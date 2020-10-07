@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div th:insert="layout/nav/commonNavbar::commonNavbar"></div>
+
+    <div class="container">
+        <div class="row">
+            <!-- SideNav -->
+            <div class="col-sm-4" th:insert="layout/user/sideNav::sideNav"></div>
+            <!-- Body -->
+            <div class="col-sm-8">
+                <div class="pcy-profile-content">
+                    <div class="pcy-profile-content-header">내정보</div>
+                    <div th:if="${data}" class="pcy-profile-content-body">
+                        <div>
+                            <span>아이디 : </span><span th:text="${data.username}"></span>
+                        </div>
+                        <div>
+                            <span>이름 또는 사업자명 : </span><span th:text="${data.name}"></span>
+                        </div>
+                        <div>
+                            <span>등록된 이메일 : </span><span th:text="${data.email}"></span>
+                        </div>
+                        <div>
+                            <span>웹사이트 or 블로그 : </span><span th:text="${data.userUrl}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script th:src="@{/js/profile.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+</body>
+
+</html>

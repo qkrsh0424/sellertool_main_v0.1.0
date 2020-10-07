@@ -1,0 +1,91 @@
+@import "calc-mg.css";
+@import "nav.css";
+@import "mainpage.css";
+@import "rangking.css";
+@import "profile.css";
+
+    a{
+        text-decoration:none;
+        color:inherit;
+    }
+    *{
+        box-sizing:border-box;
+
+    }
+    body, html{
+        font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size:14px;
+        margin:0px;
+        width:100%;
+        /* height:100%; */
+        background-color: #f0f2f5;
+    }
+    .pcy-container{
+        width:60%;
+        padding-top:15px;
+        margin:auto;
+        
+    }
+
+    .homeColorBox{
+        display: flex;
+    }
+    .colorBox{
+        display: flex;
+        padding:0;
+        color:white;
+    }
+    .colorBox1{
+        width:100%;
+        background-color: #2865D9;
+        bottom:0;
+    }
+    .colorBox2{
+        width:100%;
+        background-color:#164773;
+    }
+    .colorBox3{
+        width:100%;
+        background-color: #1F82BF;
+    }
+    .colorBox4{
+        width:100%;
+        background-color: #002c40;
+    }
+    .colorBox5{
+        width:100%;
+        background-color:#2ECEF2;
+    }
+    
+.homeHeader{
+    display:flex;
+    justify-content: space-between;
+}
+.contentGrid{
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
+  text-align: center;
+
+
+  
+  
+}
+
+.homeLink{
+    text-decoration: none;
+    color:black;
+
+}
+
+.default{
+    margin: 30px 60px
+}
+
+@media (max-width: 600px) {
+    .pcy-container{
+        width:95%;
+        margin:auto;
+    }
+  }

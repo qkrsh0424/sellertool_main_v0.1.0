@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+    <div class="pcy-container">
+        <form id="domesticMarginSubmit" class="pcy-calc-container">
+            <div class="pcy-calc-form-Gr">
+                <div class="pcy-calc-input-Gr">
+                    <div class="pcy-calc-input-box">
+                        <div class="pcy-calc-input-label">
+                            판매가격<span class="text-success">(+)</span>
+                        </div>
+                        <div class="pcy-calc-input-unit-box">
+                            <span class="pcy-calc-input-unit-text">‎₩</span>
+                            <input type="text" name="sellPrice" class="pcy-calc-input-unit" id="sellPrice" th:value="0" required/>
+                        </div>
+                    </div>
+                    <div class="pcy-calc-input-box">
+                        <div class="pcy-calc-input-label">
+                            소비자 부담 운임비<span class="text-success">(+)</span>
+                        </div>
+
+                        <div class="pcy-calc-input-unit-box">
+                            <span class="pcy-calc-input-unit-text">‎₩</span>
+                            <input type="text" name="sellTransUnitCharge" class="pcy-calc-input-unit" id="sellTransUnitCharge" th:value="0" required/>
+                        </div>
+                    </div>
+                    <div class="pcy-calc-input-box">
+                        <div class="pcy-calc-input-label">
+                            판매자 실질 부담 운임비<span class="text-danger">(-)</span>
+                        </div>
+
+                        <div class="pcy-calc-input-unit-box">
+                            <span class="pcy-calc-input-unit-text">‎₩</span>
+                            <input type="text" name="realSellTransUnitCharge" class="pcy-calc-input-unit" id="realSellTransUnitCharge" th:value="0" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pcy-calc-form-Gr">
+                <div class="pcy-calc-input-Gr pcy-clear">
+                    <div class="pcy-calc-input-box">
+                        <div class="pcy-calc-input-label">
+                            매입가격<span class="text-danger">(-)</span>
+                        </div>
+
+                        <div class="pcy-calc-input-unit-box">
+                            <span class="pcy-calc-input-unit-text">‎₩</span>
+                            <input class="pcy-calc-input-unit" type="text" name="purchaseCost" id="purchaseCost" th:value="0" required/>
+                        </div>
+                    </div>
+                    <div class="pcy-calc-input-box">
+                        <div class="pcy-calc-input-label">
+                            매입 운송비용<span class="text-danger">(-)</span>
+                        </div>
+                        <div class="pcy-calc-input-unit-box">
+                            <span class="pcy-calc-input-unit-text">‎₩</span>
+                            <input class="pcy-calc-input-unit" type="text" name="purchaseTransCharge" id="purchaseTransCharge" th:value="0" required/>
+                        </div>
+                    </div>
+                    <div class="pcy-calc-input-box">
+                        <div class="pcy-calc-input-label">
+                            기타비용<span class="text-danger">(-)</span>
+                        </div>
+                        <div class="pcy-calc-input-unit-box">
+                            <span class="pcy-calc-input-unit-text">‎₩</span>
+                            <input class="pcy-calc-input-unit" type="text" name="extraCharge" id="extraCharge" th:value="0" required/>
+                        </div>
+                    </div>
+                    <div class="pcy-calc-input-box">
+                        <div class="pcy-calc-input-label">
+                            오픈마켓 수수료
+                        </div>
+                        <div class="pcy-calc-input-unit-box">
+                            <span class="pcy-calc-input-unit-text">‎%</span>
+                            <input 
+                                type="text" 
+                                name="marketCommitionPercentage" 
+                                class="pcy-calc-input-unit"
+                                id="marketCommitionPercentage" 
+                                th:value="0" 
+                                required
+                            />
+                        </div>
+                    </div>
+                    <button class="pcy-calc-send-btn" type="submit">
+                        <span class="pcy-calc-send-btn-text">계산하기</span>
+                        <span class="pcy-calc-send-btn-icon">
+                            <i class="fas fa-calculator"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="pcy-calc-form-Gr pcy-calc-result-border">
+                <div class="pcy-calc-result-box">
+                    <div class="pcy-calc-result-box-header">
+                        <div class="pcy-calc-result-box-header-label">
+                            예상 최종 마진액 (세후)
+                        </div>
+                        <div class="pcy-calc-result-box-header-content">
+                            <h4><span id="marginAfterVAT_10">0</span> (원)</h4>
+                        </div>
+                    </div>
+                    <div class="pcy-calc-result-wrapper">
+                        <div class="pcy-calc-result-element">
+                            <div class="pcy-calc-result-element-label">
+                                마진(세전)
+                            </div>
+                            <div class="pcy-calc-result-content">
+                                <h4><span id="marginVal">0</span> (원)</h4>
+                            </div>
+                        </div>
+                        <div class="pcy-calc-result-element">
+                            <div class="pcy-calc-result-element-label">
+                                마진율 (세전)
+                            </div>
+                            <div class="pcy-calc-result-content">
+                                <h4><span id="marginRateVal">0</span> (%)</h4>
+                            </div>
+                        </div>
+                        <div class="pcy-calc-result-element">
+                            <div class="pcy-calc-result-element-label">
+                                VAT
+                            </div>
+                            <div class="pcy-calc-result-content">
+                                <h4><span id="VAT_10">0</span> (원)</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pcy-calc-result-footer">
+                        <div class="pcy-calc-result-refresh">
+                            <button class="pcy-calc-result-refresh-btn" onclick="calcRefresh()">
+                                초기화
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="text-danger text-center mt-2">
+            <p>판매가격, 매입가격 모두 세금을 모두 포함한 금액으로 간주 됩니다.</p>
+            <p>* 마진율 계산기의 부가세 계산식 *</p>
+            <p>VAT = 마진금액(세전) / 11 = (판매총합계 - (판매총합계 / 1.1)) - (매입총합계 - (매입총합계 / 1.1))</p>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
+        })
+            .ajaxStart(function () {
+                $('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+            })
+            .ajaxStop(function () {
+                $('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
+            });
+    </script>
+    <script th:src="@{/js/marginCalculate.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <footer th:replace="fragment/footer::footer"></footer>
+</body>
+
+</html>

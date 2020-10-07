@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+    <div>
+        <div class="container">
+            <a type="button" class="btn btn-primary" href="/margin/nonmem/additem">아이템 등록</a>
+            <!-- <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">상품명</th>
+                        <th scope="col">순수익</th>
+                        <th scope="col">수량</th>
+                        <th scope="col">합계</th>
+                    </tr>
+                </thead>
+                <tbody id="nonMemItemsList"></tbody>
+            </table> -->
+            <div id="nonMemItemsList">
+
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script src="/js/nonMemDashboard.js"></script>
+</body>
+
+</html>

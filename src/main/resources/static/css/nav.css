@@ -1,0 +1,64 @@
+
+.pcy-nav{
+  color:white;
+  background: #164773;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14);;
+}
+
+.pcy-nav-toggle-btn{
+  background: #164773;
+  color: white;
+  padding:8px;
+  border: none;
+  outline: none;
+}
+
+.pcy-nav a:hover{
+  color:black;
+}
+
+.pcy-calc-nav{
+  
+}
+.pcy-calc-nav-container {
+  
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 5%;
+  background-color: #164773;
+}  
+
+  .pcy-calc-nav-logo{
+    font-size:22px;
+  }
+  .pcy-calc-nav-link a,
+
+.pcy-calc-nav-logo{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #edf0f1;
+    text-decoration: none;
+    
+  }
+  
+  .pcy-calc-nav-link {
+    list-style: none;
+    display: flex;
+  }
+  
+  .pcy-calc-nav-link li {
+    padding: 0px 20px;
+  }
+  
+  .pcy-calc-nav-link li a {
+    transition: color 0.3s ease 0s;
+  }
+  
+  .pcy-calc-nav-link li a:hover {
+    color: #002c40;
+  }
+  
+  
+  

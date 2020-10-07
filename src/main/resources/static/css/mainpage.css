@@ -1,0 +1,69 @@
+.pcy-mainpage-container{
+    /* background-image: url("/images/mainpage2.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+    font-family: "Lato",sans-serif;
+    line-height: 1.8;
+    height: calc(100vh - 49px);
+    min-height: 500px;
+    background-image: url('/images/mainpage2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+}
+
+.pcy-mainpage-wrapper{
+    height: calc(100vh - 49px);
+    min-height: 500px;
+    background-color: rgba( 22 , 71, 115, 0.75 );
+}
+
+.pcy-mainpage-box{
+    position: relative;
+    top:30vh;
+    /* left:50%; */
+    /* transform: translate(-50%, -50%); */
+    /* text-align: center; */
+    color:white;
+    padding: 0 10%;
+    /* margin:15px; */
+    /* overflow: auto; */
+}
+
+.pcy-mainpage-button1{
+    padding: 15px;
+    border-radius: 10px;
+    background: #338ee6;
+}
+
+.pcy-mainpage-button1:hover{
+    text-decoration: none;
+    color:white;
+    transition: background-color 1s;
+    background-color: #0a9a72;
+}
+
+.pcy-footer-copyright{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #00ffff4f;
+    color: white;
+    text-align: center;
+}
+@media screen and (max-width:989px){
+    .pcy-mainpage-container{
+        height: calc(100vh - 56.25px);
+    }
+    .pcy-mainpage-wrapper{
+        height: calc(100vh - 56.25px);
+    }
+
+    .pcy-mainpage-box{
+        top:15vh;
+    }
+}

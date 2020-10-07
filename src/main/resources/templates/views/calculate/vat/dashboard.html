@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragment/header::header"></head>
+    <body>
+        <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+        <div>
+            <div class="pcy-container">
+                <div class="pcy-rk-input-GR-border">
+                    <div class="pcy-rk-input-GR">
+                        <form id="vatKnowSumSubmit">
+                            <div class="pcy-rk-input-box">
+                                <label class="pcy-rk-input-label" for="vatKnowSum">
+                                    부가세 계산기 <span class="font-weight-bold">[합계금액을 아는경우]</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="vatKnowSum"
+                                    id="vatKnowSum"
+                                    class="pcy-rk-input" 
+                                    value="" 
+                                    placeholder="합계금액을 입력해 주세요." 
+                                    required
+                                />
+            
+                            </div>
+                            <div class="pcy-rk-input-footer">
+                                <div class="pcy-rk-input-footer-warning">[상품의 <span class="font-weight-bold">합계금액</span>을 아는경우]</div>
+                                <div class="pcy-rk-input-footer-warning">공급가액 = 합계금액 / 1.1</div>
+                                <div class="pcy-rk-input-footer-warning">부가세액 = 합계금액 - 공급가액</div>
+                                <button type="submit" class="pcy-rk-input-footer-send">
+                                    <span class="pcy-rk-input-footer-send-btn">계산하기</span>
+                                </button>
+                            </div>
+                        </form>
+                        <div id="vatKnowSumResultPannel">
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="pcy-rk-input-GR-border">
+                    <div class="pcy-rk-input-GR">
+                        <form id="vatKnowSupplySubmit">
+                            <div class="pcy-rk-input-box">
+                                <label class="pcy-rk-input-label" for="vatKnowSupply">
+                                    부가세 계산기 <span class="font-weight-bold">[공급가액을 아는경우]</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="vatKnowSupply"
+                                    id="vatKnowSupply"
+                                    class="pcy-rk-input" 
+                                    value="" 
+                                    placeholder="공급가액을 입력해 주세요." 
+                                    required
+                                />
+            
+                            </div>
+                            <div class="pcy-rk-input-footer">
+                                <div class="pcy-rk-input-footer-warning">[상품의 <span class="font-weight-bold">공급가액</span>을 아는경우]</div>
+                                <div class="pcy-rk-input-footer-warning">부가세액 = 공급가액 x 0.1</div>
+                                <div class="pcy-rk-input-footer-warning">합계금액 = 공급가액 + 부가세액</div>
+                                <button type="submit" class="pcy-rk-input-footer-send">
+                                    <span class="pcy-rk-input-footer-send-btn">계산하기</span>
+                                </button>
+                            </div>
+                        </form>
+                        <div id="vatKnowSupplyResultPannel">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:src="@{/js/vatCalculate.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+        <footer th:replace="fragment/footer::footer"></footer>
+    </body>
+</html>

@@ -1,0 +1,228 @@
+
+.pcy-calc-container{
+    
+    background-color: #e9ecef;
+    color: #002c40;
+    border-radius:4px;
+    /* margin: 1rem; */
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    border: 2px solid #002c40;
+}
+
+.pcy-calc-container-2{
+    
+  background-color: #e9ecef;
+  color: #002c40;
+  border-radius:4px;
+  /* margin: 1rem; */
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  border: 2px solid #002c40;
+}
+
+.pcy-calc-form-Gr{
+  
+}
+
+.pcy-calc-form-Gr .pcy-clear{
+  overflow: auto;
+  margin-bottom: 15px;
+}
+
+  .pcy-calc-input-Gr{
+    padding:2rem 1rem;
+    color: #002c40;
+  }
+  .pcy-calc-input-box{
+    width:100%;
+    transition: 0.5s;
+
+}
+
+  .pcy-calc-input{
+    width:100%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    /* margin:4px 0; */
+    outline:none;
+    padding:8px;
+    margin-bottom:24px;
+    
+
+  }
+
+  .pcy-calc-input-unit-box{
+    display: flex;
+    width:100%;
+    margin-bottom:24px;
+    }
+
+    .pcy-calc-input-unit-text{
+    background-color: #002c40;
+    color:white;
+    border-radius: 5px 0px 0px 5px;
+    padding: 8px 12px;
+    
+    }
+  
+    .pcy-calc-input-unit{
+      width:100%;
+      border: 2px solid #002c40;
+      border-radius: 0px 5px 5px 0px;
+      padding: 8px 4px;
+    }
+  
+    .pcy-calc-input-unit:focus{
+      outline:none;
+    }
+ 
+
+
+  .pcy-calc-input-label{
+      display: flex;
+      justify-content: space-between;
+      padding:0px 6px;
+      margin-bottom:6px;
+  }
+
+  .pcy-calc-result-box{
+    background-color: #ffffff;
+     padding:0px;
+     height:100%;
+     border-radius:4px;
+     
+  }
+
+  .pcy-calc-result-border{
+      border-left: 2px solid #002c40;
+      border-radius: 4px;
+  }
+  .pcy-calc-result-wrapper{
+      padding: 1rem 2rem;
+      
+  }
+  .pcy-calc-result-box-header{
+      background-color: #002c40;
+      padding:2rem 2rem;
+      color: white;
+      font-size:30px;
+      font-weight: 600;
+      
+      /* border-radius:0 4px 0px 0px; */
+  }
+
+  .pcy-calc-result-box-header-label{
+      font-size:16px;
+      margin-bottom:6px;
+      font-weight: 500;
+      
+  }
+  .pcy-calc-result-element{
+      margin-bottom: 12px;
+      border-bottom:1px solid #e9ecef;
+      padding: 5px 0;
+      transition: 0.5s;
+  }
+
+  .pcy-calc-result-element-label{
+    font-size:16px;
+    margin-bottom: auto;
+    font-weight: 500;
+  }
+
+  .pcy-calc-result-content{
+      font-size:24px;
+      font-weight: 600;
+  }
+
+  .pcy-calc-result-footer{
+      display: flex;
+      justify-content: center;
+      
+    padding: .375rem .75rem;
+    
+    line-height: 1.5;
+    /* border-radius: 4px; */
+  }
+
+  .pcy-calc-result-copy-btn ,.pcy-calc-result-refresh-btn {
+    margin:8px 4px ;
+    font-weight: 400;
+    padding: 12px 24px;
+    /* color: white; */
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    
+  }
+
+  @media (max-width: 600px) {
+    .pcy-calc-container { 
+        padding-top:2rem;
+        grid-template-columns: repeat(1,1fr); 
+        }
+
+        .pcy-calc-input-Gr{
+          padding:0rem 1rem; 
+        }
+    .pcy-calc-element{
+        padding:0rem;
+      }
+    .pcy-calc-box{
+        padding:0rem 2rem;
+    }
+    .pcy-calc-result-box{
+        border-radius:4px;
+    }
+    .pcy-calc-result-box-header{
+        border-radius: 0;
+    }
+
+    .pcy-calc-result-border{
+        border: none;
+        
+    }
+  }
+
+  .pcy-calc-send-btn{
+    background: #002c40;
+    border:none;
+    border-radius: 4px;
+    color:white;
+    padding:8px 20px;
+    overflow: hidden;
+    float: right;
+    outline: none !important;
+    width:100%;
+  }
+
+  .pcy-calc-send-btn span{
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    right: 0;
+    font-size: 18px;
+  }
+
+  .pcy-calc-send-btn .pcy-calc-send-btn-text{
+    border-right: 1px solid white;
+    padding-right: 8px;
+    margin-right: 8px;
+  }
+
+  .pcy-calc-send-btn:hover .pcy-calc-send-btn-text{
+    right: 150%;
+  }
+
+  .pcy-calc-send-btn:hover .pcy-calc-send-btn-icon{
+    right: 17%;
+  }
+
+  .pcy-calc-send-btn:active{
+    background-color: #288fbd;
+  }

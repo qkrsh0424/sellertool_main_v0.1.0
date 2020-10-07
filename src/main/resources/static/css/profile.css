@@ -1,0 +1,30 @@
+.pcy-profile-sidenav{
+    padding:15px;
+    margin:15px;
+    text-align: center;
+    border:1px solid #e1e1e1;
+}
+
+.pcy-profile-sidenav a{
+    padding:8px;
+    margin:8px;
+    border:1px solid #e1e1e1;
+    border-radius: 15px;
+}
+
+.pcy-profile-content{
+    padding:15px;
+    margin:15px;
+    border:1px solid #e1e1e1;
+}
+
+.pcy-profile-content .pcy-profile-content-header{
+    font-size: 20px;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom:8px;
+    margin-bottom:8px;
+}
+
+.pcy-profile-content .pcy-profile-content-body{
+    font-size: 16px;
+}
