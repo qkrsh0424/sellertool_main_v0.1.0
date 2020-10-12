@@ -18,10 +18,10 @@ public class RoutingContoller {
     @Value("${app.environment}")
     private String myEnvironment;
 
-    @Value("${app.environment.development.login.url}")
+    @Value("${app.environment.development.auth.url}")
     private String myEnvDevMainUrl;
 
-    @Value("${app.environment.production.login.url}")
+    @Value("${app.environment.production.auth.url}")
     private String myEnvProdMainUrl;
     
     @Autowired

@@ -1,0 +1,80 @@
+.nms-dash-button1{
+    color: white;
+    background-color: #002c40;
+    border-color:#002c40;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.nms-dash-button1:hover{
+    color:white;
+    text-decoration: none;
+    background-color: #053e58;
+}
+
+.nms-dash-button2{
+    color: white;
+    background-color: #581403;
+    border-color:#581403;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.nms-dash-button2:hover{
+    color:white;
+    text-decoration: none;
+    background-color: #6e1904;
+}
+
+.nms-dash-itembox{
+    border: 2px solid #a1a1a1; 
+    border-radius: 10px; 
+    padding:15px; 
+    margin:8px 0;
+}
+
+.nms-dash-trash-button{
+    display:block;
+    height: 2.4em;
+    width: 2.4em;
+    border-radius: 50%;
+    border: 1px solid #c1c1c1;
+    margin-left: 8px;
+    margin-bottom:7px;
+}
+
+.nms-dash-trash-button:hover{
+    background-color: #c1c1c1;
+    border: 1px solid #c1c1c1;
+}
+
+.nms-dash-trash-button:active{
+    transition: 0.5s, background-color;
+    background-color: #a1a1a1;
+}
+
+.nms-dash-trash-button:focus{
+    outline: 0;
+}

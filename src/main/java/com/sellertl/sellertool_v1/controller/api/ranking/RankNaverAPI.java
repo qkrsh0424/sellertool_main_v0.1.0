@@ -26,13 +26,9 @@ public class RankNaverAPI {
 
     @RequestMapping(value = "/api/rank/naverShopping", method = RequestMethod.GET)
     public String naverShopping(@RequestParam Map<String, String> param) {
-        // System.out.println("hello world");
         JSONArray resArr = new JSONArray();
         JSONObject resObj = new JSONObject();
         for(int i = 0 ; i < 3; i++){
-            // System.out.println("cycle");
-            // System.out.println(param.get("nSearchKeyword"));
-            // System.out.println(param.get("nShopURL"));
             resArr.addAll(requestSearchAPI(param.get("nSearchKeyword"),param.get("nShopURL"),i));
         }
         resObj.put("data", resArr);
@@ -40,8 +36,6 @@ public class RankNaverAPI {
     }
 
     public JSONArray requestSearchAPI(String keyword, String iURL, int startIdx) {
-        // String clientId = "TwvJBc99_86PvskJNirw";// 애플리케이션 클라이언트 아이디값";
-        // String clientSecret = "dQK2aht33r";// 애플리케이션 클라이언트 시크릿값";
         String clientId = naver_clientId;// 애플리케이션 클라이언트 아이디값";
         String clientSecret = naver_clientSecret;// 애플리케이션 클라이언트 시크릿값";
 

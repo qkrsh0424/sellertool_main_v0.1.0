@@ -163,10 +163,14 @@
         padding-top:2rem;
         grid-template-columns: repeat(1,1fr); 
         }
+    .pcy-calc-container-2 { 
+      padding-top:2rem;
+      grid-template-columns: repeat(1,1fr); 
+    }
 
-        .pcy-calc-input-Gr{
-          padding:0rem 1rem; 
-        }
+    .pcy-calc-input-Gr{
+      padding:0rem 1rem; 
+    }
     .pcy-calc-element{
         padding:0rem;
       }
