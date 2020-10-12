@@ -12,6 +12,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
+        
+        <a class="nav-link" href="/margin/nonmem/dashboard">누적 수익 계산기</a>
         <a class="nav-link" href="/margin/dashboard">마진율 계산기</a>
         <a class="nav-link" href="/rank/naver">네이버 쇼핑 랭킹</a>
         <a class="nav-link" href="/calculate/vat">부가세 계산기</a>
@@ -34,13 +36,13 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/profile">프로필</a>
             <form th:if="${@environment.getProperty('app.environment')=='production'}"
-              th:action="${@environment.getProperty('app.environment.production.login.url')}+'/api/logout'"
+              th:action="${@environment.getProperty('app.environment.production.auth.url')}+'/api/logout'"
               method="post">
               <input hidden th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="_csrf">
               <input class="dropdown-item" type="submit" value="로그아웃">
             </form>
             <form th:if="${@environment.getProperty('app.environment')=='development'}"
-              th:action="${@environment.getProperty('app.environment.development.login.url')}+'/api/logout'"
+              th:action="${@environment.getProperty('app.environment.development.auth.url')}+'/api/logout'"
               method="post">
               <input hidden th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="_csrf">
               <input class="dropdown-item" type="submit" value="로그아웃">
@@ -51,13 +53,13 @@
         <th:block th:unless="${data}">
 
           <a th:if="${@environment.getProperty('app.environment')=='production'}" class="nav-link"
-            th:href="${@environment.getProperty('app.environment.production.login.url')+'/login'}">로그인</a>
+            th:href="${@environment.getProperty('app.environment.production.auth.url')+'/login'}">로그인</a>
           <a th:if="${@environment.getProperty('app.environment')=='development'}" class="nav-link"
-            th:href="${@environment.getProperty('app.environment.development.login.url')+'/login'}">로그인</a>
+            th:href="${@environment.getProperty('app.environment.development.auth.url')+'/login'}">로그인</a>
           <a th:if="${@environment.getProperty('app.environment')=='production'}" class="nav-link"
-            th:href="${@environment.getProperty('app.environment.production.login.url')+'/signup'}">회원가입</a>
+            th:href="${@environment.getProperty('app.environment.production.auth.url')+'/signup'}">회원가입</a>
           <a th:if="${@environment.getProperty('app.environment')=='development'}" class="nav-link"
-            th:href="${@environment.getProperty('app.environment.development.login.url')+'/signup'}">회원가입</a>
+            th:href="${@environment.getProperty('app.environment.development.auth.url')+'/signup'}">회원가입</a>
         </th:block>
       </div>
     </div>

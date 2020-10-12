@@ -3,6 +3,7 @@
 @import "mainpage.css";
 @import "rangking.css";
 @import "profile.css";
+@import "nonMemberService/dashboard.css";
 
     a{
         text-decoration:none;
@@ -67,10 +68,6 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 50px;
   text-align: center;
-
-
-  
-  
 }
 
 .homeLink{

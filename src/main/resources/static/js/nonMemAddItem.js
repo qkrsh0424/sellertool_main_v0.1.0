@@ -51,6 +51,8 @@ $("#nonMemAddItemSubmit").submit(function(event){
                 "marketCommitionPercentage":marketCommitionPercentage,
                 "extraCharge":extraCharge,
                 "unit":0,
+                "marketingCharge":0,
+                "totallyAdditionalIncome":0,
                 "margin":data.margin,
                 "marginRate":data.marginRate,
                 "VAT_10":data.VAT_10,
@@ -64,6 +66,16 @@ $("#nonMemAddItemSubmit").submit(function(event){
             jsonArr.push(json);
             let jsonToStr = JSON.stringify(jsonArr);
             window.localStorage.setItem("nonmemberItems",jsonToStr);
+            $("#productName").val("");
+            $("#purchaseCost").val("0");
+            $("#purchaseTransCharge").val("0");
+            $("#sellPrice").val("0");
+            $("#realSellTransUnitCharge").val("0");
+            $("#sellTransUnitCharge").val("0");
+            $("#marketCommitionPercentage").val("0");
+            $("#extraCharge").val("0");
+
+            alert("상품이 등록 되었습니다.");
         }
 
     });
@@ -71,38 +83,7 @@ $("#nonMemAddItemSubmit").submit(function(event){
     
 })
 
-function isNotNumber(
-    purchaseCost,
-    purchaseTransCharge,
-    sellPrice,
-    realSellTransUnitCharge,
-    sellTransUnitCharge,
-    marketCommitionPercentage,
-    extraCharge
-){
-    if (
-        isNaN(purchaseCost) ||
-        isNaN(purchaseTransCharge) ||
-        isNaN(sellPrice) ||
-        isNaN(realSellTransUnitCharge) ||
-        isNaN(sellTransUnitCharge) ||
-        isNaN(marketCommitionPercentage) ||
-        isNaN(extraCharge)
-    ) {
-        return true;
-    }else{
-        return false;
-    }
-}
-
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-}
-
 function isItemsOverflow(items){
-    if(items && items.length>10){ return true; }
+    if(items && items.length>9){ return true; }
     return false;
 }

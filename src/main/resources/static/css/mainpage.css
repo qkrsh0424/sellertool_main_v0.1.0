@@ -1,9 +1,4 @@
 .pcy-mainpage-container{
-    /* background-image: url("/images/mainpage2.jpg");
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
     font-family: "Lato",sans-serif;
     line-height: 1.8;
     height: calc(100vh - 49px);
@@ -23,20 +18,16 @@
 
 .pcy-mainpage-box{
     position: relative;
-    top:30vh;
-    /* left:50%; */
-    /* transform: translate(-50%, -50%); */
-    /* text-align: center; */
+    top:20vh;
     color:white;
     padding: 0 10%;
-    /* margin:15px; */
-    /* overflow: auto; */
 }
 
 .pcy-mainpage-button1{
     padding: 15px;
     border-radius: 10px;
     background: #338ee6;
+    margin-bottom:8px;
 }
 
 .pcy-mainpage-button1:hover{
@@ -64,6 +55,6 @@
     }
 
     .pcy-mainpage-box{
-        top:15vh;
+        top:10vh;
     }
 }

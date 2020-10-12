@@ -5,23 +5,31 @@
 
 <body>
     <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
-    <div>
-        <div class="container">
-            <a type="button" class="btn btn-primary" href="/margin/nonmem/additem">아이템 등록</a>
-            <!-- <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">상품명</th>
-                        <th scope="col">순수익</th>
-                        <th scope="col">수량</th>
-                        <th scope="col">합계</th>
-                    </tr>
-                </thead>
-                <tbody id="nonMemItemsList"></tbody>
-            </table> -->
+    <div style="margin-bottom:200px;">
+        <div class="container mt-3">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                본 서비스는 브라우저 내부 인-메모리 스토리지를 사용하여 운용되며 캐시 데이터 또는 브라우저 스토리지를 삭제하게 되면 데이터가 손실될 수 있습니다.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a type="button" class="mt-2 nms-dash-button1 btn-lg btn-block" href="/margin/nonmem/additem">상품
+                        등록</a>
+                </div>
+                <div class="col-sm-6">
+                    <button type="button" class="mt-2 nms-dash-button2 btn-lg btn-block" onclick="itemDelete().all()">모두
+                        제거</button>
+                </div>
+            </div>
             <div id="nonMemItemsList">
 
+            </div>
+            <div class="fixed-bottom" style="padding:20px; border:none; background:#1d5a8d; margin-top: 100px;">
+                <div class="float-right">
+                    <h4 style="color:white;">총 수익 : <span id="sumAllIncome">0</span>원 (세전)</h4>
+                </div>
             </div>
         </div>
     </div>

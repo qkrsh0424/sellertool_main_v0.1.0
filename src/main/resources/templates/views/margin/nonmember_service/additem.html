@@ -6,16 +6,27 @@
 <body>
     <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
     <div class="pcy-container">
-        <a type="button" class="btn btn-primary" href="/margin/nonmem/dashboard"><돌아가기</a>
+        <div class="clearfix">
+            <a type="button" class="btn btn-outline-info float-left" href="/margin/nonmem/dashboard">
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-left-short align-top"
+                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z" />
+                </svg>
+                돌아가기
+            </a>
+            <div class="alert alert-info alert-dismissible fade show float-right" role="alert">
+                상품은 최대 10개 까지만 등록이 가능합니다.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
         
-        <form id="nonMemAddItemSubmit">
-            <div class="pcy-calc-input-box">
-                <div class="pcy-calc-input-label">
-                    상품명
-                </div>
-                <div class="pcy-calc-input-unit-box">
-                    <input type="text" name="productName" id="productName"required/>
-                </div>
+        <form id="nonMemAddItemSubmit" class="mt-2">
+            <div class="form-group">
+                <label for="exampleInputEmail1">상품명</label>
+                <input type="text" class="form-control" name="productName" id="productName" required />
             </div>
             <div class="pcy-calc-container-2">
                 <div class="pcy-calc-form-Gr">
@@ -26,27 +37,30 @@
                             </div>
                             <div class="pcy-calc-input-unit-box">
                                 <span class="pcy-calc-input-unit-text">‎₩</span>
-                                <input type="text" name="sellPrice" class="pcy-calc-input-unit" id="sellPrice" th:value="0" required/>
+                                <input type="text" name="sellPrice" class="pcy-calc-input-unit" id="sellPrice"
+                                    th:value="0" required />
                             </div>
                         </div>
                         <div class="pcy-calc-input-box">
                             <div class="pcy-calc-input-label">
                                 소비자 부담 운임비<span class="text-success">(+)</span>
                             </div>
-    
+
                             <div class="pcy-calc-input-unit-box">
                                 <span class="pcy-calc-input-unit-text">‎₩</span>
-                                <input type="text" name="sellTransUnitCharge" class="pcy-calc-input-unit" id="sellTransUnitCharge" th:value="0" required/>
+                                <input type="text" name="sellTransUnitCharge" class="pcy-calc-input-unit"
+                                    id="sellTransUnitCharge" th:value="0" required />
                             </div>
                         </div>
                         <div class="pcy-calc-input-box">
                             <div class="pcy-calc-input-label">
                                 판매자 실질 부담 운임비<span class="text-danger">(-)</span>
                             </div>
-    
+
                             <div class="pcy-calc-input-unit-box">
                                 <span class="pcy-calc-input-unit-text">‎₩</span>
-                                <input type="text" name="realSellTransUnitCharge" class="pcy-calc-input-unit" id="realSellTransUnitCharge" th:value="0" required/>
+                                <input type="text" name="realSellTransUnitCharge" class="pcy-calc-input-unit"
+                                    id="realSellTransUnitCharge" th:value="0" required />
                             </div>
                         </div>
                     </div>
@@ -57,10 +71,11 @@
                             <div class="pcy-calc-input-label">
                                 매입가격<span class="text-danger">(-)</span>
                             </div>
-    
+
                             <div class="pcy-calc-input-unit-box">
                                 <span class="pcy-calc-input-unit-text">‎₩</span>
-                                <input class="pcy-calc-input-unit" type="text" name="purchaseCost" id="purchaseCost" th:value="0" required/>
+                                <input class="pcy-calc-input-unit" type="text" name="purchaseCost" id="purchaseCost"
+                                    th:value="0" required />
                             </div>
                         </div>
                         <div class="pcy-calc-input-box">
@@ -69,7 +84,8 @@
                             </div>
                             <div class="pcy-calc-input-unit-box">
                                 <span class="pcy-calc-input-unit-text">‎₩</span>
-                                <input class="pcy-calc-input-unit" type="text" name="purchaseTransCharge" id="purchaseTransCharge" th:value="0" required/>
+                                <input class="pcy-calc-input-unit" type="text" name="purchaseTransCharge"
+                                    id="purchaseTransCharge" th:value="0" required />
                             </div>
                         </div>
                         <div class="pcy-calc-input-box">
@@ -78,7 +94,8 @@
                             </div>
                             <div class="pcy-calc-input-unit-box">
                                 <span class="pcy-calc-input-unit-text">‎₩</span>
-                                <input class="pcy-calc-input-unit" type="text" name="extraCharge" id="extraCharge" th:value="0" required/>
+                                <input class="pcy-calc-input-unit" type="text" name="extraCharge" id="extraCharge"
+                                    th:value="0" required />
                             </div>
                         </div>
                         <div class="pcy-calc-input-box">
@@ -87,29 +104,26 @@
                             </div>
                             <div class="pcy-calc-input-unit-box">
                                 <span class="pcy-calc-input-unit-text">‎%</span>
-                                <input 
-                                    type="text" 
-                                    name="marketCommitionPercentage" 
-                                    class="pcy-calc-input-unit"
-                                    id="marketCommitionPercentage" 
-                                    th:value="0" 
-                                    required
-                                />
+                                <input type="text" name="marketCommitionPercentage" class="pcy-calc-input-unit"
+                                    id="marketCommitionPercentage" th:value="0" required />
                             </div>
                         </div>
                         <button class="pcy-calc-send-btn" type="submit">
                             <span class="pcy-calc-send-btn-text">등록하기</span>
                             <span class="pcy-calc-send-btn-icon">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                                    <path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                    <path fill-rule="evenodd"
+                                        d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
                                 </svg>
                             </span>
                         </button>
                     </div>
                 </div>
             </div>
-            
+
 
         </form>
         <div class="text-danger text-center mt-2">
