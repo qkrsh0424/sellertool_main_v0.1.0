@@ -35,7 +35,7 @@
     </div>
 
     <footer th:replace="fragment/footer::footer"></footer>
-    <script src="/js/nonMemDashboard.js"></script>
+    <script th:src="@{/js/nonMemDashboard.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 
 </html>
