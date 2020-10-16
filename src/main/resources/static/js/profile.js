@@ -77,7 +77,8 @@ function chkPW(password, checkPassword) {
     var pwc = checkPassword;
     var num = pw.search(/[0-9]/g);
     var eng = pw.search(/[a-z]/ig);
-    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+    // var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+    var spe = pw.search(/[!@#$%^&*()\-_=+\\\/\[\]{};:\`"',.<>\/?\|~]/gi);
 
     if(pw !== pwc){
         alert("비밀번호를 다시 확인해 주세요.");
