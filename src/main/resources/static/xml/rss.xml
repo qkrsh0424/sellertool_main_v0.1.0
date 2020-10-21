@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>셀러툴 | SellerTool</title>
+        <link>https://www.sellertool.io/</link>
+        <description>
+            셀러툴 | SellerTool은 셀러들의 상품, 판매 데이터를 통해 평가 및 분석해 주어 판매전략을 세울 수 있도록 도움을 줍니다.
+        </description>
+        <item>
+            <title>셀러툴 | 누적 수익율 계산기</title>
+            <link>https://www.sellertool.io/margin/nonmem/dashboard</link>
+            <description>
+                셀러들의 판매개수와 기타 비용들을 이용해 예상 순수익을 계산해 줍니다.
+            </description>
+            <pubDate>2020-10-21T00:00:00+00:00</pubDate>
+            <guid>https://www.sellertool.io/margin/nonmem/dashboard</guid>
+        </item>
+        <item>
+            <title>셀러툴 | 마진율 계산기</title>
+            <link>https://www.sellertool.io/margin/dashboard</link>
+            <description>
+                셀러들의 상품 마진율을 계산해 줍니다.
+            </description>
+            <pubDate>2020-10-21T00:00:00+00:00</pubDate>
+            <guid>https://www.sellertool.io/margin/dashboard</guid>
+        </item>
+        <item>
+            <title>셀러툴 | 네이버 랭킹</title>
+            <link>https://www.sellertool.io/rank/naver</link>
+            <description>
+                셀러들의 상품이 특정 키워드에서 몇 순위로 노출되는지 확인할 수 있도록 도움을 줍니다.
+            </description>
+            <pubDate>2020-10-21T00:00:00+00:00</pubDate>
+            <guid>https://www.sellertool.io/rank/naver</guid>
+        </item>
+        <item>
+            <title>셀러툴 | 부가세 계산기</title>
+            <link>https://www.sellertool.io/calculate/vat</link>
+            <description>
+                상품의 판매 가격에 따른 부가세를 계산해 줍니다.
+            </description>
+            <pubDate>2020-10-21T00:00:00+00:00</pubDate>
+            <guid>https://www.sellertool.io/calculate/vat</guid>
+        </item>
+    </channel>
+</rss>
