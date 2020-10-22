@@ -1,6 +1,8 @@
 package com.sellertl.sellertool_v1.service.itemManager;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory1DTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory2DTO;
@@ -57,10 +59,15 @@ public class ItemCategoryService {
         );
     }
 
-    public List<ItemCategory2DTO> getItemCategory2ByCategory1(int category1Id){
-        return categoryConverter.convertItemCategory2EntityToDTO(
-            ic2Repository.selectItemsByCategory1Id(category1Id, EXIST_OR_NOT.IS_EXIST).get()
-        );
+    public List<ItemCategory2DTO> getItemCategory2ByC1(int category1Id){
+        Optional<List<ItemCategory2Entity>> resCategoryList = 
+            ic2Repository.selectItemsByC1(category1Id, EXIST_OR_NOT.IS_EXIST);
+
+        if( resCategoryList.isEmpty()){
+            return new ArrayList<>();
+        }
+        
+        return categoryConverter.convertItemCategory2EntityToDTO(resCategoryList.get());
     }
 
     // About Category 3
@@ -74,6 +81,18 @@ public class ItemCategoryService {
         );
     }
 
+    public List<ItemCategory3DTO> getItemCategory3ByC1C2(int category1Id,int category2Id){
+        Optional<List<ItemCategory3Entity>> resCategoryList = 
+            ic3Repository.selectItemsByC1C2(
+                category1Id, category2Id, EXIST_OR_NOT.IS_EXIST, EXIST_OR_NOT.EMPTY_STRING
+            );
+
+        if ( resCategoryList.isEmpty() ){
+            return new ArrayList<>();
+        }
+        return categoryConverter.convertItemCategory3EntityToDTO(resCategoryList.get());
+    }
+
     // About Category 4
     public List<ItemCategory4Entity> getItemCategory4AllForAdmin(){
         return ic4Repository.findAll();
@@ -83,5 +102,17 @@ public class ItemCategoryService {
         return categoryConverter.convertItemCategory4EntityToDTO(
             ic4Repository.selectAllItemCategory4(EXIST_OR_NOT.IS_EXIST).get()
         );
+    }
+
+    public List<ItemCategory4DTO> getItemCategory4ByC1C2C3(int category1Id,int category2Id, int category3Id){
+        Optional<List<ItemCategory4Entity>> resCategoryList = 
+            ic4Repository.selectItemsByC1C2C3(
+                category1Id, category2Id, category3Id, EXIST_OR_NOT.IS_EXIST, EXIST_OR_NOT.EMPTY_STRING
+            );
+
+        if ( resCategoryList.isEmpty() ){
+            return new ArrayList<>();
+        }
+        return categoryConverter.convertItemCategory4EntityToDTO(resCategoryList.get());
     }
 }

@@ -109,6 +109,11 @@ public class RoutingContoller {
         }
     }
 
+    @GetMapping("/profit")
+    public String ProfitDashboard(){
+        return "/views/profit/dashboard.html";
+    }
+
     @GetMapping(value = "/error")
     public String Error404Page(){
         return "views/error/page404";

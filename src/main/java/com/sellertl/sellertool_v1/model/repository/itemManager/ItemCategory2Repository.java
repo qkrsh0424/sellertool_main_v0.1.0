@@ -13,5 +13,5 @@ public interface ItemCategory2Repository extends JpaRepository<ItemCategory2Enti
     Optional<List<ItemCategory2Entity>> selectAllItemCategory2(int deleted);
 
     @Query(value = "SELECT * FROM item_category2 WHERE ic1_id=:category1Id AND ic2_deleted=:deleted", nativeQuery = true)
-    Optional<List<ItemCategory2Entity>> selectItemsByCategory1Id(int category1Id,int deleted);
+    Optional<List<ItemCategory2Entity>> selectItemsByC1(int category1Id,int deleted);
 }

@@ -1,0 +1,79 @@
+<!-- TODO Profit 데시보드 만들기 -->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+    <select name="category1" id="category1" onchange="category1HandleChange()">
+        <option value="">직접선택</option>
+    </select>
+    <select name="category2" id="category2" disabled>
+        <option value="">직접선택</option>
+    </select>
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script>
+        categoryLoad().load('category1');
+        function categoryLoad(){
+            return {
+                load:function(type){
+                    if(type==='category1'){
+                        $.ajax({
+                            url:"/api/item_manger/category/get_category1/all",
+                            type:"GET",
+                            contentType:"application/json",
+                            dataType:"json",
+                            success:function(returnData){
+                                console.log(returnData);
+                                html = loadSelectHtml(returnData);
+                                $("#category1").html(html);
+                            },
+                            error:function(error){
+                                console.log(error);
+                            }
+                        })
+                    }else if(type==='category2'){
+                        $.ajax({
+                            url:"/api/item_manger/category/get_category2/val",
+                            type:"GET",
+                            contentType:"application/json",
+                            dataType:"json",
+                            data:{"ic1":$("#category1").val()},
+                            success:function(returnData){
+                                console.log(returnData);
+                                html = loadSelectHtml(returnData);
+                                $("#category2").html(html);
+                            },
+                            error:function(error){
+                                console.log(error);
+                            }
+                        })
+                    }
+                }
+            }
+        }
+
+        function loadSelectHtml(jsonData){
+            html = `<option value="">직접선택</option>`;
+            jsonData.map(r=>{
+                html+=`
+                    <option value="${r.id}">${r.name}</option>
+                `;
+            });
+            return html;
+            
+        }
+
+        function category1HandleChange(){
+            let category1Val = $("#category1").val();
+            if(category1Val===''){
+                return;
+            }
+            $("#category2").removeAttr("disabled");
+            categoryLoad().load('category2')
+        }
+    </script>
+</body>
+
+</html>
