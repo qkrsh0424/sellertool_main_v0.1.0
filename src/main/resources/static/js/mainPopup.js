@@ -15,6 +15,6 @@ function mainPopupLoad() {
     $("#mainPagePopup").html(html);
 
     $(document).ready(function () {
-        $("#ModalEvent").modal("show");
+        $("#ModalEvent").modal("hide");
     })
 }

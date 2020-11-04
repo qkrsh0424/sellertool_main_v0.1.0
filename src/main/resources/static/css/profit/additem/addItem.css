@@ -1,0 +1,124 @@
+.st-container{
+    margin: 30px 0;
+}
+
+.st-aitem-wrapper{
+    margin: 0 30px;
+    padding-bottom: 27px;
+}
+
+.st-aitem-wrapper .st-aitem-box{
+    border: 2px solid #002c40;
+    border-radius: 6px;
+    -webkit-box-shadow: 2px 6px 6px 2px rgba(0,0,0,.03);
+    box-shadow: 2px 6px 6px 2px rgba(0,0,0,.03);
+    background-color: #fff;
+}
+.st-aitem-wrapper2{
+    /* -webkit-box-shadow: 2px 6px 6px 2px rgba(0,0,0,.03); */
+    /* box-shadow: 2px 6px 6px 2px rgba(0,0,0,.03); */
+    background-color: none;
+    padding-bottom: 12px;
+    margin: 12px 30px;
+}
+
+.st-aitem-title-box{
+    position: relative;
+    margin-bottom: -1px;
+    padding: 0 20px;
+    border-bottom: 1px solid #eff2f4;
+    line-height: 49px;
+    background: 0 0;
+}
+
+.st-aitem-title-el{
+    padding: 0;
+    font-weight: 700;
+    line-height: inherit;
+}
+
+.st-aitem-content-box{
+    padding: 8px 20px 17px;
+}
+
+.st-aitem-category-list-box{
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.st-aitem-breadcrumb{
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.st-aitem-image-btn{
+    height: 30vh;
+    width: 30vh;
+    background: none;
+    border: 1px dashed black;
+    border-radius: 15px;
+    outline:none !important;
+}
+
+.st-aitem-image-fix-btn{
+    background-color: #002c40;
+    color: white;
+    font-weight: 700;
+    line-height: inherit;
+}
+
+.st-aitem-image-fix-btn:hover{
+    color: #e0ad4e;
+}
+
+.st-aitem-image-el{
+    height: 30vh;
+    width: 30vh;
+    border: 1px dashed black;
+    border-radius: 15px;
+    outline:none !important;
+}
+
+.st-aitem-option-group-box{
+    margin-bottom: 50px;
+}
+
+.st-aitem-option-group-box .st-aitem-option-group-title{
+    background: #002c40;
+    color: white;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0;
+}
+
+.st-aitem-option-group-table-container{
+    padding: 10px;
+    background: white;
+    border-radius: 0 0 10px 10px;
+}
+
+.table-responsive{
+    border-radius: 8px;
+    overflow-y: scroll;
+}
+
+.list-table-box{
+    overflow-y: auto;
+    width:100%;
+    max-height:50vh;
+}
+
+.overflow-table{
+    table-layout: fixed;
+}
+
+
+.st-aitem-category-list-box{
+    border: 1px solid #002c40;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.st-aitem-required-text{
+    font-weight: 700;
+}

@@ -54,6 +54,23 @@ public class UserService {
         return null;
     }
 
+    public UserLoginSessionDTO getUserInfoDTO(HttpServletRequest request){
+        // **Origin**
+        // if(userAuthService.isUserSessionValid(request)){
+        //     UserLoginSessionDTO userLoginSessionDTO = (UserLoginSessionDTO) redisTemplate.opsForValue().get("spring:session:sessions:expires:" + request.getSession().getId());
+        //     return getUserSessionDtoToVo(userLoginSessionDTO);
+        // }
+        // return null;
+
+        // **TEST**
+        if(userAuthService.isUserSessionValid(request)){
+            // System.out.println("UserService/getUserInfo : hello");
+            UserLoginSessionDTO userLoginSessionDTO = (UserLoginSessionDTO) convert.jsonString2ObjectClassConvert((String)redisTemplate.opsForValue().get("spring:session:sessions:expires:" + request.getSession().getId()), UserLoginSessionDTO.class);
+            return userLoginSessionDTO;
+        }
+        return null;
+    }
+
     public void logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();

@@ -4,6 +4,8 @@
 @import "rangking.css";
 @import "profile.css";
 @import "nonMemberService/dashboard.css";
+@import "alert.css";
+@import "profit/additem/style.css";
 
     a{
         text-decoration:none;

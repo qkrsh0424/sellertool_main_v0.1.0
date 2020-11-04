@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class RoutingContoller {
+public class RoutingController {
     @Value("${app.environment}")
     private String myEnvironment;
 
@@ -107,11 +107,6 @@ public class RoutingContoller {
         }else{
             return "redirect:"+myEnvDevMainUrl+"/login";
         }
-    }
-
-    @GetMapping("/profit")
-    public String ProfitDashboard(){
-        return "/views/profit/dashboard.html";
     }
 
     @GetMapping(value = "/error")
