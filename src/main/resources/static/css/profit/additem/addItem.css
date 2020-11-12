@@ -122,3 +122,10 @@
 .st-aitem-required-text{
     font-weight: 700;
 }
+
+.st-aitem-bottom-nav{
+    padding:8px; 
+    border:none; 
+    background:#002c40; 
+    margin-top: 100px;
+}

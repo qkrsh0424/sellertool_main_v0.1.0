@@ -1,0 +1,316 @@
+<!-- form-control -> ty-st-aitem-input  -->
+<!-- TODO Profit 데시보드 만들기 -->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+
+    <div class="st-container">
+        <input hidden id="i_aitem_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <!-- <div class="col-sm-3"> -->
+            <div class="st-aitem-wrapper">
+                <div class="st-aitem-box">
+                    <h4 class="text-center">상품 등록</h4>
+                </div>
+            </div>
+        <!-- </div> -->
+        
+        <div class="st-aitem-wrapper">
+            <div class="st-aitem-box">
+                <div class="st-aitem-title-box">
+                    <h4 class="st-aitem-title-el">
+                        상품 정보
+                    </h4>
+                </div>
+                <div class="st-aitem-content-box">
+                    <div class="st-aitem-header-title-wrapper">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="i_header_title" class="st-aitem-required-text">*상품명 (필수)</label>
+                                <input type="text" class="ty-st-aitem-input" id="i_header_title" name="i_header_title">
+                                <div class="ty-st-aitem-box-footer">*관리하기 편하신 이름으로 설정해주세요.</div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="i_header_desc">상품 설명 (선택)</label>
+                                <textarea class="ty-st-aitem-input" id="i_header_desc" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="st-aitem-wrapper" id="i_aitem_category">
+            <div class="st-aitem-box">
+                <div class="st-aitem-title-box">
+                    <h4 class="st-aitem-title-el">
+                        상품 카테고리
+                    </h4>
+                </div>
+                <div class="st-aitem-content-box">
+                    <div class="st-aitem-category-wrapper">
+                        <div class="row">
+                            <div class="col-sm-3 mt-1 mb-1 st-aitem-category-box">
+                                <label class="st-aitem-required-text">*카테고리1 (필수)</label>
+                                <div id="i_category1_list" class="st-aitem-category-list-box">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-1 mb-1 st-aitem-category-box">
+                                <label class="st-aitem-required-text">*카테고리2 (필수)</label>
+                                <div id="i_category2_list" class="st-aitem-category-list-box">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-1 mb-1 st-aitem-category-box">
+                                <label>카테고리3 (선택)</label>
+                                <div id="i_category3_list" class="st-aitem-category-list-box">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-1 mb-1 st-aitem-category-box">
+                                <label>카테고리4 (선택)</label>
+                                <div id="i_category4_list" class="st-aitem-category-list-box">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="st-aitem-breadcrumb">
+                            <span>카테고리 구성 : </span><span id="i_breadcrumb"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="st-aitem-wrapper">
+            <div class="st-aitem-box">
+                <div class="st-aitem-title-box">
+                    <h4 class="st-aitem-title-el">
+                        상품 이미지
+                    </h4>
+                </div>
+                <div class="st-aitem-content-box">
+                    <div class="st-aitem-image-wrapper">
+                        <label>이미지 (선택)</label>
+                        <div class="row">
+                            <div id="i_aitem_image_box" class="col-auto">
+                                <input type="file" name="i_aitem_image_file" id="i_aitem_image_file"
+                                    onchange="uploadImage()" accept="image/*" hidden>
+                                <button type="button" class="st-aitem-image-btn" onclick="fileUploaderOpen()">
+                                    <svg width="2.5em" height="2.5em" viewBox="0 0 17 16" class="bi bi-image"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M14.002 2h-12a1 1 0 0 0-1 1v9l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15.002 9.5V3a1 1 0 0 0-1-1zm-12-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm4 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                    </svg>
+                                </button>
+                                <div class="ty-st-aitem-box-footer">
+                                    *최대 10MB까지 첨부 가능합니다.
+                                </div>
+                            </div>
+                            <div class="col-sm-2 mt-2 mb-1" id="i_aitem_image_control_box" style="display: none;">
+                                <input type="file" name="i_aitem_image_file" id="i_aitem_image_file"
+                                    onchange="uploadImage()" accept="image/*" hidden>
+                                <button type="button" class="btn btn-block ty-st-aitem-btn"
+                                    onclick="fileUploaderOpen()">
+                                    이미지 수정
+                                </button>
+                                <button type="button" class="btn btn-block ty-st-aitem-btn"
+                                    onclick="eventImageHandler().deleteImage()">
+                                    이미지 제거
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="st-aitem-wrapper">
+            <div class="st-aitem-box">
+                <div class="st-aitem-title-box">
+                    <h4 class="st-aitem-title-el">
+                        상품 옵션 등록
+                    </h4>
+                </div>
+                <div class="st-aitem-content-box">
+                    <div class="st-aitem-option-setfield-wrapper">
+                        <div class="row">
+                            <div id="i_option_input_wrapper" class="col-sm-6  mb-3">
+                                <p class="st-aitem-required-text">*옵션 등록 (필수)</p>
+                                <div class="ty-st-aitem-option-input-box">
+                                    <div class="ty-st-aitem-option-input">
+                                        <input type="text" id="i_option_input_el" class=" ty-st-aitem-input  col-sm-11" placeholder="예시 : 큰사이즈,작은사이즈 (,로 구분)">
+                                    
+                                    </div>
+                                    <div class="">
+                                        <button type="button" id="i_option_input_btn"
+                                            class="btn ty-st-aitem-option-btn "
+                                            onclick="eventOptionHandler().addOptionSelectClick()"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                    
+                                </div>
+                                <div id="i_option_selected_list_box" class="ty-st-aitem-option-selected-list-box">
+                            </div>
+                            </div>
+                            <div id="i_store_input_wrapper" class="col-sm-6 mb-3">
+                                <p class="st-aitem-required-text">*마켓 등록 (필수)</p>
+                                <div class="ty-st-aitem-option-input-box">
+                                    <!-- btn code start -->
+                                    <!-- <div class="col-sm-12"> -->
+                                        <button id="i_store_select_el_btn" class="btn ty-st-aitem-btn ty-st-aitem-input ty-st-aitem-market-btn col-sm-6" data-toggle="modal" data-target="#i_store_select_modal" style="text-align: center; font-weight: 600;"><i class="fas fa-search mr-2"></i><span>마켓 등록하기</span></button>
+                                    <!-- </div> -->
+                                    <!-- btn code end -->
+                                </div>
+                                    
+                                <div id="i_store_selected_list_box" class="ty-st-aitem-option-selected-list-box">
+                                </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        </div>
+                        <div class="ty-i-option-btn-box">
+                            <button type="button" class="btn ty-st-aitem-btn ty-i-option-btn"
+                                onclick="eventOptionHandler().setOptsClick()">적용하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="st-aitem-wrapper2">
+            <div class="st-aitem-option-group-wrapper ty-aitem-fixed-column">
+                <div id="i_option_group">
+
+                </div>
+            </div>
+            <div class="fixed-bottom st-aitem-bottom-nav">
+                <div class="float-right ty-st-alitem-fix-btn-box">
+                    <div>
+                    <button class="btn btn-block ty-st-aitem-btn" onclick="window.history.back()">뒤로가기</button>
+                    </div>
+                    <div class="ml-1">
+                    <button class="btn btn-block ty-st-aitem-btn" onclick="eventIntegHandler().submit()">등록하기</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="st-aitem-item-batch-input-wrapper">
+        <div class="modal fade" id="i_item_batch_input_modal" data-keyboard="false" tabindex="-1"
+            aria-labelledby="i_item_batch_input_modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="i_item_batch_input_modalLabel">Modal title</h5>
+                        <input type="text" id="i_item_batch_input_select_uuid" value="" hidden>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="i_item_batch_input_commition_cost">마켓 수수료 [%]</label>
+                                <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_commition_cost"
+                                    value="0" placeholder="마켓 수수료" onkeypress="return isActualNumberKey(event)"
+                                    onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
+
+                                <label for="i_item_batch_input_price">판매가 [원]<span
+                                        class="text-success">(+)</span></label>
+                                <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_price" value="0"
+                                    placeholder="판매가" onkeypress="return isNumberKey(event)"
+                                    onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
+
+                                <label for="i_item_batch_input_customer_trans_cost">소비자 운임 비용 [원]<span
+                                        class="text-success">(+)</span></label>
+                                <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_customer_trans_cost"
+                                    value="0" placeholder="소비자 운임 비용" onkeypress="return isNumberKey(event)"
+                                    onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
+
+                                <label for="i_item_batch_input_seller_real_trans_cost">판매자 실질 운임 비용 [원]<span
+                                        class="text-danger">(-)</span></label>
+                                <input type="text" class="ty-st-aitem-input"
+                                    id="i_item_batch_input_seller_real_trans_cost" value="0"
+                                    placeholder="판매자 실질 운임 비용" onkeypress="return isNumberKey(event)"
+                                    onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="i_item_batch_input_purchase_cost">매입 가격 | 구매 비용 [원]<span
+                                        class="text-danger">(-)</span></label>
+                                <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_purchase_cost"
+                                    value="0" placeholder="매입 가격 | 구매 비용" onkeypress="return isNumberKey(event)"
+                                    onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
+
+                                <label for="i_item_batch_input_purchase_trans_cost">매입 운임 비용 [원]<span
+                                        class="text-danger">(-)</span></label>
+                                <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_purchase_trans_cost"
+                                    value="0" placeholder="매입 운임 비용" onkeypress="return isNumberKey(event)"
+                                    onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
+
+                                <label for="i_item_batch_input_extra_charge">기타 비용 [원]<span
+                                        class="text-danger">(-)</span></label>
+                                <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_extra_charge"
+                                    value="0" placeholder="기타 비용" onkeypress="return isNumberKey(event)"
+                                    onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                        <button type="button" class="btn ty-st-option-table-footer-btn"
+                            onclick="eventOptionHandler().setBatchModeData()">일괄등록</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- select market model start -->
+    <div class="st-aitem-item-batch-input-wrapper">
+        <div class="modal fade" id="i_store_select_modal" data-keyboard="false" tabindex="-1"
+            aria-labelledby="i_store_select_modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="i_store_select_modalLabel">마켓등록</h5>
+                        <!-- <input type="text" id="i_item_batch_input_select_uuid" value="" hidden> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <div id="i_store_select_modal_body" class="i_store_select_modal_body">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                        <button type="button" class="btn ty-st-option-table-footer-btn" form="formid" data-dismiss="modal"
+                            onclick="eventStoreHandler().setStoreSelectedData()">등록하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- select market model end -->
+    <div class="text-center">
+        <!-- snackbar -->
+        <div id="st-aitem-snackbar" class="ty-st-aitem-snackbar"></div>
+    </div>
+
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script th:src="@{/js/profit/additem/addItemObject.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/profit/additem/addItemCategory.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/profit/additem/addItemClassify.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/profit/additem/ty/addItemItem_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/profit/additem/ty/addItemOption_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/profit/additem/ty/addItemStore_ty_btn.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/profit/additem/addItemMain.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+</body>
+
+</html>

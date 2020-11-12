@@ -48,7 +48,7 @@ var OPTIONS = [
 var OPTION_SELECTED = [];
 var STORE_SELECTED = [];
 var IMAGE_SELECTED = '';
-
+var SELECTED_STORE_MODAL = [];
 function testConsole() {
     console.log('분류 : ', ITEM_CLASSIFY);
     console.log('스토어 리스트 : ',STORE_LIST);

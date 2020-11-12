@@ -67,6 +67,6 @@ public class ProfitRoutingController {
             return "/views/profit/loginError.html";
         }
         model.addAttribute("data", user);
-        return "/views/profit/addItem.html";
+        return "/views/profit/addItem_ty.html";
     }
 }
