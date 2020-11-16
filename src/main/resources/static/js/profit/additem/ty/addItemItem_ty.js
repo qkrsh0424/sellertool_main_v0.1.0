@@ -1,14 +1,17 @@
 init();
-function init(){
+function init() {
 
 }
 
-function loadItemHtml(){
-    return{
-        returnItemListLoad:function(option){
+function loadItemHtml() {
+    $(function () {
+        $("#i_option_group").enableCellNavigation();
+    });
+    return {
+        returnItemListLoad: function (option) {
             let tableEls = ``;
             items = option.items;
-            items.forEach((r,index) => {
+            items.forEach((r, index) => {
                 let commitionCostTag = `
                     <div class="">
                         <input type="text" class="form-control ty-st-aitem-input item-price-input" 
@@ -18,7 +21,7 @@ function loadItemHtml(){
                             value=${r.commitionCost}></input>
                     </div>
                 `;
-                
+
                 let priceTag = `
                     <div class="">
                         <input type="text" class="form-control ty-st-aitem-input item-price-input" 
@@ -75,7 +78,7 @@ function loadItemHtml(){
                 `;
                 tableEls += `
                     <tr class="text-center">
-                        <th scope="row">${index+1}</th>
+                        <th scope="row">${index + 1}</th>
                         <td ><button type="button" class="btn btn-danger" onclick="eventItemHandler().deleteOne('${option.optionUUID}','${r.itemUUID}')">삭제</button></td>
                         <td class="align-middle">${r.storeName}</td>
                         <td>${commitionCostTag}</td>
@@ -117,33 +120,33 @@ function loadItemHtml(){
     }
 }
 
-function eventItemHandler(){
-    return{
-        saveOthers: function(){
-            OPTIONS.forEach(r=>{
+function eventItemHandler() {
+    return {
+        saveOthers: function () {
+            OPTIONS.forEach(r => {
                 r.remainingCount = $(`#i_option_remaining_count_${r.optionUUID}`).val();
-                r.items.forEach(ir=>{
-                    ir.commitionCost = $(`#i_item_commition_cost_${ir.itemUUID}`).val()?$(`#i_item_commition_cost_${ir.itemUUID}`).val():'0';
-                    ir.price = $(`#i_item_price_${ir.itemUUID}`).val()?$(`#i_item_price_${ir.itemUUID}`).val():'0';
-                    ir.customerTransCost = $(`#i_item_customer_trans_cost_${ir.itemUUID}`).val()?$(`#i_item_customer_trans_cost_${ir.itemUUID}`).val():'0';
-                    ir.sellerRealTransCost = $(`#i_item_seller_real_trans_cost_${ir.itemUUID}`).val()?$(`#i_item_seller_real_trans_cost_${ir.itemUUID}`).val():'0';
-                    ir.purchaseCost = $(`#i_item_purchase_cost_${ir.itemUUID}`).val()?$(`#i_item_purchase_cost_${ir.itemUUID}`).val():'0';
-                    ir.purchaseTransCost = $(`#i_item_purchase_trans_cost_${ir.itemUUID}`).val()?$(`#i_item_purchase_trans_cost_${ir.itemUUID}`).val():'0';
-                    ir.extraCharge = $(`#i_item_extra_charge_${ir.itemUUID}`).val()?$(`#i_item_extra_charge_${ir.itemUUID}`).val():'0';
+                r.items.forEach(ir => {
+                    ir.commitionCost = $(`#i_item_commition_cost_${ir.itemUUID}`).val() ? $(`#i_item_commition_cost_${ir.itemUUID}`).val() : '0';
+                    ir.price = $(`#i_item_price_${ir.itemUUID}`).val() ? $(`#i_item_price_${ir.itemUUID}`).val() : '0';
+                    ir.customerTransCost = $(`#i_item_customer_trans_cost_${ir.itemUUID}`).val() ? $(`#i_item_customer_trans_cost_${ir.itemUUID}`).val() : '0';
+                    ir.sellerRealTransCost = $(`#i_item_seller_real_trans_cost_${ir.itemUUID}`).val() ? $(`#i_item_seller_real_trans_cost_${ir.itemUUID}`).val() : '0';
+                    ir.purchaseCost = $(`#i_item_purchase_cost_${ir.itemUUID}`).val() ? $(`#i_item_purchase_cost_${ir.itemUUID}`).val() : '0';
+                    ir.purchaseTransCost = $(`#i_item_purchase_trans_cost_${ir.itemUUID}`).val() ? $(`#i_item_purchase_trans_cost_${ir.itemUUID}`).val() : '0';
+                    ir.extraCharge = $(`#i_item_extra_charge_${ir.itemUUID}`).val() ? $(`#i_item_extra_charge_${ir.itemUUID}`).val() : '0';
                 })
             })
         },
-        deleteOne:function(optionUUID,itemUUID){
+        deleteOne: function (optionUUID, itemUUID) {
             // console.log(itemUUID);
             this.saveOthers();
-            OPTIONS.forEach(r=>{
-                if(r.optionUUID === optionUUID){
-                    if(r.items.length<=1){
+            OPTIONS.forEach(r => {
+                if (r.optionUUID === optionUUID) {
+                    if (r.items.length <= 1) {
                         addItemSnackbarOpen("적어도 하나의 아이템은 유지해야 합니다. <br/>삭제가 필요한 경우 옵션을 삭제해 주세요.");
                         // addItemSnackbarOpen("Some text some message..");
                         return;
                     }
-                    r.items = r.items.filter(ir=>ir.itemUUID!=itemUUID);
+                    r.items = r.items.filter(ir => ir.itemUUID != itemUUID);
                 }
             });
             loadOptionHtml().optionGroupLoad();

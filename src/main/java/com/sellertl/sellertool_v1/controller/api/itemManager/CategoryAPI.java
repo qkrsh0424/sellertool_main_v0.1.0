@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory1DTO;
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory2DTO;
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory3DTO;
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory4DTO;
-import com.sellertl.sellertool_v1.model.repository.itemManager.ItemCategory4Repository;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemCategory.ICategory1DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemCategory.ICategory2DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemCategory.ICategory3DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemCategory.ICategory4DTO;
 import com.sellertl.sellertool_v1.service.itemManager.ItemCategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +23,29 @@ public class CategoryAPI {
     ItemCategoryService itemCategoryService;
 
     @GetMapping(value = "/get_category1/all")
-    public List<ItemCategory1DTO> getItemCategory1AllApi(){
+    public List<ICategory1DTO> getItemCategory1AllApi(){
         return itemCategoryService.getItemCategory1All();
     }
 
     @GetMapping(value = "/get_category2/all")
-    public List<ItemCategory2DTO> getItemCategory2AllApi(){
+    public List<ICategory2DTO> getItemCategory2AllApi(){
         return itemCategoryService.getItemCategory2All();
     }
 
     @GetMapping(value = "/get_category3/all")
-    public List<ItemCategory3DTO> getItemCategory3AllApi(){
+    public List<ICategory3DTO> getItemCategory3AllApi(){
         return itemCategoryService.getItemCategory3All();
     }
 
     @GetMapping(value = "/get_category4/all")
-    public List<ItemCategory4DTO> getItemCategory4AllApi(){
+    public List<ICategory4DTO> getItemCategory4AllApi(){
         return itemCategoryService.getItemCategory4All();
     }
 
     // **TODO 서치 알고리즘 계속해서 추가** 
     
     @GetMapping(value = "/get_category2/val")
-    public List<ItemCategory2DTO> getItemCategory2GetApi(
+    public List<ICategory2DTO> getItemCategory2GetApi(
         @RequestParam(value = "ic1", required = false) Optional<Integer> ic1
     ){
         
@@ -58,7 +57,7 @@ public class CategoryAPI {
     }
 
     @GetMapping(value = "/get_category3/val")
-    public List<ItemCategory3DTO> getItemCategory3GetApi(
+    public List<ICategory3DTO> getItemCategory3GetApi(
         @RequestParam(value = "ic1", required = false) Optional<Integer> ic1,
         @RequestParam(value = "ic2", required = false) Optional<Integer> ic2
     ){
@@ -71,7 +70,7 @@ public class CategoryAPI {
     }
 
     @GetMapping(value = "/get_category4/val")
-    public List<ItemCategory4DTO> getItemCategory4GetApi(
+    public List<ICategory4DTO> getItemCategory4GetApi(
         @RequestParam(value = "ic1", required = false) Optional<Integer> ic1,
         @RequestParam(value = "ic2", required = false) Optional<Integer> ic2,
         @RequestParam(value = "ic3", required = false) Optional<Integer> ic3

@@ -6,15 +6,17 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemClassifyOptionsItemsReqDTO;
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemClassifyOptionsReqDTO;
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemClassifyReqDTO;
-import com.sellertl.sellertool_v1.model.entity.itemManager.ItemClassifyEntity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.ItemItemEntity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.ItemOptionEntity;
-import com.sellertl.sellertool_v1.model.repository.itemManager.ItemClassifyRepository;
-import com.sellertl.sellertool_v1.model.repository.itemManager.ItemItemRepository;
-import com.sellertl.sellertool_v1.model.repository.itemManager.ItemOptionRepository;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyOptionsItemsReqDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyOptionsReqDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyReqDTO;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ICategoryGroupDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionDefEntity;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemCategory.ICategoryGroupDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionDefRepository;
 import com.sellertl.sellertool_v1.service.handler.DateService;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
@@ -30,15 +32,18 @@ public class AddItemService {
     DateService dateService;
 
     @Autowired
-    ItemClassifyRepository itemClassifyRepository;
+    ICategoryGroupDefRepository iCategoryGroupDefRepository;
 
     @Autowired
-    ItemOptionRepository itemOptionRepository;
+    IClassifyDefRepository iClassifyDefRepository;
 
     @Autowired
-    ItemItemRepository itemItemRepository;
+    IOptionDefRepository iOptionDefRepository;
+
+    @Autowired
+    IItemDefRepository iItemDefRepository;
     
-    public String saveAddItems(ItemClassifyReqDTO classify, HttpServletRequest request){
+    public String saveAddItems(IClassifyReqDTO classify, HttpServletRequest request){
         String userId = userService.getUserInfoDTO(request).getId();
 
         if(userId==null){
@@ -47,14 +52,17 @@ public class AddItemService {
         newClassifyReqDTO(classify);
 
         try{
-            ItemClassifyEntity classifyEntity = getClassifyEntity(classify, userId);
-            itemClassifyRepository.save(classifyEntity);
-            
-            List<ItemOptionEntity> optionEntities = getOptionEntities(classify, userId);
-            itemOptionRepository.saveAll(optionEntities);
+            ICategoryGroupDefEntity categoryGroup = getCategoryGroupEntity(classify, userId);
+            iCategoryGroupDefRepository.save(categoryGroup);
 
-            List<ItemItemEntity> itemEntities = getItemEntities(classify, userId);
-            itemItemRepository.saveAll(itemEntities);
+            IClassifyDefEntity classifyEntity = getClassifyEntity(classify, userId);
+            iClassifyDefRepository.save(classifyEntity);
+            
+            List<IOptionDefEntity> optionEntities = getOptionEntities(classify, userId);
+            iOptionDefRepository.saveAll(optionEntities);
+
+            List<IItemDefEntity> itemEntities = getItemEntities(classify, userId);
+            iItemDefRepository.saveAll(itemEntities);
         } catch(Exception exception){
             // System.out.println(exception);
             return "ERROR";
@@ -63,7 +71,7 @@ public class AddItemService {
         return "SUCCESS";
     }
 
-    public void newClassifyReqDTO(ItemClassifyReqDTO classify){
+    public void newClassifyReqDTO(IClassifyReqDTO classify){
         classify.setClassifyUUID(UUID.randomUUID().toString());
         for(int i = 0 ; i < classify.getOptions().size(); i++){
             classify.getOptions().get(i).setOptionUUID(UUID.randomUUID().toString());
@@ -73,53 +81,49 @@ public class AddItemService {
         }
     }
 
-    public ItemClassifyEntity getClassifyEntity(ItemClassifyReqDTO classify, String userId){
-        ItemClassifyEntity classifyEntity = new ItemClassifyEntity();
-        classifyEntity.setItemClassifyUuid(classify.getClassifyUUID());
+    public ICategoryGroupDefEntity getCategoryGroupEntity(IClassifyReqDTO classify, String userId){
+        ICategoryGroupDefEntity categoryEntity = new ICategoryGroupDefEntity();
+        categoryEntity.setUserId(userId);
+        categoryEntity.setIClassifyUuid(classify.getClassifyUUID());
+        categoryEntity.setICategoryGroupCategory1Id(classify.getCategorys().getCategory1Id());
+        categoryEntity.setICategoryGroupCategory2Id(classify.getCategorys().getCategory2Id());
+        categoryEntity.setICategoryGroupCategory3Id(classify.getCategorys().getCategory3Id());
+        categoryEntity.setICategoryGroupCategory4Id(classify.getCategorys().getCategory4Id());
+        categoryEntity.setICategoryGroupCategory1Name(classify.getCategorys().getCategory1Name());
+        categoryEntity.setICategoryGroupCategory2Name(classify.getCategorys().getCategory2Name());
+        categoryEntity.setICategoryGroupCategory3Name(classify.getCategorys().getCategory3Name());
+        categoryEntity.setICategoryGroupCategory4Name(classify.getCategorys().getCategory4Name());
+        return categoryEntity;
+
+    }
+    public IClassifyDefEntity getClassifyEntity(IClassifyReqDTO classify, String userId){
+        IClassifyDefEntity classifyEntity = new IClassifyDefEntity();
+        classifyEntity.setIClassifyUuid(classify.getClassifyUUID());
         classifyEntity.setUserId(userId);
-        classifyEntity.setItemClassifyName(classify.getClassifyName());
-        classifyEntity.setItemClassifyDesc(classify.getClassifyDesc());
-        classifyEntity.setItemClassifyImageUrl(classify.getClassifyImage());
-        classifyEntity.setItemClassifyIc1Id(classify.getCategorys().getCategory1Id());
-        classifyEntity.setItemClassifyIc2Id(classify.getCategorys().getCategory2Id());
-        classifyEntity.setItemClassifyIc3Id(classify.getCategorys().getCategory3Id());
-        classifyEntity.setItemClassifyIc4Id(classify.getCategorys().getCategory4Id());
-        classifyEntity.setItemClassifyIc1Name(classify.getCategorys().getCategory1Name());
-        classifyEntity.setItemClassifyIc2Name(classify.getCategorys().getCategory2Name());
-        classifyEntity.setItemClassifyIc3Name(classify.getCategorys().getCategory3Name());
-        classifyEntity.setItemClassifyIc4Name(classify.getCategorys().getCategory4Name());
-        classifyEntity.setItemClassifyCreatedAt(dateService.getCurrentDate());
-        classifyEntity.setItemClassifyUpdatedAt(dateService.getCurrentDate());
+        classifyEntity.setIClassifyName(classify.getClassifyName());
+        classifyEntity.setIClassifyDesc(classify.getClassifyDesc());
+        classifyEntity.setIClassifyImageUrl(classify.getClassifyImage());
+        classifyEntity.setIClassifyCreatedAt(dateService.getCurrentDate());
+        classifyEntity.setIClassifyUpdatedAt(dateService.getCurrentDate());
         return classifyEntity;
     }
     
-    public List<ItemOptionEntity> getOptionEntities(ItemClassifyReqDTO classify, String userId){
-        List<ItemOptionEntity> optionEntityList = new ArrayList<>();
-        List<ItemClassifyOptionsReqDTO> itemClassifyOptionsSetDTOs = classify.getOptions();
+    public List<IOptionDefEntity> getOptionEntities(IClassifyReqDTO classify, String userId){
+        List<IOptionDefEntity> optionEntityList = new ArrayList<>();
+        List<IClassifyOptionsReqDTO> itemClassifyOptionsSetDTOs = classify.getOptions();
 
         for(int i = 0 ; i < itemClassifyOptionsSetDTOs.size(); i++){
-            ItemOptionEntity optionEntity = new ItemOptionEntity();
+            IOptionDefEntity optionEntity = new IOptionDefEntity();
 
+            optionEntity.setIOptionUuid(itemClassifyOptionsSetDTOs.get(i).getOptionUUID());
+            optionEntity.setIClassifyUuid(classify.getClassifyUUID());
             optionEntity.setUserId(userId);
-            optionEntity.setItemClassifyUuid(classify.getClassifyUUID());
-            optionEntity.setItemClassifyName(classify.getClassifyName());
-
-            optionEntity.setItemOptionName(itemClassifyOptionsSetDTOs.get(i).getName());
-            optionEntity.setItemOptionUuid(itemClassifyOptionsSetDTOs.get(i).getOptionUUID());
-            optionEntity.setItemOptionRemainingCount(itemClassifyOptionsSetDTOs.get(i).getRemainingCount());
-            optionEntity.setItemOptionSellCount(itemClassifyOptionsSetDTOs.get(i).getSellCount());
-            
-            optionEntity.setItemOptionImageUrl(classify.getClassifyImage());
-            optionEntity.setItemOptionIc1Id(classify.getCategorys().getCategory1Id());
-            optionEntity.setItemOptionIc2Id(classify.getCategorys().getCategory2Id());
-            optionEntity.setItemOptionIc3Id(classify.getCategorys().getCategory3Id());
-            optionEntity.setItemOptionIc4Id(classify.getCategorys().getCategory4Id());
-            optionEntity.setItemOptionIc1Name(classify.getCategorys().getCategory1Name());
-            optionEntity.setItemOptionIc2Name(classify.getCategorys().getCategory2Name());
-            optionEntity.setItemOptionIc3Name(classify.getCategorys().getCategory3Name());
-            optionEntity.setItemOptionIc4Name(classify.getCategorys().getCategory4Name());
-            optionEntity.setItemOptionCreatedAt(dateService.getCurrentDate());
-            optionEntity.setItemOptionUpdatedAt(dateService.getCurrentDate());
+            optionEntity.setIOptionName(itemClassifyOptionsSetDTOs.get(i).getName());
+            optionEntity.setIOptionRemainingCount(itemClassifyOptionsSetDTOs.get(i).getRemainingCount());
+            optionEntity.setIOptionSellCount(itemClassifyOptionsSetDTOs.get(i).getSellCount());
+            optionEntity.setIOptionImageUrl(classify.getClassifyImage());
+            optionEntity.setIOptionCreatedAt(dateService.getCurrentDate());
+            optionEntity.setIOptionUpdatedAt(dateService.getCurrentDate());
 
             optionEntityList.add(optionEntity);
         }
@@ -127,40 +131,29 @@ public class AddItemService {
         return optionEntityList;
     }
 
-    public List<ItemItemEntity> getItemEntities(ItemClassifyReqDTO classify, String userId){
-        List<ItemItemEntity> itemEntities = new ArrayList<>();
-        List<ItemClassifyOptionsReqDTO> itemClassifyOptionsSetDTOs = classify.getOptions();
+    public List<IItemDefEntity> getItemEntities(IClassifyReqDTO classify, String userId){
+        List<IItemDefEntity> itemEntities = new ArrayList<>();
+        List<IClassifyOptionsReqDTO> itemClassifyOptionsSetDTOs = classify.getOptions();
 
-        for(ItemClassifyOptionsReqDTO option : itemClassifyOptionsSetDTOs){
-            for(ItemClassifyOptionsItemsReqDTO item : option.getItems()){
-                ItemItemEntity itemEntity = new ItemItemEntity();
+        for(IClassifyOptionsReqDTO option : itemClassifyOptionsSetDTOs){
+            for(IClassifyOptionsItemsReqDTO item : option.getItems()){
+                IItemDefEntity itemEntity = new IItemDefEntity();
+                itemEntity.setIItemUuid(item.getItemUUID());
+                itemEntity.setIClassifyUuid(classify.getClassifyUUID());
+                itemEntity.setIOptionUuid(option.getOptionUUID());
                 itemEntity.setUserId(userId);
-                itemEntity.setItemItemUuid(item.getItemUUID());
-                itemEntity.setItemItemName(classify.getClassifyName()+"-"+option.getName());
-                itemEntity.setItemItemStoreType(item.getStoreType());
-                itemEntity.setItemItemStoreName(item.getStoreName());
-                itemEntity.setItemItemCommitionCost(item.getCommitionCost());
-                itemEntity.setItemItemPrice(item.getPrice());
-                itemEntity.setItemItemCustomerTransCost(item.getCustomerTransCost());
-                itemEntity.setItemItemSellerRealTransCost(item.getSellerRealTransCost());
-                itemEntity.setItemItemPurchaseCost(item.getPurchaseCost());
-                itemEntity.setItemItemPurchaseTransCost(item.getPurchaseTransCost());
-                itemEntity.setItemItemExtraCharge(item.getExtraCharge());
-                itemEntity.setItemItemImageUrl(classify.getClassifyImage());
-                itemEntity.setItemClassifyUuid(classify.getClassifyUUID());
-                itemEntity.setItemClassifyName(classify.getClassifyName());
-                itemEntity.setItemOptionUuid(option.getOptionUUID());
-                itemEntity.setItemOptionName(option.getName());
-                itemEntity.setItemItemIc1Id(classify.getCategorys().getCategory1Id());
-                itemEntity.setItemItemIc2Id(classify.getCategorys().getCategory2Id());
-                itemEntity.setItemItemIc3Id(classify.getCategorys().getCategory3Id());
-                itemEntity.setItemItemIc4Id(classify.getCategorys().getCategory4Id());
-                itemEntity.setItemItemIc1Name(classify.getCategorys().getCategory1Name());
-                itemEntity.setItemItemIc2Name(classify.getCategorys().getCategory2Name());
-                itemEntity.setItemItemIc3Name(classify.getCategorys().getCategory3Name());
-                itemEntity.setItemItemIc4Name(classify.getCategorys().getCategory4Name());
-                itemEntity.setItemItemCreatedAt(dateService.getCurrentDate());
-                itemEntity.setItemItemUpdatedAt(dateService.getCurrentDate());
+                itemEntity.setIItemStoreType(item.getStoreType());
+                itemEntity.setIItemStoreName(item.getStoreName());
+                itemEntity.setIItemCommitionCost(item.getCommitionCost());
+                itemEntity.setIItemPrice(item.getPrice());
+                itemEntity.setIItemCustomerTransCost(item.getCustomerTransCost());
+                itemEntity.setIItemSellerRealTransCost(item.getSellerRealTransCost());
+                itemEntity.setIItemPurchaseCost(item.getPurchaseCost());
+                itemEntity.setIItemPurchaseTransCost(item.getPurchaseTransCost());
+                itemEntity.setIItemExtraCharge(item.getExtraCharge());
+                itemEntity.setIItemImageUrl(classify.getClassifyImage());
+                itemEntity.setIItemCreatedAt(dateService.getCurrentDate());
+                itemEntity.setIItemUpdatedAt(dateService.getCurrentDate());
                 itemEntities.add(itemEntity);
             }
         }

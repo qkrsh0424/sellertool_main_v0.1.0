@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragment/header::header"></head>
+<head th:replace="fragment/header2::header2"></head>
 
 <body>
     <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
@@ -182,7 +182,7 @@
             </div>
         </div>
         <div class="st-aitem-wrapper2">
-            <div class="st-aitem-option-group-wrapper ty-aitem-fixed-column">
+            <div class="st-aitem-option-group-wrapper ty-st-aitem-fixed-column">
                 <div id="i_option_group">
 
                 </div>
@@ -310,6 +310,7 @@
     <script th:src="@{/js/profit/additem/ty/addItemItem_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
     <script th:src="@{/js/profit/additem/ty/addItemOption_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
     <script th:src="@{/js/profit/additem/ty/addItemStore_ty_btn.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/profit/additem/ty/addItemTableArrow_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
     <script th:src="@{/js/profit/additem/addItemMain.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 

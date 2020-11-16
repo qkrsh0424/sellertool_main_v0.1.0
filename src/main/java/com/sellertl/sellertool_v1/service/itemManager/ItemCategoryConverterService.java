@@ -3,23 +3,23 @@ package com.sellertl.sellertool_v1.service.itemManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory1DTO;
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory2DTO;
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory3DTO;
-import com.sellertl.sellertool_v1.model.DTO.itemManager.ItemCategory4DTO;
-import com.sellertl.sellertool_v1.model.entity.itemManager.ItemCategory1Entity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.ItemCategory2Entity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.ItemCategory3Entity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.ItemCategory4Entity;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemCategory.ICategory1DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemCategory.ICategory2DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemCategory.ICategory3DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemCategory.ICategory4DTO;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ItemCategory1Entity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ItemCategory2Entity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ItemCategory3Entity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ItemCategory4Entity;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class ItemCategoryConverterService {
-    public List<ItemCategory1DTO> convertItemCategory1EntityToDTO(List<ItemCategory1Entity> entityList){
-        List<ItemCategory1DTO> ic1DtoList = new ArrayList<>();
+    public List<ICategory1DTO> convertItemCategory1EntityToDTO(List<ItemCategory1Entity> entityList){
+        List<ICategory1DTO> ic1DtoList = new ArrayList<>();
         entityList.stream().forEach(r->{
-            ItemCategory1DTO ic1Dto = new ItemCategory1DTO();
+            ICategory1DTO ic1Dto = new ICategory1DTO();
             ic1Dto.setId(r.getId());
             ic1Dto.setName(r.getName());
             ic1DtoList.add(ic1Dto);
@@ -27,10 +27,10 @@ public class ItemCategoryConverterService {
         return ic1DtoList;
     }
 
-    public List<ItemCategory2DTO> convertItemCategory2EntityToDTO(List<ItemCategory2Entity> entityList){
-        List<ItemCategory2DTO> ic2DtoList = new ArrayList<>();
+    public List<ICategory2DTO> convertItemCategory2EntityToDTO(List<ItemCategory2Entity> entityList){
+        List<ICategory2DTO> ic2DtoList = new ArrayList<>();
         entityList.stream().forEach(r->{
-            ItemCategory2DTO ic2Dto = new ItemCategory2DTO();
+            ICategory2DTO ic2Dto = new ICategory2DTO();
             ic2Dto.setId(r.getId());
             ic2Dto.setName(r.getName());
             ic2Dto.setIc1Id(r.getIc1Id());
@@ -40,10 +40,10 @@ public class ItemCategoryConverterService {
         return ic2DtoList;
     }
 
-    public List<ItemCategory3DTO> convertItemCategory3EntityToDTO(List<ItemCategory3Entity> entityList){
-        List<ItemCategory3DTO> ic3DtoList = new ArrayList<>();
+    public List<ICategory3DTO> convertItemCategory3EntityToDTO(List<ItemCategory3Entity> entityList){
+        List<ICategory3DTO> ic3DtoList = new ArrayList<>();
         entityList.stream().forEach(r->{
-            ItemCategory3DTO ic3Dto = new ItemCategory3DTO();
+            ICategory3DTO ic3Dto = new ICategory3DTO();
             ic3Dto.setId(r.getId());
             ic3Dto.setName(r.getName());
             ic3Dto.setIc1Id(r.getIc1Id());
@@ -55,10 +55,10 @@ public class ItemCategoryConverterService {
         return ic3DtoList;
     }
 
-    public List<ItemCategory4DTO> convertItemCategory4EntityToDTO(List<ItemCategory4Entity> entityList){
-        List<ItemCategory4DTO> ic4DtoList = new ArrayList<>();
+    public List<ICategory4DTO> convertItemCategory4EntityToDTO(List<ItemCategory4Entity> entityList){
+        List<ICategory4DTO> ic4DtoList = new ArrayList<>();
         entityList.stream().forEach(r->{
-            ItemCategory4DTO ic4Dto = new ItemCategory4DTO();
+            ICategory4DTO ic4Dto = new ICategory4DTO();
             ic4Dto.setId(r.getId());
             ic4Dto.setName(r.getName());
             ic4Dto.setIc1Id(r.getIc1Id());

@@ -40,26 +40,6 @@ public class ProfitRoutingController {
         return "/views/profit/dashboard.html";
     }
 
-    @GetMapping("/profit/add/classify")
-    public String ProfitAddClassify(HttpServletRequest request, Model model){
-        UserInfoVO user = userService.getUserInfo(request);
-        if(user == null){
-            return "/views/profit/loginError.html";
-        }
-        model.addAttribute("data", user);
-        return "/views/profit/addClassify.html";
-    }
-
-    @GetMapping("/profit/manage/classify")
-    public String ProfitManageClassify(HttpServletRequest request, Model model){
-        UserInfoVO user = userService.getUserInfo(request);
-        if(user == null){
-            return "/views/profit/loginError.html";
-        }
-        model.addAttribute("data", user);
-        return "/views/profit/manageClassify.html";
-    }
-
     @GetMapping("/profit/add/item")
     public String ProfitAddItem(HttpServletRequest request, Model model){
         UserInfoVO user = userService.getUserInfo(request);
@@ -68,5 +48,15 @@ public class ProfitRoutingController {
         }
         model.addAttribute("data", user);
         return "/views/profit/addItem_ty.html";
+    }
+
+    @GetMapping("/profit/sell/dashboard")
+    public String ProfitSellDashboard(HttpServletRequest request, Model model){
+        UserInfoVO user = userService.getUserInfo(request);
+        if(user == null){
+            return "/views/profit/loginError.html";
+        }
+        model.addAttribute("data", user);
+        return "/views/profit/sellDashboard.html";
     }
 }

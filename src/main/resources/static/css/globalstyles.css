@@ -5,7 +5,9 @@
 @import "profile.css";
 @import "nonMemberService/dashboard.css";
 @import "alert.css";
+@import "tooltip.css";
 @import "profit/additem/style.css";
+@import "profit/selldash/style.css";
 
     a{
         text-decoration:none;
