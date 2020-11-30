@@ -1,0 +1,133 @@
+<!-- TODO Profit 데시보드 만들기 -->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit">대시보드</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link st-nav-active" href="/profit/sell/dashboard">판매 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/add/item">상품 등록 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/manage/item">등록된 상품 관리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="st-sd-container">
+        <input hidden id="i_sd_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="st-sd-wrapper">
+            <div class="st-sd-box">
+                <h4 class="text-center">판매 관리</h4>
+            </div>
+        </div>
+        <div class="st-sd-wrapper" onmousedown="return false">
+            <div class="st-sd-box">
+                <div class="st-sd-title-box">
+                    <h4 class="st-sd-title-el">
+                        판매 등록
+                    </h4>
+                </div>
+                <div class="st-sd-content-box">
+                    <div class="st-sd-timezone-wrapper">
+                        <div class="row">
+
+
+                            <div class="st-sd-search-wrapper col-sm-3">
+                                <p for="i_search_data">상품 선택</p>
+                                <div class="st-sd-search-input-box mb-3">
+                                    <input type="text" id="i_search_input" autocomplete="off" class=" ty-st-sd-input" placeholder="상품을 입력해주세요." onkeyup="eventGoodsHandler().searchClassify()">
+                                </div>
+                                <div id="ty_sell_item_classify_list" class="ty-st-sd-item-box ty-st-sd-classify-wrapper">
+                                </div>
+
+                            </div>
+                            <div class="st-sd-search-wrapper col-sm-3">
+                                <p for="i_search_data">옵션 선택</p>
+                                <div id="ty_sell_item_option_list" class="ty-st-sd-item-box  ">
+                                </div>
+                            </div>
+                            <div class="st-sd-search-wrapper col-sm-6">
+                                <p for="i_search_data">선택된 상품</p>
+                                <div id="ty_sell_item_option_selected_list" class="ty-st-sd-selected-option col-sm-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ty-st-aitem-box-footer col-sm-12">*선택된 날짜에 판매된 상품들을 등록해주세요.</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-12 pt-3">
+                                <button class="btn btn-block ty-st-sd-submit-click" onclick="eventGoodsHandler().selectedOptionItemsSubmitClick()">등록하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="st-sd-wrapper ty-st-sd-wrapper">
+            <div class="st-sd-box ">
+                <div class="st-sd-title-box ty-st-sd-time-box">
+                    <h4 class="st-sd-title-el">
+                        판매 목록
+                    </h4>
+                    <div class="st-sd-timezone-search-date-wrapper col-sm-4">
+                        <div id="i_store_input_wrapper" class="col-sm-4">
+                            <div class="">
+                                <select id="ty_st_sd_i_store_select_el" class="ty-st-sd-input" required onchange="eventStoreHandler().addStoreSelect(this)">
+
+                                </select>
+                            </div>
+                        </div>
+                        <input id="i_search_date" class="ty-st-sd-input ty-st-sd-time-input" readonly='true'>
+                    </div>
+                </div>
+                <div class="st-sd-table-container ty-st-sd-fixed-column">
+                    <div class="list-table-box ty-st-sd-sell-item-table" id="i_sell_item_list">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input hidden id="i_st_sd_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    </div>
+
+    <!-- Modal -->
+    <div class="st-sd-batch-input-wrapper">
+        <div class="modal fade" id="i_sd_batch_input_modal" data-keyboard="false" tabindex="-1" aria-labelledby="i_sd_batch_input_modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" id="i_sd_batch_modal_box">
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragment/footer::footer"></footer>
+    <footer th:replace="fragment/jquery-ui::jquery-ui"></footer>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- <script src="/js/profit/sell_dash/sellDashObject.js"></script> -->
+    <script src="/js/profit/sell_dash/ty/sellDashStore_ty.js"></script>
+    <script src="/js/profit/sell_dash/ty/sellDashObject_ty.js"></script>
+    <script src="/js/profit/sell_dash/ty/sellDashSort_ty.js"></script>
+    <!-- <script src="/js/profit/sell_dash/sellDashCalandar.js"></script> -->
+    <script src="/js/profit/sell_dash/ty/sellDashCalandar_ty.js"></script>
+    <!-- <script src="/js/profit/sell_dash/sellDashGoods.js"></script> -->
+    <script src="/js/profit/sell_dash/ty/sellDashGoods_ty.js"></script>
+    <!-- <script src="/js/profit/sell_dash/sellDashItem.js"></script> -->
+    <script src="/js/profit/sell_dash/ty/sellDashItem_ty.js"></script>
+    <!-- <script src="/js/profit/sell_dash/sellDashMain.js"></script> -->
+    <script src="/js/profit/sell_dash/ty/sellDashMain_ty.js"></script>
+</body>
+
+</html>

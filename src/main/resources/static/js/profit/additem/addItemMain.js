@@ -1,7 +1,8 @@
 init();
 async function init() {
     await getCategory().load('category1');
-    loadCategoryHtml().getCategory1();
+    // loadCategoryHtml().getCategory1();   // ORIGIN
+    categoryClickHandler().clickSelectCategory(); // TY REFACTORING
 }
 
 function addItemSnackbarOpen(message) {

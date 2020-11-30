@@ -1,0 +1,332 @@
+/* in html */
+
+.form-control:focus,
+input:focus {
+    box-shadow: none;
+    outline: 0;
+    border-color: #002c40;
+}
+
+.form-control:focus {
+    /* border-color: 0; */
+}
+/* 판매등록 box */
+/* time box */
+
+.ty-st-sd-time-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #002c40;
+    color: white;
+}
+/* sd-global-input */
+
+.ty-st-sd-input {
+    border: 2px solid #002c40;
+    padding: 3px 6px;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 4px;
+}
+
+.ty-st-sd-input:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.ty-st-sd-input:focus {
+    outline: none;
+    border: 2px solid #002c40;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.st-sd-timezone-search-date-wrapper {
+    display: flex;
+}
+
+.ty-st-sd-item-box {
+    position: relative;
+    width: 100%;
+    height: 35vh;
+    overflow-y: scroll;
+    margin: auto;
+    border: 2px solid #022c40;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.ty-st-sd-item-box:hover {
+    outline: none;
+    border: 2px solid #002c40;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.ty-st-sd-classify-wrapper {
+    width: 100%;
+    height: 28vh;
+}
+/* time input */
+
+.ty-st-sd-time-input {
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+}
+/* 판매목록 */
+/* table */
+
+.st-sd-table-container {
+    padding-top: 0px;
+}
+
+.list-table-box {
+    max-height: 70vh;
+}
+
+.st-sd-table-container {
+    height: 75vh;
+}
+/* table th */
+
+.ty-st-sd-sell-item-table thead {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    z-index: 6;
+}
+
+.ty-st-sd-sell-item-table th {
+    background-color: white;
+    position: sticky;
+    top: 0px;
+    z-index: 5;
+}
+
+.ty-st-sd-sell-item-table td {
+    position: sticky;
+    top: 0px;
+}
+
+.ty-st-sd-sell-item-table tr .col:hover {
+    background-color: #95a5a6;
+    animation: fadein 0.05s;
+    -webkit-animation: fadein 0.05s;
+}
+
+.ty-st-sd-sell-item-table td {
+    vertical-align: 0;
+    width: 100%;
+}
+
+.ty-st-sd-items-td-btn {
+    width: 100%;
+}
+/* in JS */
+/* 판매등록 */
+
+.ty-st-sd-items-btn {
+    background-color: white;
+    border: none;
+    font-size: 16px;
+    line-height: 1.5;
+    width: 100%;
+    text-align: left;
+}
+
+.ty-st-sd-items-btn:focus {
+    outline: none;
+}
+
+.ty-st-sd-items-btn:hover {
+    color: #e0ad4e;
+}
+
+.ty-st-sd-classify-box {
+    animation: fadein 0.5s;
+    -webkit-animation: fadein 0.5s;
+}
+
+.ty-st-sd-option-box {
+    animation: fadein 0.5s;
+    -webkit-animation: fadein 0.5s;
+}
+
+.ty_st_sd_option_el_active {
+    /* background: linear-gradient(to bottom right, #002c40 60%, white); */
+    background-color: #002c40;
+    color: #e0ad4e;
+    animation: fadein 0.7s;
+    -webkit-animation: fadein 0.7s;
+}
+
+.ty-st-sd-selected-option {
+    height: 35vh;
+    overflow-y: scroll;
+    width: 100%;
+    text-align: left;
+    border: 2px solid #022c40;
+    border-radius: 4px;
+}
+
+.ty-st-sd-selected-option:hover {
+    outline: none;
+    border: 2px solid #002c40;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 28px 36px 0px;
+}
+
+.ty-st-sd-selected-option-list {
+    cursor: pointer;
+    /* border: 1px solid #164773; */
+    /* display: inline-block; */
+    /* border-radius: 4px; */
+    font-weight: 600;
+    /* margin: 6px 6px; */
+    padding: 6px 0px;
+    animation: fadein 0.5s;
+    -webkit-animation: fadein 0.5s;
+}
+
+.ty-st-sd-selected-btn {
+    padding: 0px;
+}
+/* 밑줄 */
+
+.ty-st-sd-selected-option-list {
+    display: inline-block;
+}
+
+.ty-st-sd-selected-option-list:hover,
+.fa-times:hover {
+    color: #d63031;
+}
+
+.ty-st-sd-selected-option-list:after {
+    content: "";
+    width: 0px;
+    height: 2px;
+    display: block;
+    background: #d63031;
+    transition: 300ms;
+}
+
+.ty-st-sd-selected-option-list:hover:after {
+    width: 93%;
+}
+
+@-webkit-keyframes fadein {
+    /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.ty-st-sd-submit-click {
+    background-color: #002c40;
+    color: white;
+}
+
+.ty-st-sd-submit-click:hover {
+    color: #e0ad4e;
+}
+/* table sort */
+
+.ty-st-sd-sort-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.ty-st-sd-sort-icon .fa-sort {
+    margin-left: 3px;
+}
+
+.ty-st-sd-table-sort-by-asc {
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    border-radius: 4px;
+    margin: 4px 4px 0 3px;
+    background: transparent;
+    border-bottom: solid 7px #002c40;
+    border-top-width: 0;
+}
+
+.ty-st-sd-table-sort-by-desc {
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 0 3px;
+    background: transparent;
+    border-top: solid 7px #002c40;
+    border-bottom-width: 0;
+}
+
+.st-sd-sell-unit {
+    display: block;
+}
+/* table input */
+
+.flex {
+    display: flex;
+}
+
+.ty-i-td-sellCount-input-data-active {
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+        rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+/* fixed table child  */
+
+.ty-st-sd-fixed-column td:first-child,
+.ty-st-sd-fixed-column th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+}
+
+.ty-st-sd-fixed-column td:nth-child(2),
+.ty-st-sd-fixed-column th:nth-child(2) {
+    position: sticky;
+    left: 50px;
+    z-index: 1;
+    background-color: white;
+}
+
+.ty-st-sd-fixed-column td:nth-child(3),
+.ty-st-sd-fixed-column th:nth-child(3) {
+    position: sticky;
+    left: 130px;
+    z-index: 1;
+    background-color: white;
+}
+
+.ty-st-sd-fixed-column td:nth-child(4),
+.ty-st-sd-fixed-column th:nth-child(4) {
+    position: sticky;
+    left: 330px;
+    z-index: 1;
+    background-color: white;
+}
+
+.ty-st-sd-fixed-column th {
+    position: sticky;
+    top: 0;
+    /* background: #eee; */
+    z-index: 2;
+}
+
+.ty-st-sd-fixed-column th:first-child,
+.ty-st-sd-fixed-column th:nth-child(2),
+.ty-st-sd-fixed-column th:nth-child(3),
+.ty-st-sd-fixed-column th:nth-child(4) {
+    z-index: 3;
+}

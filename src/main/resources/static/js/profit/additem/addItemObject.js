@@ -22,6 +22,7 @@ var SELECTED_CATEGORY = {
     'category4Id': 0,
     'category4Name': ''
 };
+var SEARCHED_CATEGORY = []; // TY REFACTORING
 var OPTIONS = [
     // {
     //     'optionUUID': uuidv4(),
