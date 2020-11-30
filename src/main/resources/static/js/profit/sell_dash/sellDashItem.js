@@ -79,19 +79,19 @@ function itemDataConnect() {
                 }
             })
         },
-        deleteSellItemBySellItem: function(item){
+        deleteSellItemBySellItem: function (item) {
             let data = JSON.stringify(item);
 
             $.ajax({
-                url:'/api/item_manager/selldash/delete/sellitem',
-                type:'POST',
-                contentType:'application/json',
-                dataType:'json',
-                data:data,
+                url: '/api/item_manager/selldash/delete/sellitem',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: data,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $("#i_sd_csrf").val());
                 },
-                success: function(returnData){
+                success: function (returnData) {
                     if (returnData.message === 'USER_INVALID') {
                         alert("세션이 만료되었습니다.")
                         return window.location.href = '/login';
@@ -461,21 +461,66 @@ function loadItemHtml() {
 function objectValueHandler() {
     return {
         costValCalc: function (rData) {
-            let unitSales = Number(rData.sellPrice) + Number(rData.sellCustomerTransCost);
-            let unitProfit = parseInt(unitSales * ((100 - Number(rData.sellCommitionCost)) / 100) - Number(rData.sellPurchaseCost) - Number(rData.sellPurchaseTransCost) - Number(rData.sellSellerRealTransCost) - Number(rData.sellExtraCharge));
-            let unitProfitRate = 0;
+            // let unitSales = Number(rData.sellPrice) + Number(rData.sellCustomerTransCost);
+            // let unitProfit = parseInt(unitSales * ((100 - Number(rData.sellCommitionCost)) / 100) - Number(rData.sellPurchaseCost) - Number(rData.sellPurchaseTransCost) - Number(rData.sellSellerRealTransCost) - Number(rData.sellExtraCharge));
+            // let unitProfitRate = 0;
+            // if (unitSales === 0) {
+            //     unitProfitRate = 0;
+            // } else {
+            //     unitProfitRate = (unitProfit / ((unitSales)) * 100).toFixed(2);
+            // }
+            // let totProfit = (Number(unitProfit) * Number(rData.sellCount)) - Number(rData.sellTotAdsCost) + Number(rData.sellTotEarningCost) + ((Number(rData.sellTotCustomerTransCost) * ((100 - Number(rData.sellCommitionCost)) / 100))) - Number(rData.sellTotSellerRealTransCost) - Number(rData.sellTotExpensesCost) - Number(rData.sellTotPurchaseTransCost);
+            // let totSales = Number(rData.sellCount) * (Number(rData.sellPrice) + Number(rData.sellCustomerTransCost)) + Number(rData.sellTotCustomerTransCost);
+
+            // return {
+            //     getUnitSales: function () { return unitSales; },
+            //     getUnitProfit: function () { return unitProfit; },
+            //     getUnitProfitRate: function () { return unitProfitRate; },
+            //     getTotProfit: function () { return totProfit; },
+            //     getTotSales: function () { return totSales; }
+            // }
+            // ** 개당 데이터 **
+            let cc = Number(rData.sellCommitionCost); // 수수료
+            let up = Number(rData.sellPrice);   // 개당 판매가
+            let uct = Number(rData.sellCustomerTransCost);  // 개당 소비자 운임 비용
+            let ust = Number(rData.sellSellerRealTransCost);    // 개당 판매자 실질 부담 운임비용
+            let upu = Number(rData.sellPurchaseCost);   // 개당 매입 가격
+            let uput = Number(rData.sellPurchaseTransCost); // 개당 매입 운임비용
+            let ue = Number(rData.sellExtraCharge); //개당 기타 비용
+            // ** 총 데이터 **
+            let n = Number(rData.sellCount);    // 판매 개수
+            let tads = Number(rData.sellTotAdsCost);    // 총 광고 비용
+            let texp = Number(rData.sellTotExpensesCost);   // 총 추가 지출
+            let tear = Number(rData.sellTotEarningCost);    // 총 추가 수익
+            let tput = Number(rData.sellTotPurchaseTransCost);  // 총 매입 운임 비용
+            let tct = Number(rData.sellTotCustomerTransCost);   // 총 소비자 운임 비용
+            let tst = Number(rData.sellTotSellerRealTransCost); // 총 판매자 실질 부담 운임 비용
+            // ** 개당 조합 데이터 **
+            let unitSales = up + uct;   // 실질판매가 개당 매출 sau
+            let mf = parseInt(unitSales * (cc/100));    // 마켓 수수료비 mf= 실질 판매가( 판매가 + 소비자 부담 운임비) * 수수료(%)
+            let unitMarginCost = upu + uput + ust + ue + mf;    // 개당 마진 원가 | 개당 매출 원가 | 개당 매입 원가 cpu
+            let unitProfit = unitSales - unitMarginCost;    // 개당 수익
+            let unitProfitRate = 0; // 개당 수익율
+
+            // let unitProfit = parseInt(up * ((100 - Number(rData.sellCommitionCost)) / 100) - Number(rData.sellPurchaseCost) - Number(rData.sellPurchaseTransCost) - Number(rData.sellSellerRealTransCost) - Number(rData.sellExtraCharge));
+            // let unitProfitRate = 0;
+            
             if (unitSales === 0) {
                 unitProfitRate = 0;
             } else {
-                unitProfitRate = (unitProfit / ((unitSales)) * 100).toFixed(2);
+                unitProfitRate = Number((unitProfit / ((unitSales)) * 100).toFixed(2));
             }
-            let totProfit = (Number(unitProfit) * Number(rData.sellCount)) - Number(rData.sellTotAdsCost) + Number(rData.sellTotEarningCost) + ((Number(rData.sellTotCustomerTransCost)*((100-Number(rData.sellCommitionCost)) / 100))) - Number(rData.sellTotSellerRealTransCost) - Number(rData.sellTotExpensesCost) - Number(rData.sellTotPurchaseTransCost);
-            let totSales = Number(rData.sellCount) * (Number(rData.sellPrice) + Number(rData.sellCustomerTransCost));
+            // ** 합계 조합 데이터 **
+            let totSales = unitSales * n + tct; // 합계 매출 sam = 개당 실질 판매가 * 개수 + 총 소비자 운임비용
+            let totMarginCost = unitMarginCost * n + tads + texp - tear + tput + parseInt((tct * (cc/100))) + tst;
+            let totProfit = totSales - totMarginCost;
+            // let totSales = Number(rData.sellCount) * (Number(rData.sellPrice) + Number(rData.sellCustomerTransCost)) + Number(rData.sellTotCustomerTransCost);
+            // let totProfit = (Number(unitProfit) * Number(rData.sellCount)) - Number(rData.sellTotAdsCost) + Number(rData.sellTotEarningCost) + ((Number(rData.sellTotCustomerTransCost) * ((100 - Number(rData.sellCommitionCost)) / 100))) - Number(rData.sellTotSellerRealTransCost) - Number(rData.sellTotExpensesCost) - Number(rData.sellTotPurchaseTransCost);
 
             return {
-                getUnitSales: function() { return unitSales; },
-                getUnitProfit: function() { return unitProfit; },
-                getUnitProfitRate: function() { return unitProfitRate; },
+                getUnitSales: function () { return unitSales; },
+                getUnitProfit: function () { return unitProfit; },
+                getUnitProfitRate: function () { return unitProfitRate; },
                 getTotProfit: function () { return totProfit; },
                 getTotSales: function () { return totSales; }
             }
@@ -559,7 +604,7 @@ function eventItemHandler() {
                 'sellPurchaseCost': item.sellPurchaseCost,
                 'sellPurchaseTransCost': item.sellPurchaseTransCost,
                 'sellExtraCharge': item.sellExtraCharge,
-                'sellCount':item.sellCount,
+                'sellCount': item.sellCount,
                 'sellTotAdsCost': item.sellTotAdsCost,
                 'sellTotExpensesCost': item.sellTotExpensesCost,
                 'sellTotEarningCost': item.sellTotEarningCost,
@@ -568,8 +613,8 @@ function eventItemHandler() {
                 'sellTotSellerRealTransCost': item.sellTotSellerRealTransCost,
                 'unitProfit': costValCalc.getUnitProfit(),
                 'unitProfitRate': costValCalc.getUnitProfitRate(),
-                'totSales':costValCalc.getTotSales(),
-                'totProfit':costValCalc.getTotProfit()
+                'totSales': costValCalc.getTotSales(),
+                'totProfit': costValCalc.getTotProfit()
             }
         },
         modalDataAdapt: function (sellId) {
@@ -590,7 +635,7 @@ function eventItemHandler() {
                     loadItemHtml().unitModalContentSetHtml(sellId);
                 },
                 setTotValue: function () {
-                    MODAL_DATA.sellCount = $("#i_sd_batch_input_sell_count").val() === ''? 0 : $("#i_sd_batch_input_sell_count").val();
+                    MODAL_DATA.sellCount = $("#i_sd_batch_input_sell_count").val() === '' ? 0 : $("#i_sd_batch_input_sell_count").val();
                     MODAL_DATA.sellTotAdsCost = $("#i_sd_batch_input_tot_ads_cost").val() === '' ? 0 : $("#i_sd_batch_input_tot_ads_cost").val();
                     MODAL_DATA.sellTotExpensesCost = $("#i_sd_batch_input_tot_expenses_cost").val() === '' ? 0 : $("#i_sd_batch_input_tot_expenses_cost").val();
                     MODAL_DATA.sellTotEarningCost = $("#i_sd_batch_input_tot_earning_cost").val() === '' ? 0 : $("#i_sd_batch_input_tot_earning_cost").val();
@@ -627,7 +672,7 @@ function eventItemHandler() {
                 submitTotData: function () {
                     SELL_ITEMS.forEach(r => {
                         if (r.sellId == MODAL_DATA.sellId) {
-                            r.sellCount = $("#i_sd_batch_input_sell_count").val() === ''? 0 : $("#i_sd_batch_input_sell_count").val();
+                            r.sellCount = $("#i_sd_batch_input_sell_count").val() === '' ? 0 : $("#i_sd_batch_input_sell_count").val();
                             r.sellTotAdsCost = $("#i_sd_batch_input_tot_ads_cost").val() === '' ? 0 : $("#i_sd_batch_input_tot_ads_cost").val();
                             r.sellTotExpensesCost = $("#i_sd_batch_input_tot_expenses_cost").val() === '' ? 0 : $("#i_sd_batch_input_tot_expenses_cost").val();
                             r.sellTotEarningCost = $("#i_sd_batch_input_tot_earning_cost").val() === '' ? 0 : $("#i_sd_batch_input_tot_earning_cost").val();
@@ -642,13 +687,13 @@ function eventItemHandler() {
                 }
             }
         },
-        sellItemDeleteClick: function(sellId){
+        sellItemDeleteClick: function (sellId) {
             let item;
-            SELL_ITEMS = SELL_ITEMS.filter(r=>{
-                if(r.sellId==sellId){
+            SELL_ITEMS = SELL_ITEMS.filter(r => {
+                if (r.sellId == sellId) {
                     item = r;
                 }
-                return r.sellId!=sellId;
+                return r.sellId != sellId;
             });
             loadItemHtml().sellItemsHtml();
             return itemDataConnect().deleteSellItemBySellItem(item);

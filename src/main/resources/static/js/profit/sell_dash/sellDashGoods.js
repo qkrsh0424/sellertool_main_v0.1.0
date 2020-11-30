@@ -40,7 +40,7 @@ function goodsDataConnect(){
                     } else if (returnData.message === 'FAILURE') {
                         alert("DB Search error code : SDGSG500");
                         return window.location.reload();
-                    } {
+                    } else {
                         alert("undefined error code : SDGSG");
                         return window.location.reload();
                     }
@@ -173,7 +173,6 @@ function loadGoodsHtml(){
             $("#i_sell_item_list").html(html);
         },
         itemRegisterBatchModalSetHtml: function(){
-            console.log(CLASSIFYS);
             let modalHeaderHtml = `
                 <div class="modal-header">
                     <h5 class="modal-title" id="i_sd_batch_input_modalLabel">등록된 상품 찾기</h5>

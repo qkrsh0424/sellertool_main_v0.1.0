@@ -85,3 +85,58 @@ function isNumberKey(evt) {
 function isInt(num) {
     return num % 1 === 0;
 }
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function getDateRangeData(param1, param2) {  //param1은 시작일, param2는 종료일이다.
+    var res_day = [];
+    var ss_day = new Date(param1);
+    var ee_day = new Date(param2);
+    while (ss_day.getTime() <= ee_day.getTime()) {
+        var _mon_ = (ss_day.getMonth() + 1);
+        _mon_ = _mon_ < 10 ? '0' + _mon_ : _mon_;
+        var _day_ = ss_day.getDate();
+        _day_ = _day_ < 10 ? '0' + _day_ : _day_;
+        res_day.push(ss_day.getFullYear() + '-' + _mon_ + '-' + _day_);
+        ss_day.setDate(ss_day.getDate() + 1);
+    }
+    return res_day;
+}
+
+function textIsEmpty(text) {
+    let newText = text.replace(/ /gi, '');
+    if (newText == '' | newText == null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function isMember() {
+    let acc = getCookie('ATHRU');
+    let token = $("#ru_data").val();
+    let text = acc + token;
+    if(SHA256(text)===getCookie('ATHO')){
+        return true;
+    }else{
+        return false;
+    }
+}

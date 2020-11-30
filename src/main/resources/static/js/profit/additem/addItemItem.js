@@ -97,12 +97,12 @@ function loadItemHtml(){
                         <th scope="col" width="100">컨트롤러</th>
                         <th scope="col" width="200">마켓 종류</th>
                         <th scope="col" width="200">마켓 수수료 [%]</th>
-                        <th scope="col" width="200">판매가 [원]<span class="text-success">(+)</span></th>
-                        <th scope="col" width="200">소비자 운임비용 [원]<span class="text-success">(+)</span></th>
-                        <th scope="col" width="200">판매자 실질 운임비용 [원]<span class="text-danger">(-)</span></th>
-                        <th scope="col" width="200">매입 가격 | 구매 비용 [원]<span class="text-danger">(-)</span></th>
-                        <th scope="col" width="200">매입 운임 비용 [원]<span class="text-danger">(-)</span></th>
-                        <th scope="col" width="200">기타 비용 [원]<span class="text-danger">(-)</span></th>
+                        <th scope="col" width="200">개당 판매가 [원]<span class="text-success">(+)</span></th>
+                        <th scope="col" width="200">개당 소비자 운임비용 [원]<span class="text-success">(+)</span></th>
+                        <th scope="col" width="200">개당 판매자 실질 운임비용 [원]<span class="text-danger">(-)</span></th>
+                        <th scope="col" width="200">개당 매입 가격 | 구매 비용 [원]<span class="text-danger">(-)</span></th>
+                        <th scope="col" width="200">개당 매입 운임 비용 [원]<span class="text-danger">(-)</span></th>
+                        <th scope="col" width="200">개당 기타 비용 [원]<span class="text-danger">(-)</span></th>
                     </tr>
                     </thead>
                     <tbody>

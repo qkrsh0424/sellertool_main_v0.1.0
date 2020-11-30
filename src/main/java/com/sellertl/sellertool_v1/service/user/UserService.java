@@ -1,5 +1,7 @@
 package com.sellertl.sellertool_v1.service.user;
 
+import java.util.Base64;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -61,7 +63,6 @@ public class UserService {
         //     return getUserSessionDtoToVo(userLoginSessionDTO);
         // }
         // return null;
-
         // **TEST**
         if(userAuthService.isUserSessionValid(request)){
             // System.out.println("UserService/getUserInfo : hello");

@@ -41,8 +41,6 @@ public class CategoryAPI {
     public List<ICategory4DTO> getItemCategory4AllApi(){
         return itemCategoryService.getItemCategory4All();
     }
-
-    // **TODO 서치 알고리즘 계속해서 추가** 
     
     @GetMapping(value = "/get_category2/val")
     public List<ICategory2DTO> getItemCategory2GetApi(

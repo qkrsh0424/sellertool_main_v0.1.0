@@ -2,37 +2,31 @@ package com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem;
 
 import java.util.Date;
 
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
+
 import lombok.Data;
 
 @Data
 public class IItemDefGetDTO {
-    private Long itemItemId;
-    private String itemItemUuid;
-    private String itemItemName;
-
-    private String itemItemStoreType;
-    private String itemItemStoreName;
-    private Double itemItemCommitionCost;
-    private Long itemItemPrice;
-    private Long itemItemCustomerTransCost;
-    private Long itemItemSellerRealTransCost;
-    private Long itemItemPurchaseCost;
-    private Long itemItemPurchaseTransCost;
-    private Long itemItemExtraCharge;
-
-    private String itemItemImageUrl;
-    private String itemClassifyUuid;
-    private String itemClassifyName;
-    private String itemOptionUuid;
-    private String itemOptionName;
-    private int itemItemIc1Id;
-    private int itemItemIc2Id;
-    private int itemItemIc3Id;
-    private int itemItemIc4Id;
-    private String itemItemIc1Name;
-    private String itemItemIc2Name;
-    private String itemItemIc3Name;
-    private String itemItemIc4Name;
-    private Date itemItemCreatedAt;
-    private Date itemItemUpdatedAt;
+    private Long itemId;
+    private String itemUuid;
+    private String classifyUuid;
+    private String optionUuid;
+    private String storeType;
+    private String storeName;
+    private Double commitionCost;
+    private Long price;
+    private Long customerTransCost;
+    private Long sellerRealTransCost;
+    private Long purchaseCost;
+    private Long purchaseTransCost;
+    private Long extraCharge;
+    private String imageUrl;
+    private String itemName;
+    private Date createdAt;
+    private Date updatedAt;
+    private IItemDefCategDTO category;
+    private IClassifyPureGetDTO classify;
+    private IOptionPureGetDTO option;
 }

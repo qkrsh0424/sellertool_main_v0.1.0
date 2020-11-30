@@ -1,14 +1,335 @@
-<!-- TODO Profit 데시보드 만들기 -->
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragment/header::header"></head>
-
+<head th:replace="fragment/header2::header2"></head>
 <body>
     <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
-    <a type="button" href="/profit/add/item">상품 추가하기</a>
-    <a type="button" href="/profit/sell/dashboard">판매 등록하기</a>
+    <th:block th:if="${ru}">
+        <input type="text" name="ru_data" id="ru_data" th:value="${ru}" hidden>
+    </th:block>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link st-nav-active" href="/profit">데쉬보드</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/sell/dashboard">판매 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/add/item">상품 등록 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/manage/item">등록된 상품 관리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <button type="button" onclick="testConsole()">test console</button> -->
+    <div class="st-container">
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-content-box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>날짜 선택</p>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control" id="i_mdash_start_date" onchange="calandarHandler().dateChange().changeStartDate(this)">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control" id="i_mdash_end_date" onchange="calandarHandler().dateChange().changeEndDate(this)">
+                                </div>
+                            </div>
+                            <p>조회 옵션 선택</p>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <select name="i_mdash_classify_selector" id="i_mdash_classify_selector" class="form-control" onchange="eventClassifyHandler().selectorValueChange(this)"></select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select name="i_mdash_option_selector" id="i_mdash_option_selector" class="form-control" onchange="eventItemOptionHandler().selectorValueChange(this)"></select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select name="i_mdash_store_selector" id="i_mdash_store_selector" class="form-control" onchange="eventStoreHandler().selectorValueChange(this)"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-outline-primary btn-block" onclick="searchForData()">조회하기</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- <a type="button" class="btn btn-primary" href="/profit/add/item">상품 등록 관리</a>
+                            <a type="button" class="btn btn-primary" href="/profit/sell/dashboard">판매 관리</a>
+                            <a type="button" class="btn btn-primary" href="/profit/manage/item">등록된 상품 관리</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Chart -->
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-title-box">
+                    <div class="float-right">
+                        <button class="btn btn-outline-warning" sttg="mdash-main-graph-btn" onclick="eventChartHandler().mainGraph().hide()">숨기기</button>
+                    </div>
+                    <h4 class="st-mdash-title-el">
+                        기간별 합계 성과
+                    </h4>
+                </div>
+                <div class="st-mdash-content-box pb-3 pt-3">
+                    <div sttg="mdash-main-graph">
+                        <div class="chart-container" style="position: relative; height:400px; width:100%;">
+                            <canvas id="i_mdash_mainChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sell Table -->
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-title-box">
+                    <h4 class="st-mdash-title-el">
+                        판매 목록
+                    </h4>
+                </div>
+                <div class="st-mdash-table-container">
+                    <div class="table-responsive list-table-box" id="i_mdash_selled_item_list">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-title-box">
+                    <div class="float-right">
+                        <button class="btn btn-outline-warning" sttg="mdash-date-graph-btn" onclick="eventChartHandler().dateGraph().hide()">숨기기</button>
+                    </div>
+                    <h4 class="st-mdash-title-el">
+                        기간별 성과 지표
+                    </h4>
+                </div>
+                <div class="st-mdash-content-box">
+                    <div sttg="mdash-date-graph">
+                        <div class="row pb-3 pt-3">
+                            <div class="col-sm-4">
+                                <p class="text-center st-graph-title">기간별 판매 개수</p>
+                                <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                    <canvas id="i_mdash_chart_sellcount_bydate"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-center st-graph-title">기간별 투자 대비 ROI</p>
+                                <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                    <canvas id="i_mdash_roInvChart"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-center st-graph-title">기간별 지출 광고비용 대비 ROI | ROAS</p>
+                                <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                    <canvas id="i_mdash_roAdsChart"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-title-box">
+                    <div class="float-right">
+                        <button class="btn btn-outline-warning" sttg="mdash-classify-graph-btn" onclick="eventChartHandler().classifyGraph().hide()">숨기기</button>
+                    </div>
+                    <h4 class="st-mdash-title-el">
+                        상품별 성과 지표
+                    </h4>
+                </div>
+                <div class="st-mdash-content-box">
+                    <div sttg="mdash-classify-graph">
+                        <div class="row pb-3 pt-3" style="border-bottom: 1px dashed gray;">
+                            <div class="col-sm-4">
+                                <p class="text-center st-graph-title">상품별 판매 개수</p>
+                                <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                    <canvas id="i_mdash_chart_sellcount_byclassify"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-center st-graph-title">상품별 수익 및 순수익</p>
+                                <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                    <canvas id="i_mdash_chart_totSum_byclassify"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-center st-graph-title">상품별 지출 광고비용</p>
+                                <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                    <canvas id="i_mdash_chart_totAdsSum_byclassify"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3 pt-3">
+                            <div class="col-sm-6">
+                                <p class="text-center st-graph-title">상품별 투자 대비 ROI</p>
+                                <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                    <canvas id="i_mdash_chart_totRoInvSum_byclassify"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-center st-graph-title">상품별 지출 광고비용 대비 ROI | ROAS</p>
+                                <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                    <canvas id="i_mdash_chart_totRoAdsSum_byclassify"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-title-box">
+                    <div class="float-right">
+                        <button class="btn btn-outline-warning" sttg="mdash-item-graph-btn" onclick="eventChartHandler().itemGraph().hide()">숨기기</button>
+                    </div>
+                    <h4 class="st-mdash-title-el">
+                        상세 상품별 성과 지표
+                    </h4>
+                </div>
+                <div class="st-mdash-content-box">
+                    <div sttg="mdash-item-graph">
+                        <div class="row pb-3 pt-3" style="border-bottom: 1px dashed gray;">
+                            <div class="col-sm-6">
+                                <p class="text-center st-graph-title">상세 상품별 판매 개수</p>
+                                <div class="chart-container" style="position: relative; height: 95vh; width:100%">
+                                    <canvas id="i_mdash_chart_sellcount_byitem"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-center st-graph-title">상세 상품별 수익 및 순수익</p>
+                                <div class="chart-container" style="position: relative; height:95vh; width:100%">
+                                    <canvas id="i_mdash_chart_totSum_byitem"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3 pt-3" style="border-bottom: 1px dashed gray;">
+                            <div class="col-sm-12">
+                                <p class="text-center st-graph-title">상세 상품별 광고 비용</p>
+                                <div class="chart-container" style="position: relative; height: 400px; width:100%">
+                                    <canvas id="i_mdash_chart_totAdsSum_byitem"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3 pt-3" style="border-bottom: 1px dashed gray;">
+                            <div class="col-sm-12">
+                                <p class="text-center st-graph-title">상세 상품별 투자 대비 ROI</p>
+                                <div class="chart-container" style="position: relative; height: 400px; width:100%">
+                                    <canvas id="i_mdash_chart_totRoInvSum_byitem"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3 pt-3" style="border-bottom: 1px dashed gray; ">
+                            <div class="col-sm-12">
+                                <p class="text-center st-graph-title">상세 상품별 지출 광고비용 대비 ROI | ROAS</p>
+                                <div class="chart-container" style="position: relative; height: 400px; width:100%">
+                                    <canvas id="i_mdash_chart_totRoAdsSum_byitem"></canvas>
+                                    <div class="st-chart-invisible">
+                                        <div class="st-chart-invisible-el">
+                                            준비중입니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="wrap-loading display-none" id="i_mdash_loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+
+
     <footer th:replace="fragment/footer::footer"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="/js/profit/main_dash/mDashObject.js"></script>
+    <script src="/js/profit/main_dash/mDashChartObject.js"></script>
+    <script src="/js/profit/main_dash/mDashInquire.js"></script>
+    <script src="/js/profit/main_dash/mDashCalandar.js"></script>
+    <script src="/js/profit/main_dash/mDashDataConnect.js"></script>
+    <script src="/js/profit/main_dash/mDashChart.js"></script>
+    <script src="/js/profit/main_dash/mDashTable.js"></script>
+    <script src="/js/profit/main_dash/mDashMain.js"></script>
 </body>
 
 </html>

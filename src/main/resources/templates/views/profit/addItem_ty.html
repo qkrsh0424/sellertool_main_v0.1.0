@@ -1,5 +1,3 @@
-<!-- form-control -> ty-st-aitem-input  -->
-<!-- TODO Profit 데시보드 만들기 -->
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
@@ -7,13 +5,30 @@
 
 <body>
     <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
-
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit">데쉬보드</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/sell/dashboard">판매 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link st-nav-active" href="/profit/add/item">상품 등록 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/manage/item">등록된 상품 관리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="st-container">
         <input hidden id="i_aitem_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <!-- <div class="col-sm-3"> -->
             <div class="st-aitem-wrapper">
                 <div class="st-aitem-box">
-                    <h4 class="text-center">상품 등록</h4>
+                    <h4 class="text-center">상품 등록 관리</h4>
                 </div>
             </div>
         <!-- </div> -->
@@ -220,19 +235,19 @@
                                     value="0" placeholder="마켓 수수료" onkeypress="return isActualNumberKey(event)"
                                     onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_price">판매가 [원]<span
+                                <label for="i_item_batch_input_price">개당 판매가 [원]<span
                                         class="text-success">(+)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_price" value="0"
                                     placeholder="판매가" onkeypress="return isNumberKey(event)"
                                     onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_customer_trans_cost">소비자 운임 비용 [원]<span
+                                <label for="i_item_batch_input_customer_trans_cost">개당 소비자 운임 비용 [원]<span
                                         class="text-success">(+)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_customer_trans_cost"
                                     value="0" placeholder="소비자 운임 비용" onkeypress="return isNumberKey(event)"
                                     onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_seller_real_trans_cost">판매자 실질 운임 비용 [원]<span
+                                <label for="i_item_batch_input_seller_real_trans_cost">개당 판매자 실질 운임 비용 [원]<span
                                         class="text-danger">(-)</span></label>
                                 <input type="text" class="ty-st-aitem-input"
                                     id="i_item_batch_input_seller_real_trans_cost" value="0"
@@ -240,19 +255,19 @@
                                     onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="i_item_batch_input_purchase_cost">매입 가격 | 구매 비용 [원]<span
+                                <label for="i_item_batch_input_purchase_cost">개당 매입 가격 | 구매 비용 [원]<span
                                         class="text-danger">(-)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_purchase_cost"
                                     value="0" placeholder="매입 가격 | 구매 비용" onkeypress="return isNumberKey(event)"
                                     onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_purchase_trans_cost">매입 운임 비용 [원]<span
+                                <label for="i_item_batch_input_purchase_trans_cost">개당 매입 운임 비용 [원]<span
                                         class="text-danger">(-)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_purchase_trans_cost"
                                     value="0" placeholder="매입 운임 비용" onkeypress="return isNumberKey(event)"
                                     onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_extra_charge">기타 비용 [원]<span
+                                <label for="i_item_batch_input_extra_charge">개당 기타 비용 [원]<span
                                         class="text-danger">(-)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_extra_charge"
                                     value="0" placeholder="기타 비용" onkeypress="return isNumberKey(event)"

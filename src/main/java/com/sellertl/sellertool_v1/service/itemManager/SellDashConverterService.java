@@ -49,7 +49,6 @@ public class SellDashConverterService {
         return sellEntities;
     }
 
-    // **TODO : 엔티티 -> GET1 DTO**
     public List<ISellDefGetDTO> getSellEntitiesToGetDefaultDtos(List<ISellDefEntity> sellEntities){
         List<ISellDefGetDTO> sellDefaultDtos = new ArrayList<>();
         for(ISellDefEntity sellEntity : sellEntities){

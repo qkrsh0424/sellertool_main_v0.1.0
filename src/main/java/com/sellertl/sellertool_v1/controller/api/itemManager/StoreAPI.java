@@ -17,6 +17,7 @@ public class StoreAPI {
     @Autowired
     ItemStoreService itemStoreService;
 
+    // /api/item_store/get/all
     @GetMapping(value = "/get/all")
     public List<IStoreGetDTO> GetItemStoreAll(){
         return itemStoreService.searchItemStoreAll();

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit">데쉬보드</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/sell/dashboard">판매 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/add/item">상품 등록 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link st-nav-active" href="/profit/manage/item">등록된 상품 관리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <button type="button" onclick="testConsole()">test console</button> -->
+    <div class="st-container">
+        <input hidden id="i_mitem_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="st-mitem-wrapper">
+            <div class="st-mitem-box">
+                <h4 class="text-center">등록된 상품 관리</h4>
+            </div>
+        </div>
+        <div id="i_mitem_classify_selector_box">
+
+        </div>
+        <div id="i_mitem_classify_info">
+
+        </div>
+        <div id="i_mitem_category_breadcrumb">
+
+        </div>
+        <div id="i_mitem_option_selector_box">
+
+        </div>
+        <div id="i_mitem_option_info_box">
+
+        </div>
+        <div id="i_mitem_item_table_box">
+
+        </div>
+    </div>
+    <!-- Modal Regular-->
+    <div class="st-mitem-modal-regular-wrapper">
+        <div class="modal fade" id="i_mitem_modal_regular" data-keyboard="false" tabindex="-1"
+            aria-labelledby="i_mitem_modal_regularLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" id="i_mitem_modal_regular_box">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Large-->
+    <div class="st-mitem-modal-regular-wrapper">
+        <div class="modal fade" id="i_mitem_modal_large" data-keyboard="false" tabindex="-1"
+            aria-labelledby="i_mitem_modal_largeLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" id="i_mitem_modal_large_box">
+            </div>
+        </div>
+    </div>
+    <!-- Loading -->
+    <div class="wrap-loading display-none" id="i_mitem_loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <footer th:replace="fragment/footer::footer"></footer>
+    <footer th:replace="fragment/jquery-ui::jquery-ui"></footer>
+    <script src="/js/profit/manage_item/mItemObject.js"></script>
+    <script src="/js/profit/manage_item/mItemClassify.js"></script>
+    <script src="/js/profit/manage_item/mItemCategory.js"></script>
+    <script src="/js/profit/manage_item/mItemOption.js"></script>
+    <script src="/js/profit/manage_item/mItemItem.js"></script>
+    <script src="/js/profit/manage_item/mItemDataConnect.js"></script>
+    <script src="/js/profit/manage_item/mItemMain.js"></script>
+</body>
+
+</html>

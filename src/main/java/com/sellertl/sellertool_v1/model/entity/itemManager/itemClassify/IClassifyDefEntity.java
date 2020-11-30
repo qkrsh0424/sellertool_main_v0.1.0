@@ -25,7 +25,7 @@ public class IClassifyDefEntity implements Serializable{
     @Id
     @Column(name = "i_classify_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long itemClassifyId;
+    private Long iClassifyId;
 
     @NaturalId
     @Column(name = "i_classify_uuid")

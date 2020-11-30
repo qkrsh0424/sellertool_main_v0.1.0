@@ -1,0 +1,75 @@
+.st-mdash-sell-unit{
+    font-size: 11px;
+}
+
+.st-mdash-container{
+    margin: 30px 0;
+}
+
+.st-mdash-wrapper{
+    margin: 0 30px;
+    padding-bottom: 27px;
+}
+
+.st-mdash-wrapper2{
+    background-color: none;
+    padding-bottom: 12px;
+    margin: 12px 30px;
+}
+
+.st-mdash-wrapper .st-mdash-box{
+    border: 2px solid #002c40;
+    border-radius: 6px;
+    -webkit-box-shadow: 2px 6px 6px 2px rgba(0,0,0,.03);
+    box-shadow: 2px 6px 6px 2px rgba(0,0,0,.03);
+    background-color: #fff;
+}
+
+.st-mdash-title-box{
+    position: relative;
+    margin-bottom: -1px;
+    padding: 0 20px;
+    border-bottom: 1px solid #eff2f4;
+    line-height: 49px;
+    background: 0 0;
+}
+
+.st-mdash-title-el{
+    padding: 0;
+    font-weight: 700;
+    line-height: inherit;
+}
+
+.st-mdash-content-box{
+    padding: 8px 20px 17px;
+}
+
+.st-mdash-table-container{
+    padding: 10px;
+    background: white;
+    border-radius: 0 0 10px 10px;
+}
+
+.st-graph-title{
+    background: #f2ad57;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+}
+
+.st-chart-invisible{
+    background-color: #ffffffbb;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    z-index: 2;
+    height:100%; 
+    width:100%;
+}
+
+.st-chart-invisible-el{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    z-index: 3;
+}

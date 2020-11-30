@@ -13,6 +13,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -59,7 +60,10 @@ public class FileUploadService {
             String ext = file[i].getOriginalFilename().substring( pos + 1 );    // 마지막 . 인덱스를 기준으로 뒷쪽 텍스트를 가져온다.
             String fileName = String.valueOf(new Date().getTime())+"-"+((int)(Math.random()*99999)+10000)+"."+ext;  // 최종 파일 네임 : {현재 시간}-{랜덤값}.{확장자명} 
 
-            s3Client.putObject(new PutObjectRequest(bucketPath, fileName, file[i].getInputStream(), null)
+            ObjectMetadata metadata = new ObjectMetadata(); // 에러코드 피하기 위함 : No content length specified for stream data. Stream contents will be buffered in memory and could result in out of memory errors.
+            metadata.setContentLength(file[i].getSize());   // 위의 에러코드를 피하기 위해서는 contentLength를 지정해줘야 한다.
+
+            s3Client.putObject(new PutObjectRequest(bucketPath, fileName, file[i].getInputStream(), metadata)
                     .withCannedAcl(CannedAccessControlList.PublicRead))
                     ;
 
