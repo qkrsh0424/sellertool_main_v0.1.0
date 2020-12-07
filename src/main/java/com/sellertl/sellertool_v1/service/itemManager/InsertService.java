@@ -1,12 +1,18 @@
 package com.sellertl.sellertool_v1.service.itemManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.sellertl.sellertool_v1.model.DTO.UserLoginSessionDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDefGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemReq1DTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionPureEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellPureEntity;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemCategory.ICategoryGroupDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyPureRepository;
@@ -14,6 +20,7 @@ import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemDef
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellPureRepository;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +33,9 @@ public class InsertService {
 
     @Autowired
     InsertConverterService incService;
+
+    @Autowired
+    SearchService searchService;
 
     @Autowired
     SearchConverterService searConService;
@@ -50,6 +60,9 @@ public class InsertService {
 
     @Autowired
     ISellDefRepository iSellDefRepository;
+
+    @Autowired
+    ISellPureRepository iSellPureRepository;
     
     public String insertOptionOne(HttpServletRequest request, IClassifyDefGetDTO classify, String optionName, int remainingCount){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
@@ -70,4 +83,18 @@ public class InsertService {
         iItemDefRepository.save(itemEntity);
         return "SUCCESS";
     }
+
+	public String insertSellItemOne(HttpServletRequest request, IItemReq1DTO itemsWithDate) {
+        UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        if(user==null){
+            return "USER_INVALID";
+        }
+
+        List<Long> itemIds = new ArrayList<>();
+        itemsWithDate.getItems().stream().map(r->r.getItemId()).forEach(itemIds::add);
+        List<IItemPureEntity> itemPureEntities = searchService.getItemPureEntitiesByIds(itemIds);
+        List<ISellPureEntity> sellEntities = incService.getItemToSellEntities(itemPureEntities, itemsWithDate.getSellDate());
+        List<ISellPureEntity> savedSellEntities = iSellPureRepository.saveAll(sellEntities);
+		return "SUCCESS";
+	}
 }

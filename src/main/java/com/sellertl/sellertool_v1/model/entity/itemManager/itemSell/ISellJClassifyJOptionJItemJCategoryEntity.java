@@ -9,16 +9,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
-import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ICategoryGroupPureEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyPureEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemPureEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionPureEntity;
 
 import lombok.Data;
 
 @Entity
 @Data
+@NamedEntityGraph(
+    name = "SellItemWithClassifyAndOptionAndItemAndCategory",
+    attributeNodes = {
+        @NamedAttributeNode("classify"),
+        @NamedAttributeNode("option"),
+        @NamedAttributeNode("item"),
+        @NamedAttributeNode("category"),
+    }
+)
 @Table(name = "i_sell")
-public class ISellDefEntity {
+public class ISellJClassifyJOptionJItemJCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "i_sell_id")
@@ -26,6 +40,12 @@ public class ISellDefEntity {
 
     @Column(name = "user_id")
     private String userId;
+
+    @Column(name = "i_classify_uuid")
+    private String iClassifyUuid;
+
+    @Column(name = "i_option_uuid")
+    private String iOptionUuid;
 
     @Column(name = "i_item_id")
     private Long iItemId;
@@ -87,7 +107,19 @@ public class ISellDefEntity {
     @Column(name = "i_sell_deleted")
     private int iSellDeleted;
 
-    // @ManyToOne
-    // @JoinColumn(name = "i_item_id", insertable = false, updatable = false)
-    // private IItemDefEntity item;
+    @ManyToOne
+    @JoinColumn(name = "i_classify_uuid",referencedColumnName = "i_classify_uuid", insertable = false, updatable = false)
+    private IClassifyPureEntity classify;
+
+    @ManyToOne
+    @JoinColumn(name = "i_option_uuid",referencedColumnName = "i_option_uuid", insertable = false, updatable = false)
+    private IOptionPureEntity option;
+
+    @ManyToOne
+    @JoinColumn(name = "i_item_id",referencedColumnName = "i_item_id", insertable = false, updatable = false)
+    private IItemPureEntity item;
+
+    @ManyToOne
+    @JoinColumn(name = "i_classify_uuid",referencedColumnName = "i_classify_uuid", insertable = false, updatable = false)
+    private ICategoryGroupPureEntity category;
 }

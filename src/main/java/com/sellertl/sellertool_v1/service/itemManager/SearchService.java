@@ -17,15 +17,18 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionPureEntity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellJClassifyJOptionJItemJCategoryEntity;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemCategory.ICategoryGroupDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellJClassifyJOptionJItemJCategoryRepository;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +42,6 @@ public class SearchService {
 
     @Autowired
     SearchConverterService searConService;
-
-    @Autowired
-    SellDashConverterService sdConvertService;
 
     @Autowired
     ICategoryGroupDefRepository iCategoryGroupDefRepository;
@@ -59,10 +59,16 @@ public class SearchService {
     IOptionPureRepository iOptionPureRepository;
 
     @Autowired
-    IItemDefRepository itemItemRepository;
+    IItemDefRepository iItemDefRepository;
+
+    @Autowired
+    IItemPureRepository iItemPureRepository;
 
     @Autowired
     ISellDefRepository iSellDefRepository;
+
+    @Autowired
+    ISellJClassifyJOptionJItemJCategoryRepository iSellJClassifyJOptionJItemJCategoryRepository;
 
     public List<IItemGet1DTO> getRegItemAll(HttpServletRequest request){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
@@ -70,7 +76,7 @@ public class SearchService {
             return new ArrayList<>();
         }
 
-        List<IItemDefEntity> items = itemItemRepository.selectAll(user.getId(),EXIST_OR_NOT.IS_EXIST);
+        List<IItemDefEntity> items = iItemDefRepository.selectAll(user.getId(),EXIST_OR_NOT.IS_EXIST);
         return searConService.getRegItemEntitiesToDtos(items);
     }
 
@@ -80,7 +86,7 @@ public class SearchService {
             return new ArrayList<>();
         }
 
-        List<IItemDefEntity> items = itemItemRepository.selectAll(user.getId(),EXIST_OR_NOT.IS_EXIST);
+        List<IItemDefEntity> items = iItemDefRepository.selectAll(user.getId(),EXIST_OR_NOT.IS_EXIST);
         return searConService.getItemDefEntitiesToDtos(items);
     }
 
@@ -90,7 +96,7 @@ public class SearchService {
             return new ArrayList<>();
         }
 
-        List<IItemDefEntity> items = itemItemRepository.selectItemsByOption(user.getId(), optionUuid, EXIST_OR_NOT.IS_EXIST);
+        List<IItemDefEntity> items = iItemDefRepository.selectItemsByOption(user.getId(), optionUuid, EXIST_OR_NOT.IS_EXIST);
         return searConService.getItemDefEntitiesToDtos(items);
     }
 
@@ -101,9 +107,9 @@ public class SearchService {
         if(user==null){
             return new ArrayList<>();
         }
-        List<ISellDefEntity> iSellEntities = iSellDefRepository.selectSellItemsByTime(user.getId(), startDate, endDate,EXIST_OR_NOT.IS_EXIST);
+        List<ISellJClassifyJOptionJItemJCategoryEntity> iSellEntities = iSellJClassifyJOptionJItemJCategoryRepository.selectSellItemsByTime(user.getId(), startDate, endDate,EXIST_OR_NOT.IS_EXIST);
         // System.out.println(iSellEntities);
-        return sdConvertService.getSellEntitiesToGetDefaultDtos(iSellEntities);
+        return searConService.getSellEntitiesToGetDefDtos(iSellEntities);
     }
 
     // 데쉬보드를 위한 판매 아이템 조회
@@ -113,8 +119,8 @@ public class SearchService {
         if(user==null){
             return new ArrayList<>();
         }
-        List<ISellDefEntity> iSellEntities = iSellDefRepository.selectSellItemsByTimeOrdBySell(user.getId(), startDate, endDate,EXIST_OR_NOT.IS_EXIST);
-        return sdConvertService.getSellEntitiesToGetDefaultDtos(iSellEntities);
+        List<ISellJClassifyJOptionJItemJCategoryEntity> iSellEntities = iSellJClassifyJOptionJItemJCategoryRepository.selectSellItemsByTimeOrdBySell(user.getId(), startDate, endDate,EXIST_OR_NOT.IS_EXIST);
+        return searConService.getSellEntitiesToGetDefDtos(iSellEntities);
     }
 
     // 데쉬보드를 위한 판매 아이템 조회2
@@ -140,8 +146,8 @@ public class SearchService {
         if(storeType.equals("none")){
             storeType="";
         }
-        List<ISellDefEntity> iSellEntities = iSellDefRepository.selectSellItemsByCondition(user.getId(), startDate, endDate, order, classifyUuid, optionUuid, storeType, EXIST_OR_NOT.IS_EXIST);
-        return sdConvertService.getSellEntitiesToGetDefaultDtos(iSellEntities);
+        List<ISellJClassifyJOptionJItemJCategoryEntity> iSellEntities = iSellJClassifyJOptionJItemJCategoryRepository.selectSellItemsByCondition(user.getId(), startDate, endDate, order, classifyUuid, optionUuid, storeType, EXIST_OR_NOT.IS_EXIST);
+        return searConService.getSellEntitiesToGetDefDtos(iSellEntities);
     }
 
     public List<IClassifyPureGetDTO> getClassifysByUser(HttpServletRequest request){
@@ -196,11 +202,24 @@ public class SearchService {
     public List<IItemDefEntity> getRegItemsByList(HttpServletRequest request, List<Long> itemIds){
         List<IItemDefEntity> items = new ArrayList<>();
         for(Long itemId : itemIds){
-            Optional<IItemDefEntity> itemEntityOpt = itemItemRepository.selectByitemId(itemId, EXIST_OR_NOT.IS_EXIST);
+            Optional<IItemDefEntity> itemEntityOpt = iItemDefRepository.selectByitemId(itemId, EXIST_OR_NOT.IS_EXIST);
             if(itemEntityOpt.isPresent()){
                 items.add(itemEntityOpt.get());
             }
         }
         return items;
+    }
+
+    @Transactional(readOnly = true)
+    public List<IItemPureEntity> getItemPureEntitiesByIds(List<Long> itemIds){
+        List<IItemPureEntity> itemPureEntities = new ArrayList<>();
+
+        for( Long id : itemIds ){
+            Optional<IItemPureEntity> itemEntityOpt = iItemPureRepository.selectByitemId(id,EXIST_OR_NOT.IS_EXIST);
+            if(itemEntityOpt.isPresent()){
+                itemPureEntities.add(itemEntityOpt.get());
+            }
+        }
+        return itemPureEntities;   
     }
 }

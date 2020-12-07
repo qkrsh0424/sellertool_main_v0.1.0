@@ -9,13 +9,16 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyPu
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefCategDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemGet1DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemJSellDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ICategoryGroupDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ICategoryGroupPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionPureEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellJClassifyJOptionJItemJCategoryEntity;
 
 import org.springframework.stereotype.Service;
 
@@ -28,7 +31,7 @@ public class SearchConverterService {
             item.setItemId(itemEntities.get(i).getIItemId());
             item.setClassifyUuid(itemEntities.get(i).getIClassifyUuid());
             item.setOptionUuid(itemEntities.get(i).getIOptionUuid());
-            item.setItemName(itemEntities.get(i).getOption().getClassify().getIClassifyName()+"-"+itemEntities.get(i).getOption().getIOptionName());
+            item.setItemName(itemEntities.get(i).getClassify().getIClassifyName()+"-"+itemEntities.get(i).getOption().getIOptionName());
             item.setStoreType(itemEntities.get(i).getIItemStoreType());
             item.setStoreName(itemEntities.get(i).getIItemStoreName());
             itemDtos.add(item);
@@ -57,14 +60,14 @@ public class SearchConverterService {
             itemDto.setItemName(itemEntity.getIItemName());
             itemDto.setCreatedAt(itemEntity.getIItemCreatedAt());
             itemDto.setUpdatedAt(itemEntity.getIItemUpdatedAt());
-            itemDto.setCategory(getPureCategoryEntityToDto(itemEntity.getOption().getClassify().getCategory()));
-            itemDto.setClassify(getPureClassifyEntityToDto(itemEntity.getOption().getClassify()));
+            itemDto.setCategory(getPureCategoryEntityToDto(itemEntity.getCategory()));
+            itemDto.setClassify(getPureClassifyEntityToDto(itemEntity.getClassify()));
             itemDto.setOption(getPureOptionEntityToDto(itemEntity.getOption()));
             itemDtos.add(itemDto);
         }
         return itemDtos;
     }
-    public IItemDefCategDTO getPureCategoryEntityToDto(ICategoryGroupDefEntity pureEntity){
+    public IItemDefCategDTO getPureCategoryEntityToDto(ICategoryGroupPureEntity pureEntity){
         IItemDefCategDTO pureDto = new IItemDefCategDTO();
         pureDto.setCategory1Id(pureEntity.getICategoryGroupCategory1Id());
         pureDto.setCategory2Id(pureEntity.getICategoryGroupCategory2Id());
@@ -76,7 +79,7 @@ public class SearchConverterService {
         pureDto.setCategory4Name(pureEntity.getICategoryGroupCategory4Name());
         return pureDto;
     }
-    public IClassifyPureGetDTO getPureClassifyEntityToDto(IClassifyDefEntity pureEntity){
+    public IClassifyPureGetDTO getPureClassifyEntityToDto(IClassifyPureEntity pureEntity){
         IClassifyPureGetDTO pureDto = new IClassifyPureGetDTO();
         pureDto.setClassifyId(pureEntity.getIClassifyId());
         pureDto.setClassifyUuid(pureEntity.getIClassifyUuid());
@@ -135,7 +138,7 @@ public class SearchConverterService {
         return categoryDto;
     }
 
-    public IOptionPureGetDTO getPureOptionEntityToDto(IOptionDefEntity pureEntity){
+    public IOptionPureGetDTO getPureOptionEntityToDto(IOptionPureEntity pureEntity){
             IOptionPureGetDTO pureDto = new IOptionPureGetDTO();
             pureDto.setOptionId(pureEntity.getIOptionId());
             pureDto.setOptionUuid(pureEntity.getIOptionUuid());
@@ -165,5 +168,59 @@ public class SearchConverterService {
             pureDtos.add(pureDto);
         }
         return pureDtos;
+    }
+
+    // SellItem Entities To Dtos
+    public List<ISellDefGetDTO> getSellEntitiesToGetDefDtos(List<ISellJClassifyJOptionJItemJCategoryEntity> sellEntities){
+        List<ISellDefGetDTO> sellDefaultDtos = new ArrayList<>();
+        for(ISellJClassifyJOptionJItemJCategoryEntity sellEntity : sellEntities){
+            ISellDefGetDTO sellDef = new ISellDefGetDTO();
+            IItemJSellDefGetDTO itemDef = new IItemJSellDefGetDTO();
+            IItemDefCategDTO category = new IItemDefCategDTO();
+            category.setCategory1Id(sellEntity.getCategory().getICategoryGroupCategory1Id());
+            category.setCategory2Id(sellEntity.getCategory().getICategoryGroupCategory2Id());
+            category.setCategory3Id(sellEntity.getCategory().getICategoryGroupCategory3Id());
+            category.setCategory4Id(sellEntity.getCategory().getICategoryGroupCategory4Id());
+            category.setCategory1Name(sellEntity.getCategory().getICategoryGroupCategory1Name());
+            category.setCategory2Name(sellEntity.getCategory().getICategoryGroupCategory2Name());
+            category.setCategory3Name(sellEntity.getCategory().getICategoryGroupCategory3Name());
+            category.setCategory4Name(sellEntity.getCategory().getICategoryGroupCategory4Name());
+
+            itemDef.setItemId(sellEntity.getItem().getIItemId());
+            itemDef.setItemUuid(sellEntity.getItem().getIItemUuid());
+            itemDef.setItemName(sellEntity.getClassify().getIClassifyName()+"-"+sellEntity.getOption().getIOptionName());
+            itemDef.setItemStoreType(sellEntity.getItem().getIItemStoreType());
+            itemDef.setItemStoreName(sellEntity.getItem().getIItemStoreName());
+            itemDef.setItemImageUrl(sellEntity.getItem().getIItemImageUrl());
+            itemDef.setClassifyUuid(sellEntity.getItem().getIClassifyUuid());
+            itemDef.setClassifyName(sellEntity.getClassify().getIClassifyName());
+            itemDef.setOptionUuid(sellEntity.getItem().getIOptionUuid());
+            itemDef.setOptionName(sellEntity.getOption().getIOptionName());
+            itemDef.setCategoryData(category);
+
+            sellDef.setSellId(sellEntity.getISellId());
+            sellDef.setItemId(sellEntity.getIItemId());
+            sellDef.setSellTag(sellEntity.getISellTag());
+            sellDef.setSellCommitionCost(sellEntity.getISellCommitionCost());
+            sellDef.setSellPrice(sellEntity.getISellPrice());
+            sellDef.setSellCustomerTransCost(sellEntity.getISellCustomerTransCost());
+            sellDef.setSellSellerRealTransCost(sellEntity.getISellSellerRealTransCost());
+            sellDef.setSellPurchaseCost(sellEntity.getISellPurchaseCost());
+            sellDef.setSellPurchaseTransCost(sellEntity.getISellPurchaseTransCost());
+            sellDef.setSellExtraCharge(sellEntity.getISellExtraCharge());
+            sellDef.setSellCount(sellEntity.getISellSelledCount());
+            sellDef.setSellTotAdsCost(sellEntity.getISellTotAdsCost());
+            sellDef.setSellTotExpensesCost(sellEntity.getISellTotExpensesCost());
+            sellDef.setSellTotEarningCost(sellEntity.getISellTotEarningCost());
+            sellDef.setSellTotCustomerTransCost(sellEntity.getISellTotCustomerTransCost());
+            sellDef.setSellTotSellerRealTransCost(sellEntity.getISellTotSellerRealTransCost());
+            sellDef.setSellTotPurchaseTransCost(sellEntity.getISellTotPurchaseTransCost());
+            sellDef.setSellCreatedAt(sellEntity.getISellCreatedAt());
+            sellDef.setSellUpdatedAt(sellEntity.getISellUpdatedAt());
+            sellDef.setSellSelldate(sellEntity.getISellSelledDate());
+            sellDef.setItemData(itemDef);
+            sellDefaultDtos.add(sellDef);
+        }
+        return sellDefaultDtos;
     }
 }

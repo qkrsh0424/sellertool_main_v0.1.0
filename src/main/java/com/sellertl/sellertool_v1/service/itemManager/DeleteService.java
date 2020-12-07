@@ -1,5 +1,7 @@
 package com.sellertl.sellertool_v1.service.itemManager;
 
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +12,9 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDe
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDefResDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellPureEntity;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemCategory.ICategoryGroupDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyPureRepository;
@@ -18,6 +22,7 @@ import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemDef
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellPureRepository;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +56,9 @@ public class DeleteService {
 
     @Autowired
     ISellDefRepository iSellDefRepository;
+
+    @Autowired
+    ISellPureRepository iSellPureRepository;
     
     @PersistenceContext
     EntityManager entityManager;
@@ -85,6 +93,23 @@ public class DeleteService {
         String result = deleteClassifyAndOptionsAndItemsTransaction(user.getId(), classify);
         return result;
     }
+
+    public String removeSellItemOne(HttpServletRequest request, ISellDefGetDTO sellItem) {
+        UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        if(user==null){
+            return "USER_INVALID";
+        }
+        Optional<ISellPureEntity> iSellPureEntity = iSellPureRepository.selectOneById(sellItem.getSellId(),EXIST_OR_NOT.IS_EXIST);
+        if(iSellPureEntity.isPresent()){
+            iSellPureEntity.ifPresent(r->{
+                r.setISellDeleted(EXIST_OR_NOT.IS_DELETED);
+                iSellPureRepository.save(r);
+            });
+            return "SUCCESS";
+        }else{
+            return "FAILURE";
+        }
+	}
 
     @Transactional
     public String deleteOptionAndItemsTransaction(String userId , IOptionPureGetDTO option){

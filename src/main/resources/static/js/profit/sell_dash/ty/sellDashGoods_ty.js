@@ -17,13 +17,13 @@ function goodsDataConnect() {
                 }
             })
         },
-        setSellItemsAndGet: async function() {
+        setSellItems: async function() {
             let data = JSON.stringify({
                 'items': SELECTED_SEARCH_ITEMS,
                 'sellDate': DATE_SETTING.sellDate,
             });
             await $.ajax({
-                url: '/api/item_manager/selldash/reg',
+                url: '/api/item_manager/add/sell_item/one',
                 type: 'POST',
                 contentType: 'application/json',
                 dataType: 'json',
@@ -128,7 +128,6 @@ function goodsDataConnect() {
 
 function loadGoodsHtml() {
     return {
-
         sellItemsHtml: function() {
             let html = `
                 <table class="table overflow-table">
@@ -207,7 +206,6 @@ function eventGoodsHandler() {
         // TY START
         showHaveItemList: async function() {
             BATCH_ITEM_SELECTED = [];
-            await goodsDataConnect().getClassifys();
             loadGoodsHtml().showHaveItemSetListHtml().classifys();
         },
         classifySelectOnChange: async function(event) {
@@ -289,7 +287,7 @@ function eventGoodsHandler() {
                 $(`#option_${r.optionUuid}`).removeClass("ty_st_sd_option_el_active");
             });
 
-            await goodsDataConnect().setSellItemsAndGet();
+            await goodsDataConnect().setSellItems();
             eventItemHandler().itemSearchClick();
 
             BATCH_ITEM_SELECTED = [];

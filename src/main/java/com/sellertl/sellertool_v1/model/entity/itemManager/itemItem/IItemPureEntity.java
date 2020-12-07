@@ -7,30 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
-
-import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ICategoryGroupPureEntity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyPureEntity;
-import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionPureEntity;
 
 import lombok.Data;
 
 @Entity
 @Data
-@NamedEntityGraph(
-    name = "ItemWithClassifyAndOptionAndCategory",
-    attributeNodes = {
-        @NamedAttributeNode("classify"),
-        @NamedAttributeNode("option"),
-        @NamedAttributeNode("category")
-    }
-)
 @Table(name = "i_item")
-public class IItemDefEntity implements Serializable{
+public class IItemPureEntity implements Serializable{
     @Id
     @Column(name = "i_item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,20 +70,4 @@ public class IItemDefEntity implements Serializable{
 
     @Column(name = "i_item_deleted")
     private int iItemDeleted;
-
-    @ManyToOne
-    @JoinColumn(name="i_classify_uuid", referencedColumnName= "i_classify_uuid", insertable = false, updatable = false)
-    private IClassifyPureEntity classify;
-
-    @ManyToOne
-    @JoinColumn(name="i_option_uuid", referencedColumnName= "i_option_uuid", insertable = false, updatable = false)
-    private IOptionPureEntity option;
-
-    @ManyToOne
-    @JoinColumn(name="i_classify_uuid", referencedColumnName= "i_classify_uuid", insertable = false, updatable = false)
-    private ICategoryGroupPureEntity category;
-
-    public String getIItemName(){
-        return classify.getIClassifyName()+"-"+option.getIOptionName();
-    }
 }

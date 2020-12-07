@@ -64,7 +64,7 @@ public class SearchDataAPI {
 
     // /api/item_manager/search/sellitem/time
     // 판매 등록을 위한 조회
-    @GetMapping(value = "/sellitem/time")
+    @GetMapping(value = "/sell_item/time")
     public ISellDefResDTO SearchSellItemByTime(HttpServletRequest request, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate){
         ISellDefResDTO iSellResDto = new ISellDefResDTO();
         List<ISellDefGetDTO> iSellGetDtos = searchService.getSellItemsByTime(request, startDate, endDate);
@@ -75,7 +75,7 @@ public class SearchDataAPI {
 
     // /api/item_manager/search/sellitem/time/order/selldate
     // 데쉬보드를 위한 조회
-    @GetMapping(value = "/sellitem/time/order/selldate")
+    @GetMapping(value = "/sell_item/time/order/selldate")
     public ISellDefResDTO SearchSellItemByTimeOrderSellDate(HttpServletRequest request, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate){
         ISellDefResDTO iSellResDto = new ISellDefResDTO();
         List<ISellDefGetDTO> iSellGetDtos = searchService.getSellItemsByTimeOrderSellDate(request, startDate, endDate);
@@ -86,7 +86,7 @@ public class SearchDataAPI {
 
     // /api/item_manager/search/sellitem/condition
     // 데쉬보드를 위한 조회2
-    @GetMapping(value = "/sellitem/condition")
+    @GetMapping(value = "/sell_item/condition")
     public ISellDefResDTO SearchSellItemByCondition(
         HttpServletRequest request, 
         @RequestParam("startDate") Date startDate, 

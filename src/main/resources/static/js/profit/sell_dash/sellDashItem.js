@@ -6,13 +6,12 @@ function itemDataConnect() {
                 'endDate': DATE_SETTING.endDate
             }
             await $.ajax({
-                url: '/api/item_manager/search/sellitem/time',
+                url: '/api/item_manager/search/sell_item/time',
                 type: 'GET',
                 contentType: 'application/json',
                 dataType: 'json',
                 data: data,
                 success: function (returnData) {
-                    console.log(returnData.data);
                     SELL_ITEMS = returnData.data;
                     loadItemHtml().sellItemsHtml();
                 },
@@ -27,13 +26,13 @@ function itemDataConnect() {
                 'endDate': DATE_SETTING.endDate
             }
             await $.ajax({
-                url: '/api/item_manager/search/sellitem/time',
+                url: '/api/item_manager/search/sell_item/time',
                 type: 'GET',
                 contentType: 'application/json',
                 dataType: 'json',
                 data: data,
                 success: function (returnData) {
-                    console.log(returnData.data);
+                    // console.log(returnData.data);
                     SELL_ITEMS = returnData.data;
 
                 },
@@ -46,7 +45,7 @@ function itemDataConnect() {
             let item = SELL_ITEMS.filter(r => r.sellId == sellId)[0];
             let data = JSON.stringify(item);
             $.ajax({
-                url: '/api/item_manager/selldash/update/sellitem',
+                url: '/api/item_manager/update/sell_item/def',
                 type: 'POST',
                 contentType: 'application/json',
                 dataType: 'json',
@@ -59,6 +58,7 @@ function itemDataConnect() {
                         alert("세션이 만료되었습니다.")
                         return window.location.href = '/login';
                     } else if (returnData.message === 'SUCCESS') {
+                        SAVE_SELLID = [];
                         return;
                     } else if (returnData.message === 'FAILURE') {
                         alert("DB Search error code : SDIUPD500");
@@ -83,7 +83,7 @@ function itemDataConnect() {
             let data = JSON.stringify(item);
 
             $.ajax({
-                url: '/api/item_manager/selldash/delete/sellitem',
+                url: '/api/item_manager/delete/sell_item/one',
                 type: 'POST',
                 contentType: 'application/json',
                 dataType: 'json',

@@ -127,7 +127,7 @@ function dataConnect(){
                 'storeType':SELECTED_STORE
             }
             await $.ajax({
-                url:'/api/item_manager/search/sellitem/condition',
+                url:'/api/item_manager/search/sell_item/condition',
                 type:'GET',
                 contentType:'application/json',
                 dataType:'json',
@@ -159,7 +159,7 @@ function dataConnect(){
                 'endDate':DATE_SETTING.endDate,
             }
             await $.ajax({
-                url:'/api/item_manager/search/sellitem/time/order/selldate',
+                url:'/api/item_manager/search/sell_item/time/order/selldate',
                 type:'GET',
                 contentType:'application/json',
                 dataType:'json',

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemAddOneReqDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemReq1DTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionAddReqDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
 import com.sellertl.sellertool_v1.service.itemManager.InsertService;
@@ -46,6 +47,20 @@ public class InsertDataAPI {
         String storeName = data.getStoreName();
         String result = insertService.insertItemOne(request, classify, option, storeType, storeName);
 
+        if(result.equals("SUCCESS")){
+            return "{\"message\":\"SUCCESS\"}";
+        }else if (result.equals("USER_INVALID")){
+            return "{\"message\":\"USER_INVALID\"}";
+        }else{
+            return "{\"message\":\"FAILURE\"}";
+        }
+    }
+
+    // /api/item_manager/add/sell_item/one
+    @PostMapping(value = "/sell_item/one")
+    public String SellDashRegister(HttpServletRequest request, @RequestBody IItemReq1DTO itemsWithDate) {
+        String result = insertService.insertSellItemOne(request, itemsWithDate);
+        System.out.println("=======================================================================");
         if(result.equals("SUCCESS")){
             return "{\"message\":\"SUCCESS\"}";
         }else if (result.equals("USER_INVALID")){

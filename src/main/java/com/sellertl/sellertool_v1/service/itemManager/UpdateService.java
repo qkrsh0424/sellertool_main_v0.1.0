@@ -1,5 +1,7 @@
 package com.sellertl.sellertool_v1.service.itemManager;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.sellertl.sellertool_v1.model.DTO.UserLoginSessionDTO;
@@ -8,6 +10,8 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDe
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyPureGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
+import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellPureEntity;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemCategory.ICategoryGroupDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyPureRepository;
@@ -15,6 +19,7 @@ import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemDef
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellPureRepository;
 import com.sellertl.sellertool_v1.service.handler.DateService;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
@@ -31,9 +36,6 @@ public class UpdateService {
 
     @Autowired
     SearchConverterService searConService;
-
-    @Autowired
-    SellDashConverterService sdConvertService;
 
     @Autowired
     UpdateConverterService updConvertService;
@@ -58,6 +60,9 @@ public class UpdateService {
 
     @Autowired
     ISellDefRepository iSellDefRepository;
+
+    @Autowired
+    ISellPureRepository iSellPureRepository;
 
     public String saveUpdateClassify(HttpServletRequest request, IClassifyPureGetDTO classify){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
@@ -128,5 +133,36 @@ public class UpdateService {
             iCategoryGroupDefRepository.save(r);
         });
         return "SUCCESS";
+    }
+
+    public String saveUpdateSellItem(HttpServletRequest request, ISellDefGetDTO item){
+        UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        if(user==null){
+            return "USER_INVALID";
+        }
+        Optional<ISellPureEntity> iSellPureEntity = iSellPureRepository.selectOneById(item.getSellId(),EXIST_OR_NOT.IS_EXIST);
+        if(iSellPureEntity.isPresent()){
+            iSellPureEntity.ifPresent(r->{
+                r.setISellTag(item.getSellTag());
+                r.setISellCommitionCost(item.getSellCommitionCost());
+                r.setISellPrice(item.getSellPrice());
+                r.setISellCustomerTransCost(item.getSellCustomerTransCost());
+                r.setISellSellerRealTransCost(item.getSellSellerRealTransCost());
+                r.setISellPurchaseCost(item.getSellPurchaseCost());
+                r.setISellPurchaseTransCost(item.getSellPurchaseTransCost());
+                r.setISellExtraCharge(item.getSellExtraCharge());
+                r.setISellSelledCount(item.getSellCount());
+                r.setISellTotAdsCost(item.getSellTotAdsCost());
+                r.setISellTotExpensesCost(item.getSellTotExpensesCost());
+                r.setISellTotEarningCost(item.getSellTotEarningCost());
+                r.setISellTotCustomerTransCost(item.getSellTotCustomerTransCost());
+                r.setISellTotSellerRealTransCost(item.getSellTotSellerRealTransCost());
+                r.setISellTotPurchaseTransCost(item.getSellTotPurchaseTransCost());
+                iSellPureRepository.save(r);
+            });
+            return "SUCCESS";
+        }else{
+            return "FAILURE";
+        }
     }
 }

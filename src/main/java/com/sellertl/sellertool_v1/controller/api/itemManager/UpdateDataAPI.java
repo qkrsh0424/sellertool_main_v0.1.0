@@ -10,6 +10,7 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDe
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyPureGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
 import com.sellertl.sellertool_v1.service.handler.ConvertService;
 import com.sellertl.sellertool_v1.service.itemManager.UpdateService;
 import com.sellertl.sellertool_v1.service.user.UserService;
@@ -77,6 +78,19 @@ public class UpdateDataAPI {
     @PostMapping(value = "/item/def")
     public String PatchItemDef(HttpServletRequest request, @RequestBody IItemDefGetDTO item){
         String result = updateService.saveUpdateItem(request, item);
+        if(result.equals("SUCCESS")){
+            return "{\"message\":\"SUCCESS\"}";
+        }else if (result.equals("USER_INVALID")){
+            return "{\"message\":\"USER_INVALID\"}";
+        }else{
+            return "{\"message\":\"FAILURE\"}";
+        }
+    }
+
+    // /api/item_manager/update/sell_item/def
+    @PostMapping(value = "/sell_item/def")
+    public String PatchSellItem(HttpServletRequest request, @RequestBody ISellDefGetDTO item){
+        String result = updateService.saveUpdateSellItem(request, item);
         if(result.equals("SUCCESS")){
             return "{\"message\":\"SUCCESS\"}";
         }else if (result.equals("USER_INVALID")){
