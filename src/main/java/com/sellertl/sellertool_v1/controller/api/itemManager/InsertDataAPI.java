@@ -7,6 +7,7 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemAddOneReqD
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemReq1DTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionAddReqDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefGet1DTO;
 import com.sellertl.sellertool_v1.service.itemManager.InsertService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +59,21 @@ public class InsertDataAPI {
 
     // /api/item_manager/add/sell_item/one
     @PostMapping(value = "/sell_item/one")
-    public String SellDashRegister(HttpServletRequest request, @RequestBody IItemReq1DTO itemsWithDate) {
-        String result = insertService.insertSellItemOne(request, itemsWithDate);
-        System.out.println("=======================================================================");
+    public String AddSellItemOne(HttpServletRequest request, @RequestBody IItemReq1DTO itemsWithDate) {
+        String result = insertService.insertSellItems(request, itemsWithDate);
+        if(result.equals("SUCCESS")){
+            return "{\"message\":\"SUCCESS\"}";
+        }else if (result.equals("USER_INVALID")){
+            return "{\"message\":\"USER_INVALID\"}";
+        }else{
+            return "{\"message\":\"FAILURE\"}";
+        }
+    }
+
+    // /api/item_manager/add/marketing_cost/one
+    @PostMapping(value = "/marketing_cost/one")
+    public String AddMarketingCostOne(HttpServletRequest request, @RequestBody MkcDefGet1DTO mkcDefGetDto) {
+        String result = insertService.insertMarketingCostOne(request, mkcDefGetDto);
         if(result.equals("SUCCESS")){
             return "{\"message\":\"SUCCESS\"}";
         }else if (result.equals("USER_INVALID")){

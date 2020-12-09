@@ -36,7 +36,6 @@
 }
 
 .st-sd-title-el{
-    padding: 0;
     font-weight: 700;
     line-height: inherit;
 }
@@ -95,4 +94,9 @@
     font-size: 1rem;
     margin: 3px 6px;
     padding: 8px 12px;
+}
+
+.st-sd-outline-btn-selected{
+    color:#f2a057;
+    border-color: #f2a057;
 }

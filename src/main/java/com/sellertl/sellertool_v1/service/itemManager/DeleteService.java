@@ -13,16 +13,20 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDe
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefGet1DTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellPureEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.marketCost.MkcPureEntity;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemCategory.ICategoryGroupDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellPureRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.marketCost.MkcPureRepository;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,22 +59,29 @@ public class DeleteService {
     IItemDefRepository iItemDefRepository;
 
     @Autowired
+    IItemPureRepository iItemPureRepository;
+
+    @Autowired
     ISellDefRepository iSellDefRepository;
 
     @Autowired
     ISellPureRepository iSellPureRepository;
     
+    @Autowired
+    MkcPureRepository mkcPureRepository;
+
     @PersistenceContext
     EntityManager entityManager;
+
     public String removeItemByItem(HttpServletRequest request, IItemDefGetDTO item){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
         if(user==null){
             return "USER_INVALID";
         }
 
-        iItemDefRepository.selectByUserIdAndItemId(user.getId(), item.getItemId(), EXIST_OR_NOT.IS_EXIST).ifPresent(r->{
+        iItemPureRepository.selectByUserIdAndItemId(user.getId(), item.getItemId(), EXIST_OR_NOT.IS_EXIST).ifPresent(r->{
             r.setIItemDeleted(EXIST_OR_NOT.IS_DELETED);
-            iItemDefRepository.save(r);
+            iItemPureRepository.save(r);
         });
 
         return "SUCCESS";
@@ -111,12 +122,29 @@ public class DeleteService {
         }
 	}
 
+    public String removeMarketingCostOne(HttpServletRequest request, MkcDefGet1DTO mkcDefGetDto) {
+        UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        if(user==null){
+            return "USER_INVALID";
+        }
+        Optional<MkcPureEntity> mkcPureEntityOpt = mkcPureRepository.selectOneByUserAndMkcId(user.getId(), mkcDefGetDto.getMkcId(), EXIST_OR_NOT.IS_EXIST);
+        if(mkcPureEntityOpt.isPresent()){
+            mkcPureEntityOpt.ifPresent(r->{
+                r.setMkcDeleted(EXIST_OR_NOT.IS_DELETED);
+                mkcPureRepository.save(r);
+            });
+            return "SUCCESS";
+        }else{
+            return "FAILURE";
+        }
+    }
+    
     @Transactional
     public String deleteOptionAndItemsTransaction(String userId , IOptionPureGetDTO option){
 
         int deleteOptionResult = iOptionPureRepository.deleteOptionOneByOptionId(userId, option.getOptionId(), EXIST_OR_NOT.IS_DELETED);
         int deleteItemResult = iItemDefRepository.deleteItemsByOptionUuid(userId, option.getOptionUuid(), EXIST_OR_NOT.IS_DELETED);
-        if(deleteOptionResult <= 0 || deleteItemResult<=0){
+        if(deleteOptionResult <= 0){
             return "FAILURE";
         }
         return "SUCCESS";
@@ -128,7 +156,7 @@ public class DeleteService {
         int deleteClassifyResult = iClassifyPureRepository.deleteClassifyOneByClassifyId(userId, classify.getClassifyId(), EXIST_OR_NOT.IS_DELETED);
         int deleteOptionsResult = iOptionPureRepository.deleteOptionsByClassifyUuid(userId, classify.getClassifyUuid(), EXIST_OR_NOT.IS_DELETED);
         int deleteItemsResult = iItemDefRepository.deleteItemsByClassifyUuid(userId, classify.getClassifyUuid(), EXIST_OR_NOT.IS_DELETED);
-        if(deleteClassifyResult<=0 || deleteOptionsResult <= 0 || deleteItemsResult<=0){
+        if(deleteClassifyResult<=0){
             return "FAILURE";
         }
         return "SUCCESS";

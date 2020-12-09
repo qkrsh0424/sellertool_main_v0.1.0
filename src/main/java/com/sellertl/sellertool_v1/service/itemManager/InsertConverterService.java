@@ -7,10 +7,12 @@ import java.util.UUID;
 
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefGet1DTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellPureEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.marketCost.MkcPureEntity;
 import com.sellertl.sellertool_v1.service.handler.DateService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +90,20 @@ public class InsertConverterService {
             sellEntities.add(sellEntity);
         }
         return sellEntities;
+	}
+
+	public MkcPureEntity getMkcPureEntityByDto(String userId, MkcDefGet1DTO mkcDefGetDto) {
+        MkcPureEntity entity = new MkcPureEntity();
+        entity.setMkcId(mkcDefGetDto.getMkcId());
+        entity.setMkcType(mkcDefGetDto.getMkcType());
+        entity.setUserId(userId);
+        entity.setIClassifyUuid(mkcDefGetDto.getClassifyUuid());
+        entity.setIOptionUuid(mkcDefGetDto.getOptionUuid());
+        entity.setIStoreType(mkcDefGetDto.getStoreType());
+        entity.setMkcAdsCost(mkcDefGetDto.getAdsCost());
+        entity.setMkcCreatedAt(dateService.getCurrentDate());
+        entity.setMkcUpdatedAt(dateService.getCurrentDate());
+        entity.setMkcRegDate(mkcDefGetDto.getMkcRegDate());
+		return entity;
 	}
 }

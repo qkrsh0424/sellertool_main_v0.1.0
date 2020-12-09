@@ -1,5 +1,6 @@
 package com.sellertl.sellertool_v1.model.entity.itemManager;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "item_store")
-public class ItemStoreEntity {
+public class ItemStoreEntity implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_store_id")
@@ -23,5 +24,4 @@ public class ItemStoreEntity {
     private String itemStoreNameEn;
     @Column(name = "item_store_type")
     private String itemStoreType;
-    
 }

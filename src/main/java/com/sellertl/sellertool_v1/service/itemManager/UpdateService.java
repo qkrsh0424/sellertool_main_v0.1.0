@@ -16,6 +16,7 @@ import com.sellertl.sellertool_v1.model.repository.itemManager.itemCategory.ICat
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemDefRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.itemItem.IItemPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellDefRepository;
@@ -59,6 +60,9 @@ public class UpdateService {
     IItemDefRepository iItemDefRepository;
 
     @Autowired
+    IItemPureRepository iItemPureRepository;
+
+    @Autowired
     ISellDefRepository iSellDefRepository;
 
     @Autowired
@@ -100,7 +104,7 @@ public class UpdateService {
         if(user==null){
             return "USER_INVALID";
         }
-        iItemDefRepository.findById(item.getItemId()).ifPresent(r->{
+        iItemPureRepository.findById(item.getItemId()).ifPresent(r->{
             r.setIItemCommitionCost(item.getCommitionCost());
             r.setIItemPrice(item.getPrice());
             r.setIItemCustomerTransCost(item.getCustomerTransCost());
@@ -110,7 +114,7 @@ public class UpdateService {
             r.setIItemExtraCharge(item.getExtraCharge());
             r.setIItemImageUrl(item.getImageUrl());
             r.setIItemUpdatedAt(dateService.getCurrentDate());
-            iItemDefRepository.save(r);
+            iItemPureRepository.save(r);
         });
         return "SUCCESS";
     }

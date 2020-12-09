@@ -34,15 +34,19 @@
         <div class="st-sd-wrapper" onmousedown="return false">
             <div class="st-sd-box">
                 <div class="st-sd-title-box">
-                    <h4 class="st-sd-title-el">
-                        판매 등록
-                    </h4>
+                    <div class="row">
+                        <h4 class="st-sd-title-el col-sm-3">
+                            판매 등록
+                        </h4>
+                        <div class="col-sm-6"></div>
+                        <div class="st-sd-timezone-search-date-wrapper col-sm-3 mb-3">
+                            <input id="i_search_date" class="ty-st-sd-input ty-st-sd-time-input" readonly='true'>
+                        </div>
+                    </div>
                 </div>
                 <div class="st-sd-content-box">
                     <div class="st-sd-timezone-wrapper">
                         <div class="row">
-
-
                             <div class="st-sd-search-wrapper col-sm-3">
                                 <p for="i_search_data">상품 선택</p>
                                 <div class="st-sd-search-input-box mb-3">
@@ -77,20 +81,19 @@
             </div>
         </div>
         <div class="st-sd-wrapper ty-st-sd-wrapper">
-            <div class="st-sd-box ">
+            <div class="st-sd-box">
                 <div class="st-sd-title-box ty-st-sd-time-box">
                     <h4 class="st-sd-title-el">
                         판매 목록
                     </h4>
-                    <div class="st-sd-timezone-search-date-wrapper col-sm-4">
-                        <div id="i_store_input_wrapper" class="col-sm-4">
+                    <div class="st-sd-timezone-search-date-wrapper">
+                        <div id="i_store_input_wrapper" class="">
                             <div class="">
                                 <select id="ty_st_sd_i_store_select_el" class="ty-st-sd-input" required onchange="eventStoreHandler().addStoreSelect(this)">
 
                                 </select>
                             </div>
                         </div>
-                        <input id="i_search_date" class="ty-st-sd-input ty-st-sd-time-input" readonly='true'>
                     </div>
                 </div>
                 <div class="st-sd-table-container ty-st-sd-fixed-column">
@@ -98,12 +101,18 @@
 
                     </div>
                 </div>
-                
-            </div>
-        </div>
-        <div class="st-sd-table-container ty-st-sd-fixed-column">
-            <div class="list-table-box ty-st-sd-sell-item-table" id="i_marketing_cost_list">
-
+                <div class="st-sd-title-box ty-st-sd-time-box">
+                    <h4 class="st-sd-title-el">
+                        마케팅 비용 등록
+                    </h4>
+                    <button type="button" class="btn btn-outline-light" onclick="eventMarketingHandler().marketingModalOpen()">등록</button>
+                    
+                </div>
+                <div class="st-sd-table-container ty-st-sd-fixed-column">
+                    <div class="list-table-box ty-st-sd-sell-item-table" id="i_marketing_cost_list">
+        
+                    </div>
+                </div>
             </div>
         </div>
         <input hidden id="i_st_sd_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

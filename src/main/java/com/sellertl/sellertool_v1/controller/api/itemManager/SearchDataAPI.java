@@ -13,6 +13,8 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGe
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureResDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefResDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefGet1DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefRes1DTO;
 import com.sellertl.sellertool_v1.service.itemManager.SearchService;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
@@ -145,5 +147,15 @@ public class SearchDataAPI {
         pureResDto.setMessage("SUCCESS");
         pureResDto.setOptions(searchService.getOptionsByClassify(request, uuid));
         return pureResDto;
+    }
+
+    // /api/item_manager/search/marketing_cost/bytime
+    @GetMapping(value = "/marketing_cost/bytime")
+    public MkcDefRes1DTO SearchMarketingCostByTime(HttpServletRequest request, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate){
+        MkcDefRes1DTO mkcDefResDto = new MkcDefRes1DTO();
+        List<MkcDefGet1DTO> mkcDefGet1Dtos = searchService.getMarketingCostByTime(request, startDate, endDate);
+        mkcDefResDto.setMessage("SUCCESS");
+        mkcDefResDto.setData(mkcDefGet1Dtos);
+        return mkcDefResDto;
     }
 }

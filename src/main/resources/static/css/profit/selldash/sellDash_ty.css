@@ -81,14 +81,12 @@ input:focus {
 
 .st-sd-table-container {
     padding-top: 0px;
+    max-height: 75vh;
+    margin-bottom: 15px;
 }
 
 .list-table-box {
     max-height: 70vh;
-}
-
-.st-sd-table-container {
-    height: 75vh;
 }
 /* table th */
 

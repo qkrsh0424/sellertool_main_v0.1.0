@@ -15,7 +15,7 @@ function uploadImage() {
         dataType: 'json',
         data: formData,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("X-CSRF-Token", $("#i_aitem_csrf").val());
+            xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_aitem_csrf").val());
         },
         success: function (returnData) {
             if (returnData.message === 'SUCCESS') {
@@ -164,7 +164,7 @@ function mergeAllValueToClassify(){
         dataType:'json',
         data: data,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("X-CSRF-Token", $("#i_aitem_csrf").val());
+            xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_aitem_csrf").val());
         },
         success: function(returnData){
             if(returnData.message==='SUCCESS'){

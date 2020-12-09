@@ -7,6 +7,7 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDe
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefGet1DTO;
 import com.sellertl.sellertool_v1.service.itemManager.DeleteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,21 @@ public class DeleteDataAPI {
     public String DeleteSellItemOne(HttpServletRequest request, @RequestBody ISellDefGetDTO sellItem){
         
         String result = deleteService.removeSellItemOne(request, sellItem);
+
+        if(result.equals("SUCCESS")){
+            return "{\"message\":\"SUCCESS\"}";
+        }else if (result.equals("USER_INVALID")){
+            return "{\"message\":\"USER_INVALID\"}";
+        }else{
+            return "{\"message\":\"FAILURE\"}";
+        }
+    }
+
+    // /api/item_manager/delete/marketing_cost/one
+    @PostMapping(value = "/marketing_cost/one")
+    public String DeleteMarketingCostOne(HttpServletRequest request, @RequestBody MkcDefGet1DTO mkcDefGetDto){
+        
+        String result = deleteService.removeMarketingCostOne(request, mkcDefGetDto);
 
         if(result.equals("SUCCESS")){
             return "{\"message\":\"SUCCESS\"}";

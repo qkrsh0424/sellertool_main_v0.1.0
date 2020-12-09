@@ -12,6 +12,7 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemGet1DTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemJSellDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefGet1DTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ICategoryGroupDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemCategory.ICategoryGroupPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyDefEntity;
@@ -19,6 +20,7 @@ import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassif
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellJClassifyJOptionJItemJCategoryEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.marketCost.MkcJClassifyJOptionJStoreProj;
 
 import org.springframework.stereotype.Service;
 
@@ -223,4 +225,23 @@ public class SearchConverterService {
         }
         return sellDefaultDtos;
     }
+
+	public List<MkcDefGet1DTO> getMkcDefGet1DtosByProjection(List<MkcJClassifyJOptionJStoreProj> mkcProjList) {
+        List<MkcDefGet1DTO> dtos= new ArrayList<>();
+        for(MkcJClassifyJOptionJStoreProj mkcProj : mkcProjList){
+            MkcDefGet1DTO dto = new MkcDefGet1DTO();
+            dto.setMkcId(mkcProj.getMkc().getMkcId());
+            dto.setMkcType(mkcProj.getMkc().getMkcType());
+            dto.setMkcRegDate(mkcProj.getMkc().getMkcRegDate());
+            dto.setClassifyUuid(mkcProj.getMkc().getIClassifyUuid());
+            dto.setClassifyName(mkcProj.getClassify() == null ? "" : mkcProj.getClassify().getIClassifyName());
+            dto.setOptionUuid(mkcProj.getMkc().getIOptionUuid());
+            dto.setOptionName(mkcProj.getOption() == null ? "" : mkcProj.getOption().getIOptionName());
+            dto.setStoreType(mkcProj.getMkc().getIStoreType());
+            dto.setStoreName(mkcProj.getStore() == null ? "" : mkcProj.getStore().getItemStoreNameKo());
+            dto.setAdsCost(mkcProj.getMkc().getMkcAdsCost());
+            dtos.add(dto);
+        }
+		return dtos;
+	}
 }

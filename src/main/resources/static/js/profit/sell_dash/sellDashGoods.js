@@ -29,7 +29,7 @@ function goodsDataConnect(){
                 dataType:'json',
                 data:data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_st_sd_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_st_sd_csrf").val());
                 },
                 success: function(returnData){
                     if (returnData.message === 'USER_INVALID') {

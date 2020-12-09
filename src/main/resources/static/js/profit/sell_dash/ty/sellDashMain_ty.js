@@ -6,8 +6,7 @@ async function init() {
     calandarHandler().setInitDate();
     
     await loadSellDashInitializeData();
-    loadStoreHtml().setInitStore()
-    eventGoodsHandler().showHaveItemList()
+    loadSellDashInitializeHtml();
 }
 
 async function loadSellDashInitializeData(){
@@ -15,4 +14,11 @@ async function loadSellDashInitializeData(){
     await storeDataConnect().getAll();
     itemDataConnect().firstGet();
     await goodsDataConnect().items();
+    await marketingDataConnect().getMarketingData();
+}
+
+async function loadSellDashInitializeHtml(){
+    loadStoreHtml().setInitStore()
+    eventGoodsHandler().showHaveItemList()
+    loadMarketingHtml().tableHtml().set();
 }

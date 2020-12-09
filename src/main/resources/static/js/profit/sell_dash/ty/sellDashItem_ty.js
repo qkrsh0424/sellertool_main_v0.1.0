@@ -51,7 +51,7 @@ function itemDataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_sd_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_sd_csrf").val());
                 },
                 success: function (returnData) {
                     if (returnData.message === 'USER_INVALID') {
@@ -89,7 +89,7 @@ function itemDataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_sd_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_sd_csrf").val());
                 },
                 success: function (returnData) {
                     if (returnData.message === 'USER_INVALID') {
@@ -504,7 +504,9 @@ function eventItemHandler() {
         },
         itemSearchClick: async function () {
             await itemDataConnect().getByDate();
+            await marketingDataConnect().getMarketingData();
             loadItemHtml().sellItemsHtml();
+            loadMarketingHtml().tableHtml().set();
         },
         sellCountInputOpen: function (sellId, sellCount) {
             // sellCount가 0이면 인풋창에 바로 입력 할 수 있게 비워줌

@@ -14,12 +14,14 @@ import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemGet1DTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefGet1DTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemOption.IOptionPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemSell.ISellJClassifyJOptionJItemJCategoryEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.marketCost.MkcJClassifyJOptionJStoreProj;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemCategory.ICategoryGroupDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemClassify.IClassifyPureRepository;
@@ -29,6 +31,7 @@ import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptio
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemOption.IOptionPureRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellDefRepository;
 import com.sellertl.sellertool_v1.model.repository.itemManager.itemSell.ISellJClassifyJOptionJItemJCategoryRepository;
+import com.sellertl.sellertool_v1.model.repository.itemManager.marketCost.MkcPureRepository;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +72,9 @@ public class SearchService {
 
     @Autowired
     ISellJClassifyJOptionJItemJCategoryRepository iSellJClassifyJOptionJItemJCategoryRepository;
+
+    @Autowired
+    MkcPureRepository mkcPureRepository;
 
     public List<IItemGet1DTO> getRegItemAll(HttpServletRequest request){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
@@ -196,6 +202,15 @@ public class SearchService {
         }
         List<IOptionPureEntity> pureOptionEntities = iOptionPureRepository.selectAllByClassifyUuid(user.getId(), classifyUuid, EXIST_OR_NOT.IS_EXIST);
         return searConService.getPureOptionEntitiesToDtos(pureOptionEntities);
+    }
+    
+    public List<MkcDefGet1DTO> getMarketingCostByTime(HttpServletRequest request, Date startDate, Date endDate) {
+        UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        if(user==null){
+            return new ArrayList<>();
+        }
+        List<MkcJClassifyJOptionJStoreProj> mkcProjList = mkcPureRepository.selectAllByUserAndBDateConClassifyAndOptionAndStore(user.getId(), startDate, endDate, EXIST_OR_NOT.IS_EXIST);
+        return searConService.getMkcDefGet1DtosByProjection(mkcProjList);
     }
     
     @Transactional

@@ -24,6 +24,7 @@ function marketingDataConnect(){
         },
         setMarketingData: async function(json){
             let data = JSON.stringify(json);
+            console.log("ihihi");
             await $.ajax({
                 url:'/api/item_manager/add/marketing_cost/one',
                 type:'POST',

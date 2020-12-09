@@ -13,7 +13,7 @@ $("#profileUpdateSubmit").submit(function(event){
         dataType:"json",
         data:data,
         beforeSend:function(xhr){
-            xhr.setRequestHeader("X-CSRF-Token", $("#_csrf").val());
+            xhr.setRequestHeader("X-XSRF-TOKEN", $("#_csrf").val());
         },
         success:function(returnData){
             if(returnData.message==="success"){
@@ -48,7 +48,7 @@ $("#passwordUpdateSubmit").submit(function(event){
         dataType:"json",
         data:data,
         beforeSend:function(xhr){
-            xhr.setRequestHeader("X-CSRF-Token", $("#_csrf_password_change").val());
+            xhr.setRequestHeader("X-XSRF-TOKEN", $("#_csrf_password_change").val());
         },
         success:function(returnData){
             console.log(returnData);

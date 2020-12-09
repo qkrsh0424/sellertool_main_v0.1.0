@@ -67,7 +67,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                     $("#i_mitem_loading").removeClass('display-none');
                 },
                 complete: function () {
@@ -107,7 +107,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                     $("#i_mitem_loading").removeClass('display-none');
                 },
                 complete: function () {
@@ -223,7 +223,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                     $("#i_mitem_loading").removeClass('display-none');
                 },
                 complete: function () {
@@ -312,7 +312,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                     $("#i_mitem_loading").removeClass('display-none');
                 },
                 complete: function () {
@@ -352,7 +352,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                     $("#i_mitem_loading").removeClass('display-none');
                 },
                 complete: function () {
@@ -393,7 +393,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                 },
                 success: async function (returnData) {
                     if (returnData.message === 'USER_INVALID') {
@@ -473,7 +473,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                     $("#i_mitem_loading").removeClass('display-none');
                 },
                 complete: function () {
@@ -514,7 +514,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                 },
                 success: async function (returnData) {
                     if (returnData.message === 'USER_INVALID') {
@@ -557,7 +557,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: data,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                     $("#i_mitem_loading").removeClass('display-none');
                 },
                 complete: function () {
@@ -605,7 +605,7 @@ function dataConnect() {
                 dataType: 'json',
                 data: formData,
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRF-Token", $("#i_mitem_csrf").val());
+                    xhr.setRequestHeader("X-XSRF-TOKEN", $("#i_mitem_csrf").val());
                     $("#i_mitem_loading").removeClass('display-none');
                 },
                 complete: function () {
