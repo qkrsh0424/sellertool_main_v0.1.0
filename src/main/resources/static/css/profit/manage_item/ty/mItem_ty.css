@@ -1,0 +1,43 @@
+/* all */
+
+.form-control:focus,
+input:focus {
+    box-shadow: none;
+    outline: 0;
+    border-color: #002c40;
+}
+
+button:focus,
+.btn:focus {
+    box-shadow: none;
+}
+
+
+/* 상품명 선택 */
+
+.st-mItem-item-wrapper:hover {}
+
+.ty-st-mItem-item-btn {
+    margin: 4px 8px;
+    padding: 12px 24px;
+    border-radius: 4px;
+    /* border: 1px solid #022c40; */
+    background-color: #022c40;
+    color: white;
+}
+
+.ty-st-mItem-item-btn:hover {
+    color: #e0ad4e;
+}
+
+.ty-st-mItem-item-btn-active {
+    color: #e0ad4e;
+}
+
+
+/* 카테고리 */
+
+.ty-st-mitem-category-el {
+    float: none;
+    margin: 0 auto
+}

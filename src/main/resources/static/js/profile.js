@@ -31,7 +31,6 @@ $("#profileUpdateSubmit").submit(function(event){
 
 $("#passwordUpdateSubmit").submit(function(event){
     event.preventDefault();
-    console.log("hello")
     if(chkPW($("#new_password").val(), $("#new_password_check").val())===false){
         return;
     }
@@ -51,7 +50,6 @@ $("#passwordUpdateSubmit").submit(function(event){
             xhr.setRequestHeader("X-XSRF-TOKEN", $("#_csrf_password_change").val());
         },
         success:function(returnData){
-            console.log(returnData);
             if(returnData.message==="PW_NOT_MATCH"){
                 alert("현재 패스워드가 일치하지 않습니다.");
             }else if(returnData.message==="USER_NON"){

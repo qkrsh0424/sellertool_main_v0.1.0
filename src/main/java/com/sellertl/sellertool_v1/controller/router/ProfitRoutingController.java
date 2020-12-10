@@ -65,7 +65,7 @@ public class ProfitRoutingController {
         model.addAttribute("data", user);
         
         
-        return "/views/profit/dashboard.html";
+        return "/views/profit/dashboard_ty_v2.html";
     }
 
     @GetMapping("/profit/add/item")
@@ -95,7 +95,7 @@ public class ProfitRoutingController {
             return "/views/profit/loginError.html";
         }
         model.addAttribute("data", user);
-        return "/views/profit/manageItem.html";
+        return "/views/profit/manageItem_ty.html";
     }
 
     /**

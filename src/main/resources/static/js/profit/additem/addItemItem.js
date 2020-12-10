@@ -132,7 +132,6 @@ function eventItemHandler(){
             })
         },
         deleteOne:function(optionUUID,itemUUID){
-            console.log(itemUUID);
             this.saveOthers();
             OPTIONS.forEach(r=>{
                 if(r.optionUUID === optionUUID){

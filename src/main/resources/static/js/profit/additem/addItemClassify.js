@@ -119,7 +119,6 @@ function eventIntegHandler(){
         checkValueMakeError: function(){
             for(let i = 0 ; i < OPTIONS.length; i++){
                 for(let j = 0 ; j < OPTIONS[i].items.length; j++){
-                    console.log(isInt(OPTIONS[i].items[j].price));
                     if( !isInt(OPTIONS[i].items[j].price) ){
                         $(`#i_item_price_${OPTIONS[i].items[j].itemUUID}`).focus();
                         return true;
@@ -168,7 +167,6 @@ function mergeAllValueToClassify(){
         },
         success: function(returnData){
             if(returnData.message==='SUCCESS'){
-                console.log(returnData);
                 window.location.href="/profit";
             }else if(returnData.message==='USER_INVALID'){
                 alert("세션이 만료되었습니다.");

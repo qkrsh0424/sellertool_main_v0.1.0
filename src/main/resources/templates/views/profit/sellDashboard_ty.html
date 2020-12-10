@@ -101,18 +101,6 @@
 
                     </div>
                 </div>
-                <div class="st-sd-title-box ty-st-sd-time-box">
-                    <h4 class="st-sd-title-el">
-                        마케팅 비용 등록
-                    </h4>
-                    <button type="button" class="btn btn-outline-light" onclick="eventMarketingHandler().marketingModalOpen()">등록</button>
-                    
-                </div>
-                <div class="st-sd-table-container ty-st-sd-fixed-column">
-                    <div class="list-table-box ty-st-sd-sell-item-table" id="i_marketing_cost_list">
-        
-                    </div>
-                </div>
             </div>
         </div>
         <input hidden id="i_st_sd_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -125,24 +113,26 @@
             </div>
         </div>
     </div>
+    <!-- Loading -->
+    <div class="wrap-loading display-none" sttr="loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 
     <footer th:replace="fragment/footer::footer"></footer>
     <footer th:replace="fragment/jquery-ui::jquery-ui"></footer>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <!-- <script src="/js/profit/sell_dash/sellDashObject.js"></script> -->
     <script src="/js/profit/sell_dash/ty/sellDashObject_ty.js"></script>
+    <script src="/js/profit/sell_dash/sellDashDataConnect.js"></script>
     <script src="/js/profit/sell_dash/ty/sellDashStore_ty.js"></script>
     <script src="/js/profit/sell_dash/ty/sellDashSort_ty.js"></script>
     <script src="/js/profit/sell_dash/sellDashMarketing.js"></script>
-    <!-- <script src="/js/profit/sell_dash/sellDashCalandar.js"></script> -->
     <script src="/js/profit/sell_dash/ty/sellDashCalandar_ty.js"></script>
-    <!-- <script src="/js/profit/sell_dash/sellDashGoods.js"></script> -->
     <script src="/js/profit/sell_dash/ty/sellDashGoods_ty.js"></script>
-    <!-- <script src="/js/profit/sell_dash/sellDashItem.js"></script> -->
     <script src="/js/profit/sell_dash/ty/sellDashItem_ty.js"></script>
-    <!-- <script src="/js/profit/sell_dash/sellDashMain.js"></script> -->
     <script src="/js/profit/sell_dash/ty/sellDashMain_ty.js"></script>
 </body>
 

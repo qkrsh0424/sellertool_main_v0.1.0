@@ -58,7 +58,6 @@ function getCategory() {
                         "ic3": SELECTED_CATEGORY.category3Id
                     },
                     success: function (returnData) {
-                        console.log(returnData);
                         CATEGORY4 = returnData;
                     },
                     error: function (error) {

@@ -22,7 +22,6 @@ $("#searchSubmit").submit(
                 success: function (Parse_data) {
                     let resData = JSON.parse(Parse_data).data;
                     document.getElementById("rankingResultBoard").style.display = 'block';
-                    console.log(resData);
 
                     let resHtml = ``;
                     if (resData.length <= 0) {

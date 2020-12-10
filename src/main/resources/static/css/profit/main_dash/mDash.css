@@ -73,3 +73,7 @@
     top:50%;
     z-index: 3;
 }
+
+.st-mDash-cursor-point{
+    cursor: pointer;
+}

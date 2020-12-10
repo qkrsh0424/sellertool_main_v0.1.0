@@ -14,11 +14,9 @@ async function loadSellDashInitializeData(){
     await storeDataConnect().getAll();
     itemDataConnect().firstGet();
     await goodsDataConnect().items();
-    await marketingDataConnect().getMarketingData();
 }
 
 async function loadSellDashInitializeHtml(){
-    loadStoreHtml().setInitStore()
-    eventGoodsHandler().showHaveItemList()
-    loadMarketingHtml().tableHtml().set();
+    loadStoreHtml().setInitStore();
+    eventGoodsHandler().showHaveItemList();
 }

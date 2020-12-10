@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header2::header2"></head>
+
+<body>
+    <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+    <th:block th:if="${ru}">
+        <input type="text" name="ru_data" id="ru_data" th:value="${ru}" hidden>
+    </th:block>
+    <!-- <div id="i_ty_mDash_nav_container"> -->
+    <div id="i_ty_mDash_nav" class="ty-st-mDash-nav text-center smart-scroll">
+        <div class=" card-header">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link st-nav-active" href="/profit">대시보드</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/sell/dashboard">판매 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/add/item">상품 등록 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profit/manage/item">등록된 상품 관리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- </div> -->
+    <!-- <button type="button" onclick="testConsole()">test console</button> -->
+    <div class="st-container">
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-content-box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>날짜 선택</p>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <input class="ty-st-mDash-input text-center st-mDash-cursor-point"
+                                        id="i_mdash_start_date" readonly>
+                                </div>
+                                <!-- <div class="col-sm-6">
+                                    <input type="date" class="form-control" id="i_mdash_end_date" onchange="calandarHandler().dateChange().changeEndDate(this)">
+                                </div> -->
+                            </div>
+                            <p>조회 옵션 선택</p>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <select name="i_mdash_classify_selector" id="i_mdash_classify_selector"
+                                        class="ty-st-mDash-input"
+                                        onchange="eventClassifyHandler().selectorValueChange(this)"></select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select name="i_mdash_option_selector" id="i_mdash_option_selector"
+                                        class="ty-st-mDash-input"
+                                        onchange="eventItemOptionHandler().selectorValueChange(this)"></select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select name="i_mdash_store_selector" id="i_mdash_store_selector"
+                                        class="ty-st-mDash-input"
+                                        onchange="eventStoreHandler().selectorValueChange(this)"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn ty-st-mDash-btn col-sm-12" onclick="searchForData()">조회하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <div class="ty-st-mdash-data-container">
+                            <div class="ty-st-mdash-data-box">
+                                <div class="ty-st-mdash-data-title">
+                                    LEVEL
+                                </div>
+                                <div class="ty-st-mdash-data-el">
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ty-st-mdash-data-container">
+                            <div class="ty-st-mdash-data-box">
+                                <div class="ty-st-mdash-data-title">
+                                    총매출
+                                </div>
+                                <div class="ty-st-mdash-data-el">
+                                    3,432,456원
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="d-flex">
+                            <div class="ty-st-mdash-data-container-growth col-sm-6 ">
+                                <div class="ty-st-mdash-data-box">
+                                    <div class="ty-st-mdash-data-title">
+                                        매출성장률
+                                    </div>
+                                    <div class="ty-st-mdash-data-el">
+                                        36%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ty-st-mdash-data-container-growth col-sm-6">
+                                <div class="ty-st-mdash-data-box">
+                                    <div class="ty-st-mdash-data-title">
+                                        순수익성장률
+                                    </div>
+                                    <div class="ty-st-mdash-data-el">
+                                        <div class="ty-st-mdash-data-el mb-14">
+                                            29%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ty-st-mdash-data-container">
+                            <div class="ty-st-mdash-data-box">
+                                <div class="ty-st-mdash-data-title">
+                                    총순수익
+                                </div>
+                                <div class="ty-st-mdash-data-el">
+                                    845,324원
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <!--st-mdash-box END-->
+        </div>
+        <!--st-mdash-wrapper END-->
+        <!-- Main Chart -->
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-title-box">
+                    <div class="float-right">
+                        <button class="btn btn-outline-warning" sttg="mdash-main-graph-btn"
+                            onclick="eventChartHandler().mainGraph().hide()">숨기기</button>
+                    </div>
+                    <h4 class="st-mdash-title-el">
+                        기간별 합계 성과
+                    </h4>
+                </div>
+                <div class="st-mdash-content-box pb-3 pt-3">
+                    <div sttg="mdash-main-graph">
+                        <div class="chart-container" style="position: relative; height:400px; width:100%;">
+                            <canvas id="i_mdash_mainChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--st-mdash-box END-->
+        </div>
+        <!--st-mdash-wrapper END-->
+
+        <!-- Sell Table -->
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-title-box d-flex justify-content-between">
+                    <div class="st-mdash-title-box">
+                        <h4 class="st-mdash-title-el">
+                            판매 목록
+                        </h4>
+                    </div>
+                    <!-- btn -->
+                    <div class="ty-st-mDash-table-date-btn-box text-right col-sm-2">
+                        <button id="i_ty_table_date_sum"
+                            class="ty-st-mDash-table-date-btn-sum ty-st-mDash-table-date-btn ty-st-mDash-table-date-btn-active-left"
+                            onclick="tableDataHandler().tableModeChangeClick().setSum()">합계</button>
+                        <button id="i_ty_table_date_data"
+                            class="ty-st-mDash-table-date-btn-data ty-st-mDash-table-date-btn"
+                            onclick="tableDataHandler().tableModeChangeClick().setDate()">일별</button>
+                    </div>
+                </div>
+                <div class="st-mdash-table-container mt-2">
+                    <div class="list-table-box" id="i_mdash_selled_item_list">
+
+                    </div>
+                </div>
+            </div>
+            <!--st-mdash-box END-->
+        </div>
+        <!--st-mdash-wrapper END-->
+
+        <!-- 사용방법 및 개선사항 공유 START -->
+        <div class="st-mdash-wrapper">
+            <div class="st-mdash-box">
+                <div class="st-mdash-title-box">
+                    <h4 class="st-mdash-title-el">
+                        Alpha Ver. 사용방법 및 개선사항 공유하기
+                    </h4>
+                </div>
+                <div class="st-mdash-content mt-2 p-3" sttg="mdash-alpha-post">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="i_mdash_share_desc" rows="4" placeholder="수익 분석기를 커스터 마이징 하여 이용하는 다양한 방법들이 존재합니다. 셀러 분들의 의견을 자유롭게 공유해 주세요. 또한 알파 버전의 수익 분석기는 개선해 나가야 할 부분들이 많습니다. 버그를 발견하거나 개선이 필요한 부분을 공유해 주시면 더욱 힘이 됩니다."></textarea>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary form-control" onclick="eventShareHandler().shareClick()">공유하기</button>
+                        </div>
+                    </div>
+                    <div class="st-mdash-share-message-box mt-2" id="i_mdash_share_message_box">
+                    </div>
+
+                </div>
+            </div>
+            <!--st-mdash-box END-->
+        </div>
+        <!--st-mdash-wrapper END-->
+        <!-- 사용방법 및 개선사항 공유 END -->
+    </div>
+    <!-- st-container END -->
+
+    <!-- Loading -->
+    <div class="wrap-loading display-none" id="i_mdash_loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+
+
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-style@latest/dist/chartjs-plugin-style.min.js"></script>
+
+    <script src="/js/profit/main_dash/ty/mDashNav_ty.js"></script>
+    <script src="/js/profit/main_dash/ty/mDashObject_ty.js"></script>
+    <script src="/js/profit/main_dash/ty/mDashChartObject_ty.js?version=0.0.1"></script>
+    <script src="/js/profit/main_dash/ty/mDashInquire_ty.js"></script>
+    <script src="/js/profit/main_dash/ty/mDashCalandar_ty.js"></script>
+    <script src="/js/profit/main_dash/mDashDataConnect.js"></script>
+    <script src="/js/profit/main_dash/ty/mDashChart_ty.js"></script>
+    <script src="/js/profit/main_dash/ty/mDashTable_ty.js"></script>
+    <script src="/js/profit/main_dash/mDashShare.js"></script>
+    <script src="/js/profit/main_dash/ty/mDashMain_ty.js"></script>
+</body>
+
+</html>

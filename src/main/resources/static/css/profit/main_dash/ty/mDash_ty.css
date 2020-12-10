@@ -1,0 +1,165 @@
+/* all */
+
+.form-control:focus,
+input:focus {
+    box-shadow: none;
+    outline: 0;
+    border-color: #002c40;
+}
+
+button:focus,
+.btn:focus {
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+}
+
+.ty-st-mDash-input {
+    border: 1px solid #002c40;
+    padding: 3px 6px;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 4px;
+}
+
+.ty-st-mDash-input:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.ty-st-mDash-btn {
+    background-color: #002c40;
+    border: 1px solid white;
+    padding: 10px 20px;
+    color: white;
+    font-weight: 700;
+    line-height: inherit;
+}
+
+.ty-st-mDash-btn:hover {
+    color: #e0ad4e;
+}
+
+
+/* Nav */
+
+
+/* Style the navbar */
+
+.ty-st-mDash-nav {
+    overflow: hidden;
+}
+
+
+/* Navbar scroll */
+
+#i_ty_mDash_nav {
+    width: 100%;
+    z-index: 100;
+    background-color: #ffffff;
+}
+
+#i_ty_mDash_nav.hide {
+    /* top: -49px; */
+    background-color: #ffffff;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    top: 0;
+    -webkit-animation: expand 0.3s;
+    animation: expand 0.3s;
+}
+
+.setNavTop {
+    position: static;
+}
+
+.hide+.st-container {
+    padding-top: 49px;
+}
+
+@-webkit-keyframes expand {
+    0% {
+        height: 0px
+    }
+    100% {
+        height: 49px
+    }
+}
+
+@keyframes expand {
+    0% {
+        height: 00px
+    }
+    100% {
+        height: 49px
+    }
+}
+
+
+/* 판매목록 */
+
+
+/* 일별 합계 버튼 */
+
+.ty-st-mDash-table-date-btn {
+    margin: 0px 0px;
+    font-weight: 400;
+    padding: 10px 20px;
+    color: #002c40;
+    text-align: center;
+    border: 1px solid #002c40;
+    outline: none;
+    transition: all .3s ease-out;
+    line-height: 12px;
+}
+
+.ty-st-mDash-table-date-btn-sum {
+    background: linear-gradient(to left, #002c40 50%, white 50%);
+    background-position: left bottom;
+    background-size: 200% 100%;
+}
+
+.ty-st-mDash-table-date-btn-data {
+    background: linear-gradient(to right, #002c40 50%, white 50%);
+    background-position: right bottom;
+    background-size: 200% 100%;
+}
+
+.ty-st-mDash-table-date-btn-active-left {
+    background-position: right bottom;
+    background-color: #002c40;
+    color: #e9ecef;
+}
+
+.ty-st-mDash-table-date-btn-active-right {
+    background-position: left bottom;
+    background-color: #002c40;
+    color: #e9ecef;
+}
+
+
+/* mDash Table */
+
+.ty-st-mDash-table {
+    margin-bottom: 0;
+}
+
+.ty-st-mDash-thead th {
+    background-color: #002c40;
+    color: white;
+    position: sticky;
+    top: 0px;
+}
+
+.ty-st-mDash-tfoot th {
+    background-color: #ececec;
+    position: sticky;
+    bottom: 0px;
+}
+
+.st-mdash-table-container {
+    padding: 0px 10px 10px 10px
+}

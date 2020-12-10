@@ -1,22 +1,3 @@
-function storeDataConnect() {
-    return {
-        getAll: async function(){
-            await $.ajax({
-                url: '/api/item_store/get/all',
-                type: 'GET',
-                contentType: 'application/json',
-                dataType: 'json',
-                success: function(returnData) {
-                    STORE_LIST = returnData;
-                },
-                error: function(error) {
-                    console.log(error)
-                }
-            });
-        }
-    }
-}
-
 function loadStoreHtml() {
     return {
         setInitStore: function() {

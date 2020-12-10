@@ -42,6 +42,8 @@ var TOOLTIP_TEXT = {
 }
 
 function testConsole() {
+    console.log("BATCH ITEM", BATCH_ITEM_SELECTED)
+    console.log("SAVE SELLID : ", SAVE_SELLID);
     console.log(SEARCH_EL_ITEMS);
     console.log(SELECTED_SEARCH_ITEMS);
     console.log(DATE_SETTING);
