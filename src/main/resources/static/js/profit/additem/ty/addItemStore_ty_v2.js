@@ -1,25 +1,3 @@
-init();
-async function init() {
-    await getStores();
-    loadStoreHtml().storeOptionListLoad()
-}
-
-async function getStores() {
-    await $.ajax({
-        url: '/api/item_store/get/all',
-        type: 'GET',
-        contentType: 'application/json',
-        dataType: 'json',
-        success: function (returnData) {
-            STORE_LIST = returnData;
-
-        },
-        error: function (error) {
-            console.log(error)
-        }
-    })
-}
-
 function loadStoreHtml() {
     return {
         storeSelectedListLoad: function () {

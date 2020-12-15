@@ -1,0 +1,23 @@
+
+--Common--
+sellDashDataConnect.js
+sellDashMarketing.js
+--ty--
+sellDashObject_ty
+sellDashStore_ty
+sellDashSort_ty
+sellDashCalandar_ty
+sellDashGoods_ty
+sellDashItem_ty
+sellDashMain_ty
+
+--Dev Html Script Setting--
+<script src="/js/profit/sell_dash/ty/sellDashObject_ty.js"></script>
+<script src="/js/profit/sell_dash/sellDashDataConnect.js"></script>
+<script src="/js/profit/sell_dash/ty/sellDashStore_ty.js"></script>
+<script src="/js/profit/sell_dash/ty/sellDashSort_ty.js"></script>
+<script src="/js/profit/sell_dash/sellDashMarketing.js"></script>
+<script src="/js/profit/sell_dash/ty/sellDashCalandar_ty.js"></script>
+<script src="/js/profit/sell_dash/ty/sellDashGoods_ty.js"></script>
+<script src="/js/profit/sell_dash/ty/sellDashItem_ty.js"></script>
+<script src="/js/profit/sell_dash/ty/sellDashMain_ty.js"></script>

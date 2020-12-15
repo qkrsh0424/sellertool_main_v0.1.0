@@ -1,0 +1,18 @@
+--Common--
+mItemObject.js
+mItemItem.js
+mItemDataConnect.js
+mItemMain.js
+--ty--
+mItemClassify_ty.js
+mItemCategory_ty.js
+mItemOption_ty.js
+
+--Dev Html Script Setting--
+<script src="/js/profit/manage_item/mItemObject.js"></script>
+<script src="/js/profit/manage_item/ty/mItemClassify_ty.js"></script>
+<script src="/js/profit/manage_item/ty/mItemCategory_ty.js"></script>
+<script src="/js/profit/manage_item/ty/mItemOption_ty.js"></script>
+<script src="/js/profit/manage_item/mItemItem.js"></script>
+<script src="/js/profit/manage_item/mItemDataConnect.js"></script>
+<script src="/js/profit/manage_item/mItemMain.js"></script>

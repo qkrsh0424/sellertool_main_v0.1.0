@@ -159,13 +159,15 @@ function eventCategoryHandler(){
                     await dataConnect().getCategorys().getCategory1();
                     loadCategoryHtml().setCategoryEls().category1();
                 },
-                saveUpdate: function(){
-                    console.log(SELECTED_CATEGORY);
-                    if(SELECTED_CATEGORY.category1Id==0 | SELECTED_CATEGORY.category2Id==0){
+                saveUpdate: async function(){
+                    if(SELECTED_CATEGORY.category1Id==0 || SELECTED_CATEGORY.category2Id==0){
                         alert("카테고리1과 카테고리2는 필수 선택입니다.");
                         return;
                     }
-                    dataConnect().updateCategoryData();
+                    await dataConnect().updateCategoryData();
+                    await dataConnect().getClassifys();
+                    classifyObjectControl().updateSelectedClassify();
+                    loadCategoryHtml().setCategoyBreadcrumb().set();
                 },
                 closeUpdate: function(){
                     loadCategoryHtml().setCategoyBreadcrumb().set();

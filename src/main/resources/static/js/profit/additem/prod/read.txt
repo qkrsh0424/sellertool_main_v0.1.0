@@ -1,0 +1,22 @@
+--common--
+addItemObject.js
+addItemClassify.js
+addItemDataConnect.js
+addItemMain.js
+--ty--
+addItemCategory_ty.js
+addItemItem_ty.js
+addItemOption_ty.js
+addItemStore_ty_v2.js
+addItemTableArrow_ty.js
+
+--Dev Html Script Setting--
+<script th:src="@{/js/profit/additem/addItemObject.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+<script th:src="@{/js/profit/additem/ty/addItemCategory_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+<script th:src="@{/js/profit/additem/addItemClassify.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+<script th:src="@{/js/profit/additem/ty/addItemItem_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+<script th:src="@{/js/profit/additem/ty/addItemOption_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+<script th:src="@{/js/profit/additem/ty/addItemStore_ty_v2.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+<script th:src="@{/js/profit/additem/ty/addItemTableArrow_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+<script th:src="@{/js/profit/additem/addItemDataConnect.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+<script th:src="@{/js/profit/additem/addItemMain.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>

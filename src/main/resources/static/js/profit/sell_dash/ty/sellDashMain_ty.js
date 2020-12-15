@@ -1,22 +1,29 @@
 init();
 
 async function init() {
+    loadSellDashInitializeObject();
+    
     calandarHandler().designCalandar_ty();
     calandarHandler().setCurrentTimeHtml();
     calandarHandler().setInitDate();
-    
+
     await loadSellDashInitializeData();
     loadSellDashInitializeHtml();
 }
 
-async function loadSellDashInitializeData(){
-    await goodsDataConnect().getClassifys();
-    await storeDataConnect().getAll();
-    itemDataConnect().firstGet();
-    await goodsDataConnect().items();
+async function loadSellDashInitializeData() {
+    await sellDashDataConnect().getClassifys();
+    await sellDashDataConnect().getStores();
+    await sellDashDataConnect().getSellItems();
+    await sellDashDataConnect().getRegItems();
 }
 
-async function loadSellDashInitializeHtml(){
+async function loadSellDashInitializeHtml() {
     loadStoreHtml().setInitStore();
+    loadItemHtml().sellItemsHtml();
     eventGoodsHandler().showHaveItemList();
+}
+
+function loadSellDashInitializeObject(){
+    sellDashObjectInit();
 }

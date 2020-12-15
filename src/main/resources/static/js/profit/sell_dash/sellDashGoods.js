@@ -332,7 +332,7 @@ function eventGoodsHandler(){
         },
         addSellItemsClick: async function(){
             await goodsDataConnect().setSellItemsAndGet();
-            eventItemHandler().itemSearchClick();
+            eventItemHandler().sellItemSearchClick();
         },
         deleteSelectedSearchItem: function(index){
             SELECTED_SEARCH_ITEMS = SELECTED_SEARCH_ITEMS.filter(r=>r.index!=index);

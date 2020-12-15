@@ -530,7 +530,7 @@ function objectValueHandler() {
 
 function eventItemHandler() {
     return {
-        itemSearchClick: async function () {
+        sellItemSearchClick: async function () {
             await itemDataConnect().getByDate();
             loadItemHtml().sellItemsHtml();
         },

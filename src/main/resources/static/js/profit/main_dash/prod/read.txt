@@ -1,0 +1,25 @@
+--Common--
+mDashDataConnect.js
+mDashShare.js
+--ty--
+mDashNav_ty.js
+mDashObject_ty.js
+mDashChartObject_ty.js
+mDashInquire_ty.js
+mDashCalandar_ty.js
+mDashChart_ty.js
+mDashTable_ty.js
+mDashMain_ty.js
+
+
+--Dev Html Script Setting--
+<script src="/js/profit/main_dash/ty/mDashNav_ty.js"></script>
+<script src="/js/profit/main_dash/ty/mDashObject_ty.js"></script>
+<script src="/js/profit/main_dash/ty/mDashChartObject_ty.js?version=0.0.1"></script>
+<script src="/js/profit/main_dash/ty/mDashInquire_ty.js"></script>
+<script src="/js/profit/main_dash/ty/mDashCalandar_ty.js"></script>
+<script src="/js/profit/main_dash/mDashDataConnect.js"></script>
+<script src="/js/profit/main_dash/ty/mDashChart_ty.js"></script>
+<script src="/js/profit/main_dash/ty/mDashTable_ty.js"></script>
+<script src="/js/profit/main_dash/mDashShare.js"></script>
+<script src="/js/profit/main_dash/ty/mDashMain_ty.js"></script>
