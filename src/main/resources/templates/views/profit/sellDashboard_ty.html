@@ -31,7 +31,7 @@
                 <h4 class="text-center">판매 관리</h4>
             </div>
         </div>
-        <div class="st-sd-wrapper" onmousedown="return false">
+        <div class="st-sd-wrapper">
             <div class="st-sd-box">
                 <div class="st-sd-title-box">
                     <div class="row">
@@ -125,15 +125,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <script src="/js/profit/sell_dash/ty/sellDashObject_ty.js"></script>
-    <script src="/js/profit/sell_dash/sellDashDataConnect.js"></script>
-    <script src="/js/profit/sell_dash/ty/sellDashStore_ty.js"></script>
-    <script src="/js/profit/sell_dash/ty/sellDashSort_ty.js"></script>
-    <script src="/js/profit/sell_dash/sellDashMarketing.js"></script>
-    <script src="/js/profit/sell_dash/ty/sellDashCalandar_ty.js"></script>
-    <script src="/js/profit/sell_dash/ty/sellDashGoods_ty.js"></script>
-    <script src="/js/profit/sell_dash/ty/sellDashItem_ty.js"></script>
-    <script src="/js/profit/sell_dash/ty/sellDashMain_ty.js"></script>
+    <script th:src="@{/js/profit/sell_dash/prod/min/sell_dash_merge_v1.min.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 
 </html>

@@ -211,28 +211,28 @@
                                 <label for="i_item_batch_input_commition_cost">마켓 수수료 [%]</label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_commition_cost" value="0" placeholder="마켓 수수료" onkeypress="return isActualNumberKey(event)" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_price">판매가 [원]<span
+                                <label for="i_item_batch_input_price">개당 판매가 [원]<span
                                         class="text-success">(+)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_price" value="0" placeholder="판매가" onkeypress="return isNumberKey(event)" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_customer_trans_cost">소비자 운임 비용 [원]<span
+                                <label for="i_item_batch_input_customer_trans_cost">개당 소비자 운임 비용 [원]<span
                                         class="text-success">(+)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_customer_trans_cost" value="0" placeholder="소비자 운임 비용" onkeypress="return isNumberKey(event)" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_seller_real_trans_cost">판매자 실질 운임 비용 [원]<span
+                                <label for="i_item_batch_input_seller_real_trans_cost">개당 판매자 실질 운임 비용 [원]<span
                                         class="text-danger">(-)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_seller_real_trans_cost" value="0" placeholder="판매자 실질 운임 비용" onkeypress="return isNumberKey(event)" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="i_item_batch_input_purchase_cost">매입 가격 | 구매 비용 [원]<span
+                                <label for="i_item_batch_input_purchase_cost">개당 매입 가격 | 구매 비용 [원]<span
                                         class="text-danger">(-)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_purchase_cost" value="0" placeholder="매입 가격 | 구매 비용" onkeypress="return isNumberKey(event)" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_purchase_trans_cost">매입 운임 비용 [원]<span
+                                <label for="i_item_batch_input_purchase_trans_cost">개당 매입 운임 비용 [원]<span
                                         class="text-danger">(-)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_purchase_trans_cost" value="0" placeholder="매입 운임 비용" onkeypress="return isNumberKey(event)" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
 
-                                <label for="i_item_batch_input_extra_charge">기타 비용 [원]<span
+                                <label for="i_item_batch_input_extra_charge">개당 기타 비용 [원]<span
                                         class="text-danger">(-)</span></label>
                                 <input type="text" class="ty-st-aitem-input" id="i_item_batch_input_extra_charge" value="0" placeholder="기타 비용" onkeypress="return isNumberKey(event)" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');">
                             </div>
@@ -279,14 +279,6 @@
     </div>
 
     <footer th:replace="fragment/footer::footer"></footer>
-    <script th:src="@{/js/profit/additem/addItemObject.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
-    <script th:src="@{/js/profit/additem/ty/addItemCategory_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
-    <script th:src="@{/js/profit/additem/addItemClassify.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
-    <script th:src="@{/js/profit/additem/ty/addItemItem_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
-    <script th:src="@{/js/profit/additem/ty/addItemOption_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
-    <script th:src="@{/js/profit/additem/ty/addItemStore_ty_btn.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
-    <script th:src="@{/js/profit/additem/ty/addItemTableArrow_ty.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
-    <script th:src="@{/js/profit/additem/addItemMain.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/profit/additem/prod/min/add_item_merge_v1.min.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
-
 </html>

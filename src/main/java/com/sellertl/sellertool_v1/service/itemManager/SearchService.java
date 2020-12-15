@@ -9,12 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.sellertl.sellertool_v1.model.DTO.UserLoginSessionDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDefGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyDefResDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemClassify.IClassifyPureResDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemDefResDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemGet1DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemItem.IItemRes1DTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemOption.IOptionPureResDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefGetDTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.itemSell.ISellDefResDTO;
 import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefGet1DTO;
+import com.sellertl.sellertool_v1.model.DTO.itemManager.marketCost.MkcDefRes1DTO;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyDefEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemClassify.IClassifyPureEntity;
 import com.sellertl.sellertool_v1.model.entity.itemManager.itemItem.IItemDefEntity;
@@ -76,61 +83,85 @@ public class SearchService {
     @Autowired
     MkcPureRepository mkcPureRepository;
 
-    public List<IItemGet1DTO> getRegItemAll(HttpServletRequest request){
+    public IItemRes1DTO getRegItemAll(HttpServletRequest request){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        IItemRes1DTO resDto = new IItemRes1DTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setData(new ArrayList<>());
+            return resDto;
         }
 
         List<IItemDefEntity> items = iItemDefRepository.selectAll(user.getId(),EXIST_OR_NOT.IS_EXIST);
-        return searConService.getRegItemEntitiesToDtos(items);
+        resDto.setMessage("SUCCESS");
+        resDto.setData(searConService.getRegItemEntitiesToDtos(items));
+        return resDto;
     }
 
-    public List<IItemDefGetDTO> getItemAll(HttpServletRequest request){
+    public IItemDefResDTO getItemAll(HttpServletRequest request){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        IItemDefResDTO resDto = new IItemDefResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setData(new ArrayList<>());
+            return resDto;
         }
 
         List<IItemDefEntity> items = iItemDefRepository.selectAll(user.getId(),EXIST_OR_NOT.IS_EXIST);
-        return searConService.getItemDefEntitiesToDtos(items);
+        resDto.setMessage("SUCCESS");
+        resDto.setData(searConService.getItemDefEntitiesToDtos(items));
+        return resDto;
     }
 
-    public List<IItemDefGetDTO> getItemsByOption(HttpServletRequest request, String optionUuid){
+    public IItemDefResDTO getItemsByOption(HttpServletRequest request, String optionUuid){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        IItemDefResDTO resDto = new IItemDefResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setData(new ArrayList<>());
+            return resDto;
         }
 
         List<IItemDefEntity> items = iItemDefRepository.selectItemsByOption(user.getId(), optionUuid, EXIST_OR_NOT.IS_EXIST);
-        return searConService.getItemDefEntitiesToDtos(items);
+        resDto.setMessage("SUCCESS");
+        resDto.setData(searConService.getItemDefEntitiesToDtos(items));
+        return resDto;
     }
 
     // 판매 등록을 위한 판매 아이템 조회
     // order by created at
-    public List<ISellDefGetDTO> getSellItemsByTime(HttpServletRequest request, Date startDate, Date endDate){
+    public ISellDefResDTO getSellItemsByTime(HttpServletRequest request, Date startDate, Date endDate){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        ISellDefResDTO iSellResDto = new ISellDefResDTO();
         if(user==null){
-            return new ArrayList<>();
+            iSellResDto.setMessage("USER_INVALID");
+            iSellResDto.setData(new ArrayList<>());
+            return iSellResDto;
         }
         List<ISellJClassifyJOptionJItemJCategoryEntity> iSellEntities = iSellJClassifyJOptionJItemJCategoryRepository.selectSellItemsByTime(user.getId(), startDate, endDate,EXIST_OR_NOT.IS_EXIST);
-        // System.out.println(iSellEntities);
-        return searConService.getSellEntitiesToGetDefDtos(iSellEntities);
+        iSellResDto.setMessage("SUCCESS");
+        iSellResDto.setData(searConService.getSellEntitiesToGetDefDtos(iSellEntities));
+        return iSellResDto;
     }
 
     // 데쉬보드를 위한 판매 아이템 조회
     // order by sell date DESC
-    public List<ISellDefGetDTO> getSellItemsByTimeOrderSellDate(HttpServletRequest request, Date startDate, Date endDate){
+    public ISellDefResDTO getSellItemsByTimeOrderSellDate(HttpServletRequest request, Date startDate, Date endDate){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        ISellDefResDTO resDto = new ISellDefResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setData(new ArrayList<>());
+            return resDto;
         }
         List<ISellJClassifyJOptionJItemJCategoryEntity> iSellEntities = iSellJClassifyJOptionJItemJCategoryRepository.selectSellItemsByTimeOrdBySell(user.getId(), startDate, endDate,EXIST_OR_NOT.IS_EXIST);
-        return searConService.getSellEntitiesToGetDefDtos(iSellEntities);
+        resDto.setMessage("SUCCESS");
+        resDto.setData(searConService.getSellEntitiesToGetDefDtos(iSellEntities));
+        return resDto;
     }
 
     // 데쉬보드를 위한 판매 아이템 조회2
-    public List<ISellDefGetDTO> getSellItemsByCondition(
+    public ISellDefResDTO getSellItemsByCondition(
         HttpServletRequest request, 
         Date startDate, 
         Date endDate,
@@ -140,8 +171,11 @@ public class SearchService {
         String storeType
     ){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        ISellDefResDTO resDto = new ISellDefResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setData(new ArrayList<>());
+            return resDto;
         }
         if(classifyUuid.equals("none")){
             classifyUuid = "";
@@ -153,64 +187,96 @@ public class SearchService {
             storeType="";
         }
         List<ISellJClassifyJOptionJItemJCategoryEntity> iSellEntities = iSellJClassifyJOptionJItemJCategoryRepository.selectSellItemsByCondition(user.getId(), startDate, endDate, order, classifyUuid, optionUuid, storeType, EXIST_OR_NOT.IS_EXIST);
-        return searConService.getSellEntitiesToGetDefDtos(iSellEntities);
+        resDto.setMessage("SUCCESS");
+        resDto.setData(searConService.getSellEntitiesToGetDefDtos(iSellEntities));
+        return resDto;
     }
 
-    public List<IClassifyPureGetDTO> getClassifysByUser(HttpServletRequest request){
+    public IClassifyPureResDTO getClassifysByUser(HttpServletRequest request){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        IClassifyPureResDTO resDto = new IClassifyPureResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setClassifys(new ArrayList<>());
+            return resDto;
         }
         List<IClassifyPureEntity> pureClassifyEntities = iClassifyPureRepository.selectAllByUserId(user.getId(), EXIST_OR_NOT.IS_EXIST);
 
-        return searConService.getPureClassifyEntitiesToDtos(pureClassifyEntities);
+        resDto.setMessage("SUCCESS");
+        resDto.setClassifys(searConService.getPureClassifyEntitiesToDtos(pureClassifyEntities));
+        return resDto;
     }
 
-    public List<IClassifyPureGetDTO> getDeletedClassifysJoinSelled(HttpServletRequest request){
+    public IClassifyPureResDTO getDeletedClassifysJoinSelled(HttpServletRequest request){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        IClassifyPureResDTO resDto = new IClassifyPureResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setClassifys(new ArrayList<>());
+            return resDto;
         }
         List<IClassifyPureEntity> pureClassifyEntities = iClassifyPureRepository.selectDeletedAllJoinSelled(user.getId(), EXIST_OR_NOT.IS_DELETED,EXIST_OR_NOT.IS_EXIST);
 
-        return searConService.getPureClassifyEntitiesToDtos(pureClassifyEntities);
+        resDto.setMessage("SUCCESS");
+        resDto.setClassifys(searConService.getPureClassifyEntitiesToDtos(pureClassifyEntities));
+        return resDto;
     }
 
-    public List<IClassifyDefGetDTO> getClassifysDefByUser(HttpServletRequest request){
+    public IClassifyDefResDTO getClassifysDefByUser(HttpServletRequest request){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        IClassifyDefResDTO resDto = new IClassifyDefResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setClassifys(new ArrayList<>());
+            return resDto;
         }
         List<IClassifyDefEntity> defClassifyEntities = iClassifyDefRepository.selectAllByUserId(user.getId(), EXIST_OR_NOT.IS_EXIST);
 
-        return searConService.getDefClassifyEntitiesToDtos(defClassifyEntities);
+        resDto.setMessage("SUCCESS");
+        resDto.setClassifys(searConService.getDefClassifyEntitiesToDtos(defClassifyEntities));
+        return resDto;
     }
 
-    public List<IOptionPureGetDTO> getOptionsByUser(HttpServletRequest request){
+    public IOptionPureResDTO getOptionsByUser(HttpServletRequest request){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        IOptionPureResDTO resDto = new IOptionPureResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setOptions(new ArrayList<>());
+            return resDto;
         }
         List<IOptionPureEntity> pureOptionEntities = iOptionPureRepository.selectAllByUserId(user.getId(), EXIST_OR_NOT.IS_EXIST);
-        return searConService.getPureOptionEntitiesToDtos(pureOptionEntities);
+        resDto.setMessage("SUCCESS");
+        resDto.setOptions(searConService.getPureOptionEntitiesToDtos(pureOptionEntities));
+        return resDto;
     }
 
-    public List<IOptionPureGetDTO> getOptionsByClassify(HttpServletRequest request, String classifyUuid){
+    public IOptionPureResDTO getOptionsByClassify(HttpServletRequest request, String classifyUuid){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        IOptionPureResDTO resDto = new IOptionPureResDTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setOptions(new ArrayList<>());
+            return resDto;
         }
         List<IOptionPureEntity> pureOptionEntities = iOptionPureRepository.selectAllByClassifyUuid(user.getId(), classifyUuid, EXIST_OR_NOT.IS_EXIST);
-        return searConService.getPureOptionEntitiesToDtos(pureOptionEntities);
+        resDto.setMessage("SUCCESS");
+        resDto.setOptions(searConService.getPureOptionEntitiesToDtos(pureOptionEntities));
+        return resDto;
     }
     
-    public List<MkcDefGet1DTO> getMarketingCostByTime(HttpServletRequest request, Date startDate, Date endDate) {
+    public MkcDefRes1DTO getMarketingCostByTime(HttpServletRequest request, Date startDate, Date endDate) {
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
+        MkcDefRes1DTO resDto = new MkcDefRes1DTO();
         if(user==null){
-            return new ArrayList<>();
+            resDto.setMessage("USER_INVALID");
+            resDto.setData(new ArrayList<>());
+            return resDto;
         }
         List<MkcJClassifyJOptionJStoreProj> mkcProjList = mkcPureRepository.selectAllByUserAndBDateConClassifyAndOptionAndStore(user.getId(), startDate, endDate, EXIST_OR_NOT.IS_EXIST);
-        return searConService.getMkcDefGet1DtosByProjection(mkcProjList);
+        resDto.setMessage("SUCCESS");
+        resDto.setData(searConService.getMkcDefGet1DtosByProjection(mkcProjList));
+        return resDto;
     }
     
     @Transactional

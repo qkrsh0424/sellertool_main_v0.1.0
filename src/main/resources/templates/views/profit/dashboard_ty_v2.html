@@ -173,7 +173,7 @@
                     <div class="ty-st-mDash-table-date-btn-box text-right col-sm-2">
                         <button id="i_ty_table_date_sum"
                             class="ty-st-mDash-table-date-btn-sum ty-st-mDash-table-date-btn ty-st-mDash-table-date-btn-active-left"
-                            onclick="tableDataHandler().tableModeChangeClick().setSum()">합계</button>
+                            onclick="tableDataHandler().tableModeChangeClick().setSum()">기간내 상품별</button>
                         <button id="i_ty_table_date_data"
                             class="ty-st-mDash-table-date-btn-data ty-st-mDash-table-date-btn"
                             onclick="tableDataHandler().tableModeChangeClick().setDate()">일별</button>
@@ -235,16 +235,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-style@latest/dist/chartjs-plugin-style.min.js"></script>
 
-    <script src="/js/profit/main_dash/ty/mDashNav_ty.js"></script>
-    <script src="/js/profit/main_dash/ty/mDashObject_ty.js"></script>
-    <script src="/js/profit/main_dash/ty/mDashChartObject_ty.js?version=0.0.1"></script>
-    <script src="/js/profit/main_dash/ty/mDashInquire_ty.js"></script>
-    <script src="/js/profit/main_dash/ty/mDashCalandar_ty.js"></script>
-    <script src="/js/profit/main_dash/mDashDataConnect.js"></script>
-    <script src="/js/profit/main_dash/ty/mDashChart_ty.js"></script>
-    <script src="/js/profit/main_dash/ty/mDashTable_ty.js"></script>
-    <script src="/js/profit/main_dash/mDashShare.js"></script>
-    <script src="/js/profit/main_dash/ty/mDashMain_ty.js"></script>
+    <script th:src="@{/js/profit/main_dash/prod/min/main_dash_merge_v1.min.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 
 </html>

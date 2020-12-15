@@ -37,53 +37,33 @@ public class SearchDataAPI {
     // /api/item_manager/search/regitem/all
     @GetMapping(value = "/regitem/all")
     public IItemRes1DTO SearchRegItemAll(HttpServletRequest request){
-        IItemRes1DTO result = new IItemRes1DTO();
-        
-        result.setMessage("SUCCESS");
-        result.setData(searchService.getRegItemAll(request));
-        return result;
+        return searchService.getRegItemAll(request);
     }
 
     // /api/item_manager/search/item/all
     @GetMapping(value = "/item/all")
     public IItemDefResDTO SearchItemAll(HttpServletRequest request){
-        IItemDefResDTO result = new IItemDefResDTO();
-        
-        result.setMessage("SUCCESS");
-        result.setData(searchService.getItemAll(request));
-        return result;
+        return searchService.getItemAll(request);
     }
 
     // /api/item_manager/search/item/partial/byoption
     @GetMapping(value = "/item/partial/byoption")
     public IItemDefResDTO SearchItemsByOpion(HttpServletRequest request, @RequestParam("optionUuid") String optionUuid){
-        IItemDefResDTO result = new IItemDefResDTO();
-        
-        result.setMessage("SUCCESS");
-        result.setData(searchService.getItemsByOption(request, optionUuid));
-        return result;
+        return searchService.getItemsByOption(request, optionUuid);
     }
 
     // /api/item_manager/search/sellitem/time
     // 판매 등록을 위한 조회
     @GetMapping(value = "/sell_item/time")
     public ISellDefResDTO SearchSellItemByTime(HttpServletRequest request, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate){
-        ISellDefResDTO iSellResDto = new ISellDefResDTO();
-        List<ISellDefGetDTO> iSellGetDtos = searchService.getSellItemsByTime(request, startDate, endDate);
-        iSellResDto.setMessage("SUCCESS");
-        iSellResDto.setData(iSellGetDtos);
-        return iSellResDto;
+        return searchService.getSellItemsByTime(request, startDate, endDate);
     }
 
     // /api/item_manager/search/sellitem/time/order/selldate
     // 데쉬보드를 위한 조회
     @GetMapping(value = "/sell_item/time/order/selldate")
     public ISellDefResDTO SearchSellItemByTimeOrderSellDate(HttpServletRequest request, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate){
-        ISellDefResDTO iSellResDto = new ISellDefResDTO();
-        List<ISellDefGetDTO> iSellGetDtos = searchService.getSellItemsByTimeOrderSellDate(request, startDate, endDate);
-        iSellResDto.setMessage("SUCCESS");
-        iSellResDto.setData(iSellGetDtos);
-        return iSellResDto;
+        return searchService.getSellItemsByTimeOrderSellDate(request, startDate, endDate);
     }
 
     // /api/item_manager/search/sellitem/condition
@@ -98,64 +78,41 @@ public class SearchDataAPI {
         @RequestParam("optionUuid") String optionUuid,
         @RequestParam("storeType") String storeType
     ){
-        ISellDefResDTO iSellResDto = new ISellDefResDTO();
-        List<ISellDefGetDTO> iSellGetDtos = searchService.getSellItemsByCondition(request, startDate, endDate, order, classifyUuid, optionUuid, storeType);
-        iSellResDto.setMessage("SUCCESS");
-        iSellResDto.setData(iSellGetDtos);
-        return iSellResDto;
+        return searchService.getSellItemsByCondition(request, startDate, endDate, order, classifyUuid, optionUuid, storeType);
     }
 
     // /api/item_manager/search/classifys/byuser
     @GetMapping(value = "/classifys/byuser")
     public IClassifyPureResDTO SearchClassifysByUser(HttpServletRequest request){
-        IClassifyPureResDTO pureResDto = new IClassifyPureResDTO();
-        pureResDto.setMessage("SUCCESS");
-        pureResDto.setClassifys(searchService.getClassifysByUser(request));
-        return pureResDto;
+        return searchService.getClassifysByUser(request);
     }
     // /api/item_manager/search/deleted_classifys/byuser
     @GetMapping(value = "/deleted_classifys/jselled")
     public IClassifyPureResDTO SearchDeletedClassifysJoinSelled(HttpServletRequest request){
-        IClassifyPureResDTO pureResDto = new IClassifyPureResDTO();
-        pureResDto.setMessage("SUCCESS");
-        pureResDto.setClassifys(searchService.getDeletedClassifysJoinSelled(request));
-        return pureResDto;
+        return searchService.getDeletedClassifysJoinSelled(request);
     }
 
     // /api/item_manager/search/classifys/def/byuser
     @GetMapping(value = "/classifys/def/byuser")
     public IClassifyDefResDTO SearchClassifysDefByUser(HttpServletRequest request){
-        IClassifyDefResDTO defResDto = new IClassifyDefResDTO();
-        defResDto.setMessage("SUCCESS");
-        defResDto.setClassifys(searchService.getClassifysDefByUser(request));
-        return defResDto;
+        return searchService.getClassifysDefByUser(request);
     }
 
     // /api/item_manager/search/options/byuser
     @GetMapping(value = "/options/byuser")
     public IOptionPureResDTO SearchOptionsByUser(HttpServletRequest request){
-        IOptionPureResDTO pureResDto = new IOptionPureResDTO();
-        pureResDto.setMessage("SUCCESS");
-        pureResDto.setOptions(searchService.getOptionsByUser(request));
-        return pureResDto;
+        return searchService.getOptionsByUser(request);
     }
 
     // /api/item_manager/search/options/byclassify
     @GetMapping(value = "/options/byclassify")
     public IOptionPureResDTO SearchOptionsByClassify(HttpServletRequest request, @RequestParam("classifyUuid") String uuid){
-        IOptionPureResDTO pureResDto = new IOptionPureResDTO();
-        pureResDto.setMessage("SUCCESS");
-        pureResDto.setOptions(searchService.getOptionsByClassify(request, uuid));
-        return pureResDto;
+        return searchService.getOptionsByClassify(request, uuid);
     }
 
     // /api/item_manager/search/marketing_cost/bytime
     @GetMapping(value = "/marketing_cost/bytime")
     public MkcDefRes1DTO SearchMarketingCostByTime(HttpServletRequest request, @RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate){
-        MkcDefRes1DTO mkcDefResDto = new MkcDefRes1DTO();
-        List<MkcDefGet1DTO> mkcDefGet1Dtos = searchService.getMarketingCostByTime(request, startDate, endDate);
-        mkcDefResDto.setMessage("SUCCESS");
-        mkcDefResDto.setData(mkcDefGet1Dtos);
-        return mkcDefResDto;
+        return searchService.getMarketingCostByTime(request, startDate, endDate);
     }
 }

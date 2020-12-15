@@ -74,13 +74,7 @@
 
     <footer th:replace="fragment/footer::footer"></footer>
     <footer th:replace="fragment/jquery-ui::jquery-ui"></footer>
-    <script src="/js/profit/manage_item/mItemObject.js"></script>
-    <script src="/js/profit/manage_item/ty/mItemClassify_ty.js"></script>
-    <script src="/js/profit/manage_item/ty/mItemCategory_ty.js"></script>
-    <script src="/js/profit/manage_item/ty/mItemOption_ty.js"></script>
-    <script src="/js/profit/manage_item/mItemItem.js"></script>
-    <script src="/js/profit/manage_item/mItemDataConnect.js"></script>
-    <script src="/js/profit/manage_item/mItemMain.js"></script>
+    <script th:src="@{/js/profit/manage_item/prod/min/manage_item_merge_v1.min.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 
 </html>
