@@ -125,6 +125,7 @@ function eventOptionHandler(){
         },
         setOptsClick:function(){
             if(OPTION_SELECTED.length === 0 | STORE_SELECTED.length === 0){
+                addItemSnackbarOpen('최소 하나 이상의 옵션과 마켓을 추가해 주세요.')
                 return;
             }
             this.setOptsDataAndLoadHtml();

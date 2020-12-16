@@ -1,0 +1,40 @@
+<th:block th:fragment="profitSubNav">
+    <div id="i_ty_mDash_nav" class="ty-st-mDash-nav text-center smart-scroll">
+        <div class=" card-header">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" st-loc="mdash" href="/profit">대시보드</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" st-loc="selldash" href="/profit/sell/dashboard">판매 관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" st-loc="additem" href="/profit/add/item">상품 등록</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" st-loc="manageitem" href="/profit/manage/item">등록된 상품 수정</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link pcy-mainpage-button1-disable" st-loc="memberdash" href="#">확장 대시보드(준비중)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        let loc = window.location.pathname;
+        switch(loc){
+            case '/profit':
+                $("a[st-loc=mdash]").addClass('st-nav-active');
+                break;
+            case '/profit/sell/dashboard':
+                $("a[st-loc=selldash]").addClass('st-nav-active');
+                break;
+            case '/profit/add/item':
+                $("a[st-loc=additem]").addClass('st-nav-active');
+                break;
+            case '/profit/manage/item':
+                $("a[st-loc=manageitem]").addClass('st-nav-active');
+                break;
+        }
+    </script>
+</th:block>

@@ -9,8 +9,11 @@ import com.sellertl.sellertool_v1.model.DTO.PasswordChangeDTO;
 import com.sellertl.sellertool_v1.model.DTO.UserLoginSessionDTO;
 import com.sellertl.sellertool_v1.model.DTO.UserProfileUpdateDTO;
 import com.sellertl.sellertool_v1.model.entity.UserEntity;
+import com.sellertl.sellertool_v1.model.entity.itemManager.user.DeletedUserEntity;
 import com.sellertl.sellertool_v1.model.repository.UserRepository;
+import com.sellertl.sellertool_v1.model.repository.user.DeletedUserRepository;
 import com.sellertl.sellertool_v1.service.handler.ConvertService;
+import com.sellertl.sellertool_v1.service.handler.DateService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -23,6 +26,9 @@ public class ProfileService {
     UserRepository userRepository;
 
     @Autowired
+    DeletedUserRepository deletedUserRepository;
+
+    @Autowired
     RedisTemplate redisTemplate;
 
     @Autowired
@@ -33,6 +39,9 @@ public class ProfileService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    DateService dateService;
     public boolean updateProfile(HttpServletRequest request, UserProfileUpdateDTO info){
         String session = (String) redisTemplate.opsForValue().get("spring:session:sessions:expires:" + request.getSession().getId());
         if( session != null && !session.isEmpty() ){
@@ -90,7 +99,40 @@ public class ProfileService {
         }else{
             return "USER_NON";
         }
+    }
 
+    public String singoutUser(HttpServletRequest request, String password){
+        // System.out.println(pcDto.getPassword());
+        // System.out.println(pcDto.getNewPassword());
+        String session = (String) redisTemplate.opsForValue().get("spring:session:sessions:expires:" + request.getSession().getId());
+
+        if( session == null || session.isEmpty() ){
+            return "SESSION_NON";
+        }
+
+        UserLoginSessionDTO sessionData = (UserLoginSessionDTO) convert.jsonString2ObjectClassConvert(session, UserLoginSessionDTO.class);
+        Optional<UserEntity> userOp = userRepository.findById(sessionData.getId());
+
+        if(userOp.isPresent()){
+            UserEntity user = userOp.get();
+            String mergePassword = password + user.getSalt();
+            if (encoder.matches(mergePassword, user.getPassword())) {
+                DeletedUserEntity duEntity = new DeletedUserEntity();
+                duEntity.setDuEmail(user.getEmail());
+                duEntity.setDuUuid(user.getId());
+                duEntity.setDuDeletedAt(dateService.getCurrentDate());
+
+                deletedUserRepository.save(duEntity);
+                userRepository.delete(user);
+
+                userService.logout(request);
+                return "SUCCESS";
+            }else{
+                return "PW_NOT_MATCH";
+            }
+        }else{
+            return "USER_NON";
+        }
     }
 
 

@@ -100,6 +100,18 @@ public class RoutingController {
         return "views/user/password";
     }
 
+    // 회원 탈퇴 페이지
+    @GetMapping(value="/profile/signout")
+    public String ProfileSignoutPage(HttpServletRequest request, Model model) {
+        UserInfoVO user = userService.getUserInfo(request);
+        if(user == null){
+            return "redirect:/";
+        }
+
+        model.addAttribute("data", user);
+        return "views/user/signout";
+    }
+
     @GetMapping("/login")
     public String LoginPage(){
         if(myEnvironment.equals("production")){

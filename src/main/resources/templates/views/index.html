@@ -8,6 +8,7 @@
     <div class="pcy-mainpage-container">
         <div class="pcy-mainpage-wrapper">
             <div class="text-center pcy-mainpage-box">
+                <h1><img src="/images/icon/favicon.ico/android-icon-192x192.png" width="60" height="60" alt="" loading="lazy"></h1>
                 <h1>셀러툴</h1>
                 <h1>SellerTool</h1>
                 <!-- <p>
@@ -16,22 +17,22 @@
                 <p>OUR_SERVICE</p>
                 <div class="row">
                     <div class="col-sm-4">
-                        <a type="button" style="width: 15rem;" class="pcy-mainpage-button1" href="/margin/nonmem/dashboard">누적 수익 계산기<span class="badge badge-danger align-top">new</span></a>
+                        <button type="button" class="pcy-mainpage-button1" onclick="pageRouting('/margin/nonmem/dashboard')">누적 수익 계산기</button>
                     </div>
                     <div class="col-sm-4">
-                        <a type="button" style="width: 15rem;" class="pcy-mainpage-button1" href="/margin/dashboard">마진율 계산기</a>
+                        <button type="button" class="pcy-mainpage-button1" onclick="pageRouting('/margin/dashboard')">마진율 계산기</button>
                     </div>
                     <div class="col-sm-4">
-                        <a type="button" style="width: 15rem;" class="pcy-mainpage-button1" href="/rank/naver">네이버 랭킹</a>
+                        <button type="button" class="pcy-mainpage-button1" onclick="pageRouting('/rank/naver')">네이버 랭킹</button>
                     </div>
                     <div class="col-sm-4">
-                        <a type="button" style="width: 15rem;" class="pcy-mainpage-button1" href="/calculate/vat">부가세 계산기</a>
+                        <button type="button" class="pcy-mainpage-button1" onclick="pageRouting('/calculate/vat')">부가세 계산기</button>
                     </div>
                     <div class="col-sm-4">
-                        <a type="button" style="width: 15rem;" class="pcy-mainpage-button1" href="/profit">수익 분석기 TODO*</a>
+                        <button type="button" class="pcy-mainpage-button1" onclick="pageRouting('http:\/\/www.multranslator.com')">멀티 번역기</button>
                     </div>
                     <div class="col-sm-4">
-                        <a type="button" style="width: 15rem;" class="pcy-mainpage-button1" href="http://www.multranslator.com">멀티 번역기</a>
+                        <button type="button" class="pcy-mainpage-button1 pcy-mainpage-button1-disable" onclick="pageRouting('/profit')" disabled><span class="badge badge-danger align-top">new</span> 수익 분석기 Alpha Ver. <br/><span style="font-size: 12px; color:#f1f1f1;">-- 준비중 입니다 --</span></button>
                     </div>
                 </div>
                 <div class="pcy-footer-copyright">

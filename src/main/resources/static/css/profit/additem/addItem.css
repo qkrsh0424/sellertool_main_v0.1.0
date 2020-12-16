@@ -54,6 +54,8 @@
 .st-aitem-image-btn{
     height: 30vh;
     width: 30vh;
+    max-width: 400px;
+    max-height: 400px;
     background: none;
     border: 1px dashed black;
     border-radius: 15px;
@@ -74,6 +76,8 @@
 .st-aitem-image-el{
     height: 30vh;
     width: 30vh;
+    max-width: 400px;
+    max-height: 400px;
     border: 1px dashed black;
     border-radius: 15px;
     outline:none !important;

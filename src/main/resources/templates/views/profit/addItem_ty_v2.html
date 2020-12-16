@@ -7,24 +7,9 @@
 
 <body>
     <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
-    <div class="card text-center">
-        <div class="card-header">
-            <ul class="nav nav-pills justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="/profit">대시보드</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profit/sell/dashboard">판매 관리</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link st-nav-active" href="/profit/add/item">상품 등록 관리</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profit/manage/item">등록된 상품 관리</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!-- SubNav S-->
+    <div th:replace="views/profit/profitSubNav::profitSubNav"></div>
+    <!-- SubNav E-->
     <div class="st-container">
         <input hidden id="i_aitem_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <!-- <div class="col-sm-3"> -->

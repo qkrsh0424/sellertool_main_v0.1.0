@@ -24,10 +24,11 @@ input:focus {
 
 .ty-st-sd-input {
     border: 2px solid #002c40;
+    height:calc(1.5em + 0.75rem + 2px);
+    line-height: 0;
     padding: 3px 6px;
     display: block;
     width: 100%;
-    height: calc(1.5em + 0.75rem + 2px);
     font-size: 1rem;
     font-weight: 400;
     border-radius: 4px;
@@ -50,7 +51,8 @@ input:focus {
 .ty-st-sd-item-box {
     position: relative;
     width: 100%;
-    height: 35vh;
+    min-height: 180px;
+    max-height:250px;
     overflow-y: scroll;
     margin: auto;
     border: 2px solid #022c40;
@@ -67,7 +69,8 @@ input:focus {
 
 .ty-st-sd-classify-wrapper {
     width: 100%;
-    height: 28vh;
+    min-height: 130px;
+    max-height:200px;
 }
 /* time input */
 
@@ -98,13 +101,8 @@ input:focus {
 .ty-st-sd-sell-item-table th {
     background-color: white;
     position: sticky;
-    top: 0px;
+    top: 0;
     z-index: 5;
-}
-
-.ty-st-sd-sell-item-table td {
-    position: sticky;
-    top: 0px;
 }
 
 .ty-st-sd-sell-item-table tr .col:hover {
@@ -160,9 +158,7 @@ input:focus {
 }
 
 .ty-st-sd-selected-option {
-    height: 35vh;
     overflow-y: scroll;
-    width: 100%;
     text-align: left;
     border: 2px solid #022c40;
     border-radius: 4px;

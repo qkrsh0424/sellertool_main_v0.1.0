@@ -24,10 +24,18 @@
 }
 
 .pcy-mainpage-button1{
+    width: 90%;
     padding: 15px;
     border-radius: 10px;
     background: #338ee6;
-    margin-bottom:8px;
+    margin-bottom:15px;
+    border:none;
+    color:white;
+    box-shadow:3px 3px 3px 3px #16477344;
+}
+
+.pcy-mainpage-button1-disable{
+    opacity: 0.65;
 }
 
 .pcy-mainpage-button1:hover{
@@ -48,10 +56,12 @@
 }
 @media screen and (max-width:989px){
     .pcy-mainpage-container{
-        height: calc(100vh - 56.25px);
+        /* height: calc(100vh - 56.25px); */
+        height: 120vh;
     }
     .pcy-mainpage-wrapper{
-        height: calc(100vh - 56.25px);
+        height: 120vh;
+        /* height: calc(100vh - 56.25px); */
     }
 
     .pcy-mainpage-box{

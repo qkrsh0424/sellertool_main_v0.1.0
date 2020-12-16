@@ -15,8 +15,8 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <a type="button" class="mt-2 nms-dash-button1 btn-lg btn-block" href="/margin/nonmem/additem">상품
-                        등록</a>
+                    <button type="button" class="mt-2 nms-dash-button1 btn-lg btn-block"
+                        onclick="pageRouting('/margin/nonmem/additem')">상품 등록</button>
                 </div>
                 <div class="col-sm-6">
                     <button type="button" class="mt-2 nms-dash-button2 btn-lg btn-block" onclick="itemDelete().all()">모두
@@ -35,7 +35,8 @@
     </div>
 
     <footer th:replace="fragment/footer::footer"></footer>
-    <script th:src="@{/js/nonMemDashboard.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script
+        th:src="@{/js/nonMemDashboard.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 
 </html>

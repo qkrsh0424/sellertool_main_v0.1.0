@@ -2,28 +2,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragment/header::header"></head>
+<head th:replace="fragment/header2::header2"></head>
 
 <body>
     <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
-    <div class="card text-center">
-        <div class="card-header">
-            <ul class="nav nav-pills justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="/profit">대시보드</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link st-nav-active" href="/profit/sell/dashboard">판매 관리</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profit/add/item">상품 등록 관리</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profit/manage/item">등록된 상품 관리</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!-- SubNav S-->
+    <div th:replace="views/profit/profitSubNav::profitSubNav"></div>
+    <!-- SubNav E-->
     <div class="st-sd-container">
         <input hidden id="i_sd_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="st-sd-wrapper">
@@ -58,12 +43,12 @@
                             </div>
                             <div class="st-sd-search-wrapper col-sm-3">
                                 <p for="i_search_data">옵션 선택</p>
-                                <div id="ty_sell_item_option_list" class="ty-st-sd-item-box  ">
+                                <div id="ty_sell_item_option_list" class="ty-st-sd-item-box">
                                 </div>
                             </div>
                             <div class="st-sd-search-wrapper col-sm-6">
                                 <p for="i_search_data">선택된 상품</p>
-                                <div id="ty_sell_item_option_selected_list" class="ty-st-sd-selected-option col-sm-12">
+                                <div id="ty_sell_item_option_selected_list" class="ty-st-sd-item-box ty-st-sd-selected-option col-sm-12">
                                 </div>
                             </div>
                         </div>

@@ -69,6 +69,46 @@ $("#passwordUpdateSubmit").submit(function(event){
     })
 });
 
+$("#signoutSubmit").submit(function(event){
+    event.preventDefault();
+    if(!confirm('회원 탈퇴시 관련된 모든 데이터를 잃게 되며, 복구가 불가능 합니다. 그래도 계속 하시겠습니까?')){
+        return;
+    }
+    let data = JSON.stringify({
+        "password":$("#i_signout_password").val(),
+    });
+
+    $.ajax({
+        url:"/api/profile/signout",
+        type:"POST",
+        contentType:"application/json",
+        dataType:"json",
+        data:data,
+        beforeSend:function(xhr){
+            xhr.setRequestHeader("X-XSRF-TOKEN", $("#_csrf_signout").val());
+        },
+        success:function(returnData){
+            console.log(returnData);
+            if(returnData.message==="PW_NOT_MATCH"){
+                alert("패스워드가 일치하지 않습니다.");
+                return;
+            }else if(returnData.message==="USER_NON"){
+                alert("세션이 만료되었습니다.");
+                return window.location.reload();
+            }else if(returnData.message==="SUCCESS"){
+                alert("회원이 정상적으로 탈퇴 되었습니다.");
+                return window.location.href="/";
+            }else{
+                alert("failure error");
+                return window.location.reload();
+            }
+        },
+        error:function(error){
+            alert("server connect error");
+        }
+    })
+});
+
 function chkPW(password, checkPassword) {
 
     var pw = password;

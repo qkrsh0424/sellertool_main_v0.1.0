@@ -40,7 +40,7 @@ public class ProfitRoutingController {
     public String ProfitDashboard(HttpServletRequest request, HttpServletResponse response, Model model){
         UserInfoVO user = userService.getUserInfo(request);
         if(user == null){
-            return "/views/profit/loginError.html";
+            return "views/profit/loginError.html";
         }
         String userROLE = user.getRole();
         String uuid1 = UUID.randomUUID().toString();
@@ -65,7 +65,7 @@ public class ProfitRoutingController {
         model.addAttribute("data", user);
         
         
-        return "/views/profit/dashboard_ty_v2.html";
+        return "views/profit/dashboard_ty_v2.html";
     }
 
     @GetMapping("/profit/add/item")
@@ -75,27 +75,27 @@ public class ProfitRoutingController {
             return "/views/profit/loginError.html";
         }
         model.addAttribute("data", user);
-        return "/views/profit/addItem_ty_v2.html";
+        return "views/profit/addItem_ty_v2.html";
     }
 
     @GetMapping("/profit/sell/dashboard")
     public String ProfitSellDashboard(HttpServletRequest request, Model model){
         UserInfoVO user = userService.getUserInfo(request);
         if(user == null){
-            return "/views/profit/loginError.html";
+            return "views/profit/loginError.html";
         }
         model.addAttribute("data", user);
-        return "/views/profit/sellDashboard_ty.html";
+        return "views/profit/sellDashboard_ty.html";
     }
 
     @GetMapping("/profit/manage/item")
     public String ProfitManageItem(HttpServletRequest request, Model model){
         UserInfoVO user = userService.getUserInfo(request);
         if(user == null){
-            return "/views/profit/loginError.html";
+            return "views/profit/loginError.html";
         }
         model.addAttribute("data", user);
-        return "/views/profit/manageItem_ty.html";
+        return "views/profit/manageItem_ty.html";
     }
 
     /**

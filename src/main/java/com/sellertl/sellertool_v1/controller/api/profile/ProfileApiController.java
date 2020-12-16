@@ -41,4 +41,18 @@ public class ProfileApiController {
         }
         return "{\"message\":\"error\"}";
     }
+
+    @PostMapping(value = "/profile/signout")
+    public String signoutUser(HttpServletRequest request, @RequestBody PasswordChangeDTO info){
+        String password = info.getPassword();
+        String result = profileService.singoutUser(request, password);
+        if(result.equals("SESSION_NON") || result.equals("USER_NON")){
+            return "{\"message\":\"USER_NON\"}";
+        }else if(result.equals("PW_NOT_MATCH")){
+            return "{\"message\":\"PW_NOT_MATCH\"}";
+        }else if(result.equals("SUCCESS")){
+            return "{\"message\":\"SUCCESS\"}";
+        }
+        return "{\"message\":\"ERROR\"}";
+    }
 }

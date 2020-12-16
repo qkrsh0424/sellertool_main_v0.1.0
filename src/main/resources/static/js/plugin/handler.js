@@ -164,3 +164,7 @@ function goToByScroll(id) {
         scrollTop: $(id).offset().top-150
     },'slow');
 }
+
+function pageRouting(href){
+    window.location.href=href;
+}
