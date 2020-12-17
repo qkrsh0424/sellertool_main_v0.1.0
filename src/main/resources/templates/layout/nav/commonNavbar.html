@@ -36,16 +36,17 @@
             <div class="dropdown-item" th:text="${data.name}+님"></div>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/profile">프로필</a>
+            <!-- TODO LOGOUT AJAX로 넘기기 -->
             <form th:if="${@environment.getProperty('app.environment')=='production'}"
               th:action="${@environment.getProperty('app.environment.production.auth.url')}+'/api/logout'"
               method="post">
-              <input hidden th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="_csrf">
+              <input hidden th:name="X-XSRF-TOKEN" th:value="${_csrf.token}" id="_csrf">
               <input class="dropdown-item" type="submit" value="로그아웃">
             </form>
             <form th:if="${@environment.getProperty('app.environment')=='development'}"
               th:action="${@environment.getProperty('app.environment.development.auth.url')}+'/api/logout'"
               method="post">
-              <input hidden th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="_csrf">
+              <input hidden name="X-XSRF-TOKEN" th:value="${_csrf.token}" id="_csrf">
               <input class="dropdown-item" type="submit" value="로그아웃">
             </form>
           </div>

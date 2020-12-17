@@ -8,6 +8,7 @@ import com.sellertl.sellertool_v1.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,8 @@ public class RoutingController {
     @GetMapping("/")
     public String HomePage(HttpServletRequest request, Model model){
         model.addAttribute("data", userService.getUserInfo(request));
+        // CookieCsrfTokenRepository a = new CookieCsrfTokenRepository();
+        // System.out.println(a.loadToken(request).getToken());
         return "views/index";
     }
 

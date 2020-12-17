@@ -1,34 +1,31 @@
 package com.sellertl.sellertool_v1.config;
 
-import com.sellertl.sellertool_v1.model.DTO.UserLoginSessionDTO;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 
 @Configuration
-@EnableRedisHttpSession
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60*60)
 public class RedisSessionConfig extends WebSecurityConfigurerAdapter{
     @Value("${spring.redis.host}")
     private String redisAddress;
 
     @Value("${spring.redis.port}")
     private int redisPort;
+
+    @Value("${app.environment}")
+    private String myEnvironment;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -42,7 +39,7 @@ public class RedisSessionConfig extends WebSecurityConfigurerAdapter{
             .anyRequest().permitAll()
             .and()
             .csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                .csrfTokenRepository(getCookieCsrfTokenRepository());
             ;
     }
 
@@ -70,5 +67,14 @@ public class RedisSessionConfig extends WebSecurityConfigurerAdapter{
         serializer.setCookiePath("/");
         serializer.setDomainNamePattern("^.+?\\.(\\w+\\.[a-z]+)$");
         return serializer;
+    }
+
+    @Bean
+    public CrossDomainCookieCsrfTokenRepository getCookieCsrfTokenRepository(){
+        CrossDomainCookieCsrfTokenRepository cookieTokenConfig = new CrossDomainCookieCsrfTokenRepository();
+        cookieTokenConfig.setCookieName("XSRF-TOKEN");
+        cookieTokenConfig.setCookiePath("/");
+        cookieTokenConfig.setDomainPattern("^.+?\\.(\\w+\\.[a-z]+)$");
+        return cookieTokenConfig;
     }
 }

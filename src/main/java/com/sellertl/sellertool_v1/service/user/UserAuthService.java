@@ -1,6 +1,7 @@
 package com.sellertl.sellertool_v1.service.user;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.sellertl.sellertool_v1.model.DTO.UserLoginSessionDTO;
 import com.sellertl.sellertool_v1.service.handler.ConvertService;
@@ -43,4 +44,10 @@ public class UserAuthService {
         }
         return false;
     }
+
+	public void logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        redisTemplate.delete("spring:session:sessions:" + session.getId());
+	}
 }

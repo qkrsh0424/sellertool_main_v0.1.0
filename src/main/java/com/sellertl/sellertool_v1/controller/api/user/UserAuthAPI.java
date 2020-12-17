@@ -10,16 +10,21 @@ import com.sellertl.sellertool_v1.service.user.UserAuthService;
 import com.sellertl.sellertool_v1.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserAuthAPI {
+    @Value("${app.environment}")
+    private String myEnvironment;
+
     @Autowired
     UserAuthService userAuthService;
 
