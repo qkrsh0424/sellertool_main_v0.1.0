@@ -7,10 +7,15 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.sellertl.sellertool_v1.service.rank.NRankLogService;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +29,18 @@ public class RankNaverAPI {
     @Value("${naver.clientSecret}")
     String naver_clientSecret;
 
+    @Autowired
+    NRankLogService nrankLogService;
+
     @RequestMapping(value = "/api/rank/naverShopping", method = RequestMethod.GET)
-    public String naverShopping(@RequestParam Map<String, String> param) {
+    public String naverShopping(@RequestParam Map<String, String> param, HttpServletRequest request) {
+        // added S
+        String prevResult = nrankLogService.setNRankLog(request, param.get("nSearchKeyword"), param.get("nShopURL"));
+        if(!prevResult.equals("SUCCESS")){
+            return "ERROR";
+        }
+        // added E
+        
         JSONArray resArr = new JSONArray();
         JSONObject resObj = new JSONObject();
         for(int i = 0 ; i < 3; i++){

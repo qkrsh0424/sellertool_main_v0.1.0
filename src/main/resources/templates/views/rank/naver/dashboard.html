@@ -13,49 +13,61 @@
                         <label class="pcy-rk-input-label" for="nSearchKeyword">
                             검색 키워드
                         </label>
-                        <input 
-                            type="text" 
-                            name="nSearchKeyword"
-                            id="nSearchKeyword"
-                            class="pcy-rk-input" 
-                            value="" 
-                            placeholder="검색에 사용할 키워드를 입력해주세요." 
-                            required
-                        />
-    
+                        <input type="text" name="nSearchKeyword" id="nSearchKeyword" class="pcy-rk-input" value=""
+                            placeholder="검색에 사용할 키워드를 입력해주세요." required />
+
                     </div>
                     <div class="pcy-rk-input-box">
                         <label class="pcy-rk-input-label" for="nShopURL">
                             스토어명
                         </label>
-    
-                        <input 
-                            type="text" 
-                            name="nShopURL" 
-                            id="nShopURL"
-                            class="pcy-rk-input" 
-                            value=""
-                            placeholder="스토어명을 정확히 입력해주세요." 
-                            required
-                        />
-    
+
+                        <input type="text" name="nShopURL" id="nShopURL" class="pcy-rk-input" value=""
+                            placeholder="스토어명을 정확히 입력해주세요." required />
+
                     </div>
-    
+
                     <div class="pcy-rk-input-footer">
-                        <div class="pcy-rk-input-footer-warning">*쇼핑 광고 상품 및 특정 상품(롯데홈쇼핑 땡큐딜, 인터파크 쎈딜)등을 제외한 랭킹을 조회합니다.</div>
-                        <button type="submit" class="pcy-rk-input-footer-send">
+                        <div class="pcy-rk-input-footer-warning">*쇼핑 광고 상품 및 특정 상품(롯데홈쇼핑 땡큐딜, 인터파크 쎈딜)등을 제외한 랭킹을 조회합니다.
+                        </div>
+                        <button type="submit" class="pcy-rk-input-footer-send" id="i_nrank_search_btn">
                             <span class="pcy-rk-input-footer-send-btn">랭킹추적</span>
                         </button>
                     </div>
                 </form>
+                <div class="pcy-rk-input-GR">
+                    <p class="pcy-rk-input-label">
+                        최근 조회 기록
+                    </p>
+                    <div th:if="${data}" style="height: 200px; overflow-y: scroll;">
+                        <table class="table text-center table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">조회 날짜</th>
+                                    <th scope="col">키워드명</th>
+                                    <th scope="col">스토어명</th>
+                                    <th scope="col">조회</th>
+                                </tr>
+                            </thead>
+                            <tbody id="i_nrank_my_search_list">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:unless="${data}" class="text-center">
+                        <h4>로그인이 필요한 서비스 입니다.</h4>
+                    </div>
+                </div>
             </div>
+
             <div id="rankingResultBoard" class="pcy-rk-result" style="display:none">
 
             </div>
         </div>
     </div>
-    <script th:src="@{/js/rankSearch.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
     <footer th:replace="fragment/footer::footer"></footer>
+    <script
+        th:src="@{/js/rankSearch.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 
 </html>

@@ -1,14 +1,12 @@
 /* all */
 
-.form-control:focus,
-input:focus {
+.st-mdash-wrapper .form-control:focus, .st-mdash-wrapper input:focus {
     box-shadow: none;
     outline: 0;
     border-color: #002c40;
 }
 
-button:focus,
-.btn:focus {
+.st-mdash-wrapper button:focus, .st-mdash-wrapper .btn:focus {
     outline: 0;
     border: 0;
     box-shadow: none;

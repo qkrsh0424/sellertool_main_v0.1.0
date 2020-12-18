@@ -7,12 +7,11 @@
 
 .pcy-rk-input-GR{
     background-color: #e9ecef;
-    padding:2rem 1rem;
+    padding:1rem 1rem;
     color:#002c40;
-    font-size:18px;
     border:2px solid #002c40;
     border-radius: 4px;
-    
+    margin-top: 8px;
 }
 
 
@@ -24,6 +23,7 @@
 }
 
 .pcy-rk-input-label{
+    font-size:18px;
     padding:0px 6px;
     margin-bottom:6px;
 }

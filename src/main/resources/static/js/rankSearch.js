@@ -1,6 +1,58 @@
+init();
+function init() {
+    setMySearchList();
+}
+
+function initializeLocalStorage() {
+    let storage = window.localStorage.getItem('st_nrank_search_list');
+    if (storage == null) {
+        window.localStorage.setItem('st_nrank_search_list', '[]');
+    }
+}
+
+function setSearchLog(keyword, storeName) {
+    initializeLocalStorage();
+    let storage = window.localStorage.getItem('st_nrank_search_list');
+    let storageJson = JSON.parse(storage);
+    let newData = {
+        'searchDate': new Date(),
+        'keyword': keyword,
+        'storeName': storeName
+    }
+    console.log(storageJson.length);
+    storageJson.unshift(newData);
+    if (storageJson.length >= 10) {
+        storageJson = storageJson.slice(0, 10);
+    }
+    window.localStorage.setItem('st_nrank_search_list', JSON.stringify(storageJson));
+    setMySearchList();
+}
+
+function setMySearchList() {
+    let html = ``;
+    initializeLocalStorage();
+    let storage = window.localStorage.getItem('st_nrank_search_list');
+    let storageJson = JSON.parse(storage);
+    storageJson.forEach(r => {
+        html += `
+            <tr>
+                <th scope="row">${dateToYYYYMMDD(r.searchDate)}</th>
+                <td>${r.keyword}</td>
+                <td>${r.storeName}</td>
+                <td><button type="button" class="btn btn-outline-secondary" onclick="eventNaverRankHandler().storageSearch('${r.keyword}-${r.storeName}')">조회</button></td>
+            </tr>       
+        `;
+    });
+
+    $('#i_nrank_my_search_list').html(html);
+}
+
 $("#searchSubmit").submit(
     function searchSubmit(e) {
         e.preventDefault();
+        let keyword = $("#nSearchKeyword").val();
+        let storeName = $("#nShopURL").val();
+        setSearchLog(keyword, storeName);
         $(document).ready(function () {
             $.ajax({
                 type: "GET", //전송방식을 지정한다 (POST,GET)
@@ -13,8 +65,8 @@ $("#searchSubmit").submit(
                     // realSellTransUnitCharge:document.getElementById("realSellTransUnitCharge").value,
                     // sellTransUnitCharge:document.getElementById("sellTransUnitCharge").value,
                     // marketCommitionPercentage:document.getElementById("marketCommitionPercentage").value
-                    nSearchKeyword: $("#nSearchKeyword").val(),
-                    nShopURL: $("#nShopURL").val(),
+                    nSearchKeyword: keyword,
+                    nShopURL: storeName,
                 },
                 error: function () {
                     alert("server connect failed");
@@ -32,18 +84,6 @@ $("#searchSubmit").submit(
                         `;
                     }
                     for (let i = 0; i < resData.length; i++) {
-                        // resHtml+=`
-                        //     <div class="rs_itemList_Wrapper">
-                        //         <img src="${resData[i].val.image}"/>
-                        //         <div class="float-left">
-                        //             <p class="rs_itemList_title"><a href=${resData[i].val.link} target="_blank">${resData[i].val.title}</a></p>
-                        //             <p class="rs_itemList_storeName">${resData[i].val.mallName}</p>
-                        //             <p class="rs_itemList_price">${resData[i].val.lprice} 원</p>
-                        //             <p class="rs_itemList_category">${resData[i].val.category1}>${resData[i].val.category2}>${resData[i].val.category3}>${resData[i].val.category4}</p>
-                        //             <p class="rs_itemList_rank">현재 랭킹 : <span class="text-danger">${resData[i].rank}</span>위</p>
-                        //         </div>
-                        //     </div>
-                        // `;
                         resHtml += `
                             <div class="pcy-rk-result-itemlist-wrapper">
                                 <div>
@@ -64,16 +104,21 @@ $("#searchSubmit").submit(
 
                     }
                     $("#rankingResultBoard").html(resHtml);
-                    // $("#Parse_Area").html(Parse_data); //div에 받아온 값을 넣는다.
-                    // alert("통신 데이터 값 : " + Parse_data);
-                    // console.log(JSON.parse(Parse_data).margin);
-                    // $("#marginVal").html(JSON.parse(Parse_data).margin);
-                    // $("#marginRateVal").html(JSON.parse(Parse_data).marginRate);
-                    // $("#VAT_10").html(JSON.parse(Parse_data).VAT_10);
-                    // $("#marginAfterVAT_10").html(JSON.parse(Parse_data).margin - JSON.parse(Parse_data).VAT_10);
                 }
 
             });
         });
     }
 );
+
+function eventNaverRankHandler() {
+    return {
+        storageSearch: function (text) {
+            let keyword = text.split('-')[0];
+            let storeName = text.split('-')[1];
+            $('#nSearchKeyword').val(keyword);
+            $('#nShopURL').val(storeName);
+            $('#i_nrank_search_btn').click();
+        }
+    }
+}
