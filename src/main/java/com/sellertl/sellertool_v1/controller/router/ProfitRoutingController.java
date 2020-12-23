@@ -72,7 +72,7 @@ public class ProfitRoutingController {
     public String ProfitAddItem(HttpServletRequest request, Model model){
         UserInfoVO user = userService.getUserInfo(request);
         if(user == null){
-            return "/views/profit/loginError.html";
+            return "views/profit/loginError.html";
         }
         model.addAttribute("data", user);
         return "views/profit/addItem_ty_v2.html";
