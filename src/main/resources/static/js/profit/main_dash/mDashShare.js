@@ -54,7 +54,7 @@ function shareDataConnect() {
                 },
                 success: function (returnData) {
                     if (returnData.message === 'USER_INVALID') {
-                        alert("세션이 만료되었습니다.")
+                        alert("로그인 세션이 만료되었습니다.")
                         return window.location.href = '/login';
                     } else if (returnData.message === 'SUCCESS') {
                         return;

@@ -15,9 +15,10 @@ function dataConnect(){
                 success: function(returnData){
                     if(returnData.message==='SUCCESS'){
                         return CLASSIFYS = returnData.classifys;
-                    }else if(returnData.message==='USER_INVALID'){
-                        alert('로그인 세션이 만료되었습니다.');
-                        return window.location.href='/login';
+                    }
+                    else if(returnData.message==='USER_INVALID'){
+                        // alert('로그인 세션이 만료되었습니다.');
+                        // return window.location.href='/login';
                     }
                     
                 },
@@ -43,8 +44,8 @@ function dataConnect(){
                         CLASSIFYS = CLASSIFYS.concat(returnData.classifys);
                         return;
                     }else if(returnData.message==='USER_INVALID'){
-                        alert('로그인 세션이 만료되었습니다.');
-                        return window.location.href='/login';
+                        // alert('로그인 세션이 만료되었습니다.');
+                        // return window.location.href='/login';
                     }
                     
                 },
@@ -70,8 +71,8 @@ function dataConnect(){
                 },
                 success: function(returnData){
                     if (returnData.message === 'USER_INVALID') {
-                        alert("로그인 세션이 만료되었습니다.")
-                        return window.location.href = '/login';
+                        // alert("로그인 세션이 만료되었습니다.")
+                        // return window.location.href = '/login';
                     } else if (returnData.message === 'SUCCESS') {
                         OPTIONS = returnData.options;
                         return;
@@ -144,8 +145,8 @@ function dataConnect(){
                     if(returnData.message==='SUCCESS'){
                         return SELLED_ITEMS = returnData.data;
                     }else if(returnData.message==='USER_INVALID'){
-                        alert('로그인 세션이 만료되었습니다.');
-                        return window.location.href='/login';
+                        // alert('로그인 세션이 만료되었습니다.');
+                        // return window.location.href='/login';
                     }
                     
                 },
@@ -175,8 +176,8 @@ function dataConnect(){
                     if(returnData.message==='SUCCESS'){
                         return SELLED_ITEMS = returnData.data;
                     }else if(returnData.message==='USER_INVALID'){
-                        alert('로그인 세션이 만료되었습니다.');
-                        return window.location.href='/login';
+                        // alert('로그인 세션이 만료되었습니다.');
+                        // return window.location.href='/login';
                     }
                 },
                 error: function(error){
