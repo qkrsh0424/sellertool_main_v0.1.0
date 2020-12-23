@@ -32,9 +32,9 @@ public class AlphaPostService {
     
     public List<AlphaPostGet1DTO> searchAlphaPostAll(HttpServletRequest request, int pageNum, int PAGESIZE){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
-        if(user==null){
-            return new ArrayList<>();
-        }
+        // if(user==null){
+        //     return new ArrayList<>();
+        // }
         if(pageNum<=0){
             pageNum = 0;
         }
@@ -93,7 +93,7 @@ public class AlphaPostService {
             }else{
                 dto.setWriterName("**"+proj.getUser().getUsername().substring(2, 5) + "****");
             }
-            if(proj.getUser().getId().equals(user.getId())){
+            if(user !=null && proj.getUser().getId().equals(user.getId())){
                 dto.setWriterType("SELF");
             }
             dto.setDesc(proj.getPost().getAlpostDesc());

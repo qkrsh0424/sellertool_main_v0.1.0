@@ -39,29 +39,29 @@ public class ProfitRoutingController {
     @GetMapping("/profit")
     public String ProfitDashboard(HttpServletRequest request, HttpServletResponse response, Model model){
         UserInfoVO user = userService.getUserInfo(request);
-        if(user == null){
-            return "views/profit/loginError.html";
-        }
-        String userROLE = user.getRole();
-        String uuid1 = UUID.randomUUID().toString();
-        String uuid2 = UUID.randomUUID().toString();
-        if(userROLE.equals("ROLE_ADMIN") || userROLE.equals("ROLE_MEMBER")){
-            try {
-                Cookie rolemem = new Cookie("ATHRU", uuid1);
-                Cookie roleok = new Cookie("ATHO", sha256(uuid1 + uuid2));
-                response.addCookie(rolemem);
-                response.addCookie(roleok);
-                model.addAttribute("ru", uuid2);
-            } catch (NoSuchAlgorithmException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }else{
-            Cookie rolemem = new Cookie("ATHRU", "0");
-            Cookie roleok = new Cookie("ATHO", "0");
-            response.addCookie(rolemem);
-            response.addCookie(roleok);
-        }
+        // if(user == null){
+        //     return "views/profit/loginError.html";
+        // }
+        // String userROLE = user.getRole();
+        // String uuid1 = UUID.randomUUID().toString();
+        // String uuid2 = UUID.randomUUID().toString();
+        // if(userROLE.equals("ROLE_ADMIN") || userROLE.equals("ROLE_MEMBER")){
+        //     try {
+        //         Cookie rolemem = new Cookie("ATHRU", uuid1);
+        //         Cookie roleok = new Cookie("ATHO", sha256(uuid1 + uuid2));
+        //         response.addCookie(rolemem);
+        //         response.addCookie(roleok);
+        //         model.addAttribute("ru", uuid2);
+        //     } catch (NoSuchAlgorithmException e) {
+        //         // TODO Auto-generated catch block
+        //         e.printStackTrace();
+        //     }
+        // }else{
+        //     Cookie rolemem = new Cookie("ATHRU", "0");
+        //     Cookie roleok = new Cookie("ATHO", "0");
+        //     response.addCookie(rolemem);
+        //     response.addCookie(roleok);
+        // }
         model.addAttribute("data", user);
         
         
