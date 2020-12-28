@@ -71,11 +71,15 @@ function eventIntegHandler(){
             }
         },
         checkCategoryFailure: function(){
-            if(SELECTED_CATEGORY.category1Id==0 | SELECTED_CATEGORY.category2Id==0){
-                return true;
-            }else{
-                return false;
-            }
+            // ORIGIN (상품 카테고리 태그가 활성화 되면 이 부분도 활성화 시켜야됨.)
+            // if(SELECTED_CATEGORY.category1Id==0 | SELECTED_CATEGORY.category2Id==0){
+            //     return true;
+            // }else{
+            //     return false;
+            // }
+
+            // NEW (상품 카테고리 태그가 활성화 되면 ORIGIN 파트를 활성화 시킨다.)
+            return false;
         },
         checkOptionsEmpty: function(){
             if(OPTIONS.length<=0){
