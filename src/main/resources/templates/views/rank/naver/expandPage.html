@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header::header"></head>
+
+<body>
+    <div th:replace="layout/nav/commonNavbar::commonNavbar"></div>
+    <!-- SUB NAV S -->
+    <div th:replace="views/rank/naver/naverRankSubNav::naverRankSubNav"></div>
+    <!-- SUB NAV E -->
+    <!-- <button onclick="testConsole()">console</button> -->
+    <div st-area="module" class="mt-3">
+    </div>
+
+    <div class="st-nre-container">
+        <div class="st-nre-wrapper">
+            <div class="st-nre-title clearfix">
+                <span>조회 결과</span><span class="text-danger ml-3" style="font-size:12px;">* 광고를 제외한 상품들의 랭킹을 최대 300위까지 조회합니다.</span>
+            </div>
+            <div st-area="result" class="st-nre-content">
+                <h6 class="text-center p-3">랭킹 조회 결과가 이곳에 나타납니다.</h6>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="i_st_rne_add_keyword_modal" data-keyboard="false" tabindex="-1"
+        aria-labelledby="i_st_rne_add_keyword_modal_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="i_st_rne_add_keyword_modal_label">키워드 추가</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="i_st_rne_keyword_input_el">키워드 명</label>
+                    <input id="i_st_rne_keyword_input_el" type="text" class="form-control"
+                        onkeydown="nrankExpandModuleEventHandler().addKeywordModal().enter()"
+                        placeholder="조회하실 키워드 명을 입력해 주세요.">
+                    <label for="i_st_rne_shop_name_input_el">스토어 명</label>
+                    <input id="i_st_rne_shop_name_input_el" type="text" class="form-control"
+                        onkeydown="nrankExpandModuleEventHandler().addKeywordModal().enter()"
+                        placeholder="정확한 스토어 명을 입력해 주세요.">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="nrankExpandModuleEventHandler().addKeywordModal().close()">닫기</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="nrankExpandModuleEventHandler().addKeywordSubmit()">추가하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragment/footer::footer"></footer>
+    <script
+        th:src="@{/js/nRank/expand/nRankExpandObject.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script
+        th:src="@{/js/nRank/expand/nRankExpandDataConnect.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script
+        th:src="@{/js/nRank/expand/nRankExpandModule.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script
+        th:src="@{/js/nRank/expand/nRankExpandResult.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script
+        th:src="@{/js/nRank/expand/nRankExpandMain.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+</body>
+
+</html>

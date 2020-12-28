@@ -1,0 +1,25 @@
+<th:block th:fragment="naverRankSubNav">
+    <div class="ty-st-mDash-nav st-box-shadow text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" st-loc="nrank_common" href="/rank/naver">실시간 조회</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" st-loc="nrank_expand" href="/rank/naver/expand">한번에 조회</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        let loc = window.location.pathname;
+        switch(loc){
+            case '/rank/naver':
+                $("a[st-loc=nrank_common]").addClass('st-nav-active');
+                break;
+            case '/rank/naver/expand':
+                $("a[st-loc=nrank_expand]").addClass('st-nav-active');
+                break;
+        }
+    </script>
+</th:block>

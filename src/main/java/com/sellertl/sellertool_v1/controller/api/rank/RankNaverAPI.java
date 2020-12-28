@@ -1,4 +1,4 @@
-package com.sellertl.sellertool_v1.controller.api.ranking;
+package com.sellertl.sellertool_v1.controller.api.rank;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

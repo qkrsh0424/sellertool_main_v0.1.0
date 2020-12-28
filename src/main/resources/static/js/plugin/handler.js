@@ -168,3 +168,20 @@ function goToByScroll(id) {
 function pageRouting(href){
     window.location.href=href;
 }
+
+function StSnackbarOpen(message) {
+    var x = document.getElementById("i_st_snackbar");
+    if(x == null){
+        let snackbarHtml = `
+            <div class="text-center">
+                <div id="i_st_snackbar" class="show">${message}</div>
+            </div>
+        `;
+        $('body').append(snackbarHtml);
+        x = document.getElementById("i_st_snackbar");
+    }else{
+        x.innerHTML = message;
+        x.classList.add("show");
+    }
+    setTimeout(function(){ x.classList.remove("show"); }, 3000);
+}

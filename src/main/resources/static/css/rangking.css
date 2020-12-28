@@ -1,105 +1,95 @@
-.pcy-rk-input-GR-border{
-    padding-bottom:3rem;
+.pcy-rk-input-GR-border {
+    padding-bottom: 3rem;
     border-bottom: 1px solid #002c40;
     margin-bottom: 15px;
-    
 }
 
-.pcy-rk-input-GR{
+.pcy-rk-input-GR {
     background-color: #e9ecef;
-    padding:1rem 1rem;
-    color:#002c40;
-    border:2px solid #002c40;
+    padding: 1rem 1rem;
+    color: #002c40;
+    border: 2px solid #002c40;
     border-radius: 4px;
     margin-top: 8px;
 }
 
-
-.pcy-rk-input-box{
-    margin:1rem 0;
-    width:100%;
+.pcy-rk-input-box {
+    margin: 1rem 0;
+    width: 100%;
     transition: 0.5s;
-    
 }
 
-.pcy-rk-input-label{
-    font-size:18px;
-    padding:0px 6px;
-    margin-bottom:6px;
+.pcy-rk-input-label {
+    font-size: 18px;
+    padding: 0px 6px;
+    margin-bottom: 6px;
 }
-.pcy-rk-input{
-    width:100%;
+.pcy-rk-input {
+    width: 100%;
     border: 2px solid #002c40;
-    border-radius:4px;
-    outline:none;
-    padding:8px;
-    margin-bottom:24px;
-    font-size:14px;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px;
+    margin-bottom: 24px;
+    font-size: 14px;
 }
-.pcy-rk-input-footer{
-    color:#dc3545;
-    font-size:14px;
+.pcy-rk-input-footer {
+    color: #dc3545;
+    font-size: 14px;
 }
 
-.pcy-rk-input-footer-send { 
+.pcy-rk-input-footer-send {
     border-radius: 4px;
-     background-color:#002c40 ;
-     border: none;
-     color: #FFFFFF;
-     text-align: center;
-     margin:16px 0px ;
-     padding: 0.8rem 1.6rem;
-     transition: all 0.5s;
-     cursor: pointer;
-     width:100%;
-     
-}
-.pcy-rk-input-footer-send .pcy-rk-input-footer-send-btn { 
+    background-color: #002c40;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    margin: 16px 0px;
+    padding: 0.8rem 1.6rem;
+    transition: all 0.5s;
     cursor: pointer;
-     display: inline-block;
-     position: relative;
-     transition: 0.5s;
+    width: 100%;
 }
-.pcy-rk-input-footer-send .pcy-rk-input-footer-send-btn:after { 
-    content: '\00bb';
-     position: absolute;
-     opacity: 0;
-     top: 0;
-     right: -20px;
-     transition: 0.5s;
-     
+.pcy-rk-input-footer-send .pcy-rk-input-footer-send-btn {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+.pcy-rk-input-footer-send .pcy-rk-input-footer-send-btn:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
 }
 .pcy-rk-input-footer-send:hover .pcy-rk-input-footer-send-btn {
-     padding-right: 25px;
-      
-    }
-.pcy-rk-input-footer-send:hover .pcy-rk-input-footer-send-btn:after { 
+    padding-right: 25px;
+}
+.pcy-rk-input-footer-send:hover .pcy-rk-input-footer-send-btn:after {
     opacity: 0.7;
-     right: 0;
-     
+    right: 0;
 }
 
-.pcy-rk-result{
-    
+.pcy-rk-result {
 }
-.pcy-rk-result-itemlist-wrapper{
+.pcy-rk-result-itemlist-wrapper {
     display: flex;
     border: 2px solid #d0d0d0;
-    
+
     border-radius: 4px;
     padding: 15px;
     margin: 48px 0;
 }
 
-.pcy-rk-result-itemlist-wrapper:hover{
+.pcy-rk-result-itemlist-wrapper:hover {
     border: 2px solid #002c40;
     /* transition: ease-in-out 0.5s, 0.3s; */
-    transition:all 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
-
-
-.pcy-rk-result-itemlist-img{
+.pcy-rk-result-itemlist-img {
     padding: 3px;
     vertical-align: middle;
     width: 130px;
@@ -109,37 +99,36 @@
     border: 1px solid #d0d0d0;
 }
 
-.pcy-rk-result-itemlist-box{
-    width:100%;
-    font-size:18px;
+.pcy-rk-result-itemlist-box {
+    width: 100%;
+    font-size: 18px;
     overflow: hidden;
 }
 
-.pcy-rk-result-itemlist-label{
+.pcy-rk-result-itemlist-label {
     width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: pre;
-    font-size:20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+    font-size: 20px;
     margin-bottom: 3px;
 }
 
-.pcy-rk-result-itemlist-storename{
+.pcy-rk-result-itemlist-storename {
     font-weight: 600;
     margin-bottom: 3px;
 }
 
-.pcy-rk-result-itemlist-price{
-    color:red;
+.pcy-rk-result-itemlist-price {
+    color: red;
     margin-bottom: 3px;
 }
 
-.pcy-rk-result-itemlist-category{
+.pcy-rk-result-itemlist-category {
     opacity: 0.7;
-    font-size:12px;
+    font-size: 12px;
 }
 
-.pcy-rk-result-itemlist-rank-p{
+.pcy-rk-result-itemlist-rank-p {
     margin-bottom: 0;
 }
-

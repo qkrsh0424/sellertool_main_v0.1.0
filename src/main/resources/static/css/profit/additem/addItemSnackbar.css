@@ -1,6 +1,30 @@
+#i_st_snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  max-width: 300px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 15px;
+  padding: 16px;
+  position: fixed;
+  z-index: 2;
+  left: 50%;
+  bottom: 70px;
+  font-size: 14px;
+  box-shadow: 3px 3px 3px #aaaaaa;
+}
+
+#i_st_snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
 #st-aitem-snackbar {
   visibility: hidden;
   min-width: 250px;
+  max-width: 300px;
   margin-left: -125px;
   background-color: #333;
   color: #fff;

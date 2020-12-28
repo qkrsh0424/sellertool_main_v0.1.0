@@ -63,6 +63,12 @@ public class RoutingController {
         return "views/rank/naver/dashboard";
     }
 
+    @GetMapping("/rank/naver/expand")
+    public String rankingNaverExpandPage(HttpServletRequest request, Model model){
+        model.addAttribute("data", userService.getUserInfo(request));
+        return "views/rank/naver/expandPage";
+    }
+
     @GetMapping(value="/calculate/vat")
     public String vatCalcualteDashboard(HttpServletRequest request, Model model) {
         model.addAttribute("data", userService.getUserInfo(request));

@@ -11,6 +11,7 @@
 @import "profit/selldash/style.css";
 @import "profit/main_dash/style.css";
 @import "profit/manage_item/style.css";
+@import "nrank/expand/style.css";
     a{
         text-decoration:none;
         color:inherit;
