@@ -11,14 +11,21 @@ function nrankExpandModuleLoadHtml() {
                                 <span class="st-nre-prod-el">${k.keyword}-${k.shopName} <button type="button" class="st-nre-prod-noborder-btn" onclick="nrankExpandModuleEventHandler().deleteKeywordSubmit('${jsonToBase64(k)}')"><i class="fas fa-times"></i></button></span>
                             `;
                         });
-                        html += `
+                        html +=`
                             <div class="st-nre-container">
                                 <div class="st-nre-wrapper">
-                                    <div class="st-nre-title clearfix">
-                                        <span>모듈 ${index + 1}</span>
-                                        <button type="button" class="st-nre-prod-noborder-btn" onclick="nrankExpandModuleEventHandler().deleteModuleSubmit('${jsonToBase64(r)}')"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-outline-primary float-right ml-2" onclick="nrankExpandModuleEventHandler().searchRankSubmit('${jsonToBase64(r)}')">조회</button>
-                                        <button type="button" class="btn btn-outline-secondary float-right ml-2" onclick="nrankExpandModuleEventHandler().addKeywordModal().open('${r.id}')">키워드 추가</button>
+                                    <div class="st-nre-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <span>모듈 ${index + 1}</span>
+                                                <button type="button" class="st-nre-prod-noborder-btn" onclick="nrankExpandModuleEventHandler().deleteModuleSubmit('${jsonToBase64(r)}')"><i class="far fa-trash-alt"></i></button>
+                                            </div>
+                                            <div class="col-sm-6 clearfix">
+                                                <button type="button" class="btn btn-outline-primary float-right ml-2" onclick="nrankExpandModuleEventHandler().searchRankSubmit('${jsonToBase64(r)}')">조회</button>
+                                                <button type="button" class="btn btn-outline-secondary float-right ml-2" onclick="nrankExpandModuleEventHandler().addKeywordModal().open('${r.id}')">키워드 추가</button>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                     <div class="st-nre-content">
                                         ${keywordsHtml}
@@ -26,10 +33,11 @@ function nrankExpandModuleLoadHtml() {
                                 </div>
                             </div>
                         `;
+
                     });
                     html+=`
                         <div class="text-center">
-                            <p class="text-danger ml-3" style="font-size:12px; font-weight:600;">* 모듈 1개당 키워드 등록 개수는 최대 5개입니다.</p>
+                            <p class="text-info ml-3" style="font-size:12px; font-weight:600;">* 모듈 1개당 키워드 등록 개수는 최대 5개이며, 현재는 3개의 모듈 생성만 지원합니다.</p>
                             <button class="st-nre-circle-btn" onclick="nrankExpandModuleEventHandler().addModuleClick()"><i class="fas fa-plus"></i></button>
                         </div>
                     `
@@ -48,14 +56,21 @@ function nrankExpandModuleLoadHtml() {
                                 <span class="st-nre-prod-el">${k.keyword}-${k.shopName} <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></span>
                             `;
                         });
-                        html += `
+                        html +=`
                             <div class="st-nre-container">
                                 <div class="st-nre-wrapper">
-                                    <div class="st-nre-title clearfix">
-                                        <span>모듈 ${index + 1}</span>
-                                        <button type="button" class="st-nre-prod-noborder-btn"> <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-                                        <button type="button" class="btn btn-outline-primary float-right ml-2">조회 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-                                        <button type="button" class="btn btn-outline-secondary float-right ml-2">키워드 추가 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                                    <div class="st-nre-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <span>모듈 ${index + 1}</span>
+                                                <button type="button" class="st-nre-prod-noborder-btn"> <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                                            </div>
+                                            <div class="col-sm-6 clearfix">
+                                                <button type="button" class="btn btn-outline-primary float-right ml-2">조회 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                                                <button type="button" class="btn btn-outline-secondary float-right ml-2">키워드 추가 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                     <div class="st-nre-content">
                                         ${keywordsHtml}

@@ -3,6 +3,9 @@ async function nRankInit(){
     nRankExpandObjectInit();
     await nRankExpandDataConnectInitialize();
     nRankExpandLoadHtmlInitialize();
+    // setTimeout(()=>{
+    //     $('div[st-alert=top]').alert('close');
+    // },5000)
 }
 
 async function nRankExpandDataConnectInitialize(){

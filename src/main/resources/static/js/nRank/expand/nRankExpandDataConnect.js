@@ -45,7 +45,7 @@ function nrankExpandDataConnect(){
                         return window.location.href='/login';
                     }
                     if(message == 'OVER_LIMIT'){
-                        StSnackbarOpen('현재는 추가 모듈 생성을 지원하지 않습니다. 추후 공개될 서비스이며, 필요하신 셀러분은 관리자 메일로 연락주시기 바랍니다.');
+                        StSnackbarOpen('현재는 3개의 모듈 생성만 지원합니다. 추후 공개될 서비스이며, 추가 모듈이 필요하신 테스터 셀러분은 관리자 메일로 연락주시기 바랍니다.');
                         return;
                     }
                     if(message=='SUCCESS'){
@@ -211,7 +211,6 @@ function nrankExpandDataConnect(){
                 //     $("#i_mdash_loading").addClass('display-none');
                 // },
                 success: function(returnData){
-                    console.log(returnData);
                     let message = returnData && returnData.message ? returnData.message : 'ERROR';
                     if(message == 'USER_INVALID'){
                         alert("로그인 세션이 만료되었습니다.");

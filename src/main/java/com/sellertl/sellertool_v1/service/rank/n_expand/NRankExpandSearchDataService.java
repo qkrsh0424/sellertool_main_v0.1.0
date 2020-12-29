@@ -66,9 +66,9 @@ public class NRankExpandSearchDataService {
         }
         int moduleCount = nrankModulePureRepo.countByUser(user.getId(), EXIST_OR_NOT.IS_EXIST);
         String userRole = user.getRole();
-        if(userRole.equals("ROLE_USER") && moduleCount>=1){
+        if(userRole.equals("ROLE_USER") && moduleCount>=3){
             return "OVER_LIMIT";
-        }else if(userRole.equals("ROLE_TEST") && moduleCount>=3){
+        }else if(userRole.equals("ROLE_TEST") && moduleCount>=6){
             return "OVER_LIMIT";
         }
 

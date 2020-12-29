@@ -8,16 +8,16 @@ function nRankExpandResultLoadHtml() {
                         let itemHtml = ``;
                         r.itemList.forEach(k => {
                             itemHtml += `
-                                <div class="pcy-rk-result-itemlist-wrapper row">
-                                    <div class="col-sm-2 text-center">
-                                        <img class="pcy-rk-result-itemlist-img m-0" src="${k.imageUrl}">
+                                <div class="st-nre-result-itemlist-wrapper row">
+                                    <div class="col-md-3 col-lg-2 text-center">
+                                        <img class="st-nre-result-itemlist-img m-0" src="${k.imageUrl}">
                                     </div>
-                                    <div class="pcy-rk-result-itemlist-box col-sm-10">
-                                        <div class="pcy-rk-result-itemlist-label"><a href="${k.mallProductUrl}" target="_blank">${k.productTitle}</a></div>
-                                        <div class="pcy-rk-result-itemlist-storename"><a href="${k.mallPcUrl}" target="_blank">${k.mallName}</a></div>
-                                        <div class="pcy-rk-result-itemlist-price">${numberWithCommas(k.price)} 원</div>
-                                        <div class="pcy-rk-result-itemlist-rank">
-                                            <p class="pcy-rk-result-itemlist-rank-p">현재 랭킹 : <span class="text-danger">${k.rank}</span>위 <a href="${k.shoppingPageUrl}" target="_blank">${k.pageNum} PAGE ${k.rankInPage} 번째</a></p>
+                                    <div class="st-nre-result-itemlist-box col-md-9 col-lg-10">
+                                        <div class="st-nre-result-itemlist-label"><a href="${k.mallProductUrl}" target="_blank">${k.productTitle}</a></div>
+                                        <div class="st-nre-result-itemlist-storename"><a href="${k.mallPcUrl}" target="_blank">${k.mallName}</a></div>
+                                        <div class="st-nre-result-itemlist-price">${numberWithCommas(k.price)} 원</div>
+                                        <div class="st-nre-result-itemlist-rank">
+                                            <p class="st-nre-result-itemlist-rank-p">현재 랭킹 : <span class="text-danger">${k.rank}</span>위 <a href="${k.shoppingPageUrl}" target="_blank">${k.pageNum} PAGE ${k.rankInPage} 번째</a></p>
                                         </div>
                                     </div>
                                 </div>
