@@ -146,6 +146,8 @@
             <p>VAT = 마진금액(세전) / 11 = (판매총합계 - (판매총합계 / 1.1)) - (매입총합계 - (매입총합계 / 1.1))</p>
         </div>
     </div>
+    <button id="i_open_btn" class="ty-st-cal-open-btn st-calc-show" onclick="loadCalculatorHtml().calculatorDragOpen()"><i class="fas fa-calculator"></i></button>
+    <div id="i_ty_st_cal_container"></div>
     <script>
         $(document).ready(function () {
 
@@ -158,8 +160,10 @@
                 $('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
             });
     </script>
-    <script th:src="@{/js/marginCalculate.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
     <footer th:replace="fragment/footer::footer"></footer>
+    <footer th:replace="fragment/jquery-ui::jquery-ui"></footer>
+    <script th:src="@{/js/marginCalculate.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/handler/miNiCalculator.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 
 </html>

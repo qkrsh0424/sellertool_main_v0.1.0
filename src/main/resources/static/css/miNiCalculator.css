@@ -1,0 +1,183 @@
+/* Calculator */
+
+.ty-st-cal-calculator {
+    background-color: #636e72;
+    display: none;
+    width: 16rem;
+    border-radius: 5px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    z-index: 10;
+    height: 21rem;
+    position: fixed;
+    right: 45px;
+    bottom: 80px;
+}
+
+.ty-st-cal-calculator:focus {
+    outline: 2.5px solid #e0ad4e;
+}
+
+@keyframes openCal {
+    0% {
+        transform: scale( .1);
+    }
+    100% {
+        transform: scale( 1);
+    }
+}
+
+
+/* open-btn css */
+
+.ty-st-cal-open-btn {
+    display: none;
+    border: none;
+    border-radius: 64px;
+    background-color: #002c40;
+    color: white;
+    height: 64px;
+    width: 64px;
+    font-size: 36px;
+    z-index: 10;
+    position: fixed;
+    right: 45px;
+    bottom: 80px;
+}
+
+.st-calc-show {
+    display: block;
+    animation: openCal 0.3s;
+    -moz-animation: openCal 0.3s;
+    -webkit-animation: openCal 0.3s;
+    -o-animation: openCal 0.3s;
+}
+
+.ty-st-cal-calculator:focus {
+    /* background-color: white; */
+}
+
+
+/* Top */
+
+.ty-st-cal-top span.clear {
+    float: left;
+}
+
+
+/* Screen styling */
+
+.ty-st-cal-top .ty-st-cal-nav {
+    border-radius: 5px 5px 0 0;
+    background: #002c40;
+    height: 1rem;
+    padding: 0.4rem;
+}
+
+.ty-st-cal-top .ty-st-cal-minimi {
+    background-color: #e0ad4e;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    font-size: 16px;
+    text-align: center;
+    float: left;
+}
+
+.ty-st-cal-top .ty-st-cal-minimi:hover:before {
+    margin: 0px;
+    content: "\2212";
+    position: relative;
+    bottom: 7px;
+}
+
+.ty-st-cal-top .ty-st-cal-screen {
+    height: 5rem;
+    width: 16rem;
+    padding: 0 20px;
+    background: #002c40;
+    border: none;
+    border-bottom: 0.001em solid #636e72;
+    /* Typography */
+    font-size: 30px;
+    line-height: 90px;
+    color: white;
+    text-align: right;
+}
+
+
+/* Clear floats */
+
+.ty-st-cal-keys {
+    /* width: 16rem; */
+    /* overflow: hidden; */
+    /* height: 100%; */
+}
+
+
+/* Keys */
+
+.ty-st-cal-keys span {
+    float: left;
+    position: relative;
+    top: 0px;
+    background: #164773;
+    font-size: 26px;
+    cursor: pointer;
+    width: 25%;
+    max-height: 3rem;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+    border: 0.001em solid #636e72;
+    color: #e0ad4e;
+    line-height: 3rem;
+    text-align: center;
+    user-select: none;
+    /* hover and active state transitions */
+    transition: all 0.2s ease;
+}
+
+.ty-st-cal-keys span:focus {
+    outline: 0;
+}
+
+
+/* Unique key styling */
+
+.ty-st-cal-keys span.ty-st-cal-operator {
+    background: #002c40;
+}
+
+.ty-st-cal-keys span.ty-st-cal-eval {
+    background: #002c40;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+    color: #e0ad4e;
+    margin-right: 0;
+}
+
+
+/* hover effects */
+
+.ty-st-cal-keys span:hover {
+    background: #795ebd;
+    color: #ffffff;
+}
+
+.ty-st-cal-keys span.ty-st-cal-eval:hover {
+    background: #f37c4c;
+    color: #ffffff;
+}
+
+.ty-st-cal-keys span.ty-st-cal-operator:hover {
+    background: #5d7bba;
+    color: #ffffff;
+}
+
+
+/* Simulating "pressed" effect */
+
+.ty-st-cal-keys span:active {
+    top: 4px;
+}
+
+.ty-st-cal-keys span.ty-st-cal-eval:active {
+    top: 4px;
+}

@@ -256,6 +256,8 @@
             </div>
         </div>
     </div>
+    <button id="i_open_btn" class="ty-st-cal-open-btn st-calc-show" onclick="loadCalculatorHtml().calculatorDragOpen()"><i class="fas fa-calculator"></i></button>
+    <div id="i_ty_st_cal_container"></div>
     <!-- select market model end -->
     <div class="text-center">
         <!-- snackbar -->
@@ -263,6 +265,8 @@
     </div>
 
     <footer th:replace="fragment/footer::footer"></footer>
+    <footer th:replace="fragment/jquery-ui::jquery-ui"></footer>
     <script th:src="@{/js/profit/additem/prod/min/add_item_merge_v1.min.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/handler/miNiCalculator.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 </html>

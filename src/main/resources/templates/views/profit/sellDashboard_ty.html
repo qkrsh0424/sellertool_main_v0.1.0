@@ -137,7 +137,8 @@
         </div>
         <input hidden id="i_st_sd_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     </div>
-
+    <button id="i_open_btn" class="ty-st-cal-open-btn st-calc-show" onclick="loadCalculatorHtml().calculatorDragOpen()"><i class="fas fa-calculator"></i></button>
+    <div id="i_ty_st_cal_container"></div>
     <!-- Modal -->
     <div class="st-sd-batch-input-wrapper">
         <div class="modal fade" id="i_sd_batch_input_modal" data-keyboard="false" tabindex="-1"
@@ -159,6 +160,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <script th:src="@{/js/profit/sell_dash/prod/min/sell_dash_merge_v1.min.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
+    <script th:src="@{/js/handler/miNiCalculator.js?version=}+${@environment.getProperty('app.environment.static.version')}"></script>
 </body>
 
 </html>

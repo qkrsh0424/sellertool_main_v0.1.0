@@ -15,26 +15,26 @@ import org.springframework.test.context.ActiveProfiles;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ItemStoreServiceTest {
-    @Autowired
-    ItemStoreRepository itemStoreRepository;
+    // @Autowired
+    // ItemStoreRepository itemStoreRepository;
 
-    @Test
-    public void saveRunTest(){
-        ItemStoreEntity entity = new ItemStoreEntity();
-        entity.setItemStoreNameEn("TEST");
-        entity.setItemStoreNameKo("테스트");
-        entity.setItemStoreType("TYPE_TEST");
-        itemStoreRepository.save(entity);
-    }
+    // @Test
+    // public void saveRunTest(){
+    //     ItemStoreEntity entity = new ItemStoreEntity();
+    //     entity.setItemStoreNameEn("TEST");
+    //     entity.setItemStoreNameKo("테스트");
+    //     entity.setItemStoreType("TYPE_TEST");
+    //     itemStoreRepository.save(entity);
+    // }
 
-    @Test
-    public void findAllRunTest(){
-        itemStoreRepository.findAll();
-        System.out.println(itemStoreRepository.findAll());
-    }
+    // @Test
+    // public void findAllRunTest(){
+    //     itemStoreRepository.findAll();
+    //     System.out.println(itemStoreRepository.findAll());
+    // }
 
-    @Test
-    public void compareCount(){
-        assertEquals(11, itemStoreRepository.findAll().size());
-    }
+    // @Test
+    // public void compareCount(){
+    //     assertEquals(11, itemStoreRepository.findAll().size());
+    // }
 }
