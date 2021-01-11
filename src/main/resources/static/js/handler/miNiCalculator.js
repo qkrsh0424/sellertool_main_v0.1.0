@@ -4,15 +4,15 @@ function init() {
     console.log("2")
     loadCalculatorHtml().calculatorHtml()
     handlerCalculator().calculatorOnMouseClick()
-        // loadCalculatorHtml().calculatorDragOpen()
-        //버튼 drag and move 움직일때 클릭안되게
+    // loadCalculatorHtml().calculatorDragOpen()
+    //버튼 drag and move 움직일때 클릭안되게
     $('#i_open_btn').draggable({
         containment: 'document',
         cancel: false,
-        stop: function(event, ui) {
+        stop: function (event, ui) {
             // event.toElement is the element that was responsible
             // for triggering this event. The handle, in case of a draggable.
-            $(event.originalEvent.target).one('click', function(e) { e.stopImmediatePropagation(); });
+            $(event.originalEvent.target).one('click', function (e) { e.stopImmediatePropagation(); });
         }
     })
 }
@@ -20,14 +20,14 @@ function init() {
 
 function loadCalculatorHtml() {
     return {
-        calculatorDragOpen: function() {
+        calculatorDragOpen: function () {
 
             $('#i_ty_st_calculator').draggable({ containment: 'document' })
             $('#i_ty_st_calculator').addClass('st-calc-show')
             $('#i_open_btn').removeClass('st-calc-show')
 
         },
-        calculatorHtml: function() {
+        calculatorHtml: function () {
             let calHtml = ``;
             calHtml += `
                     <div id="i_ty_st_calculator" class="ty-st-cal-calculator" role="application" tabindex="0" onkeydown="handlerCalculator().calculatorOnKeyDown(event)">
@@ -78,7 +78,7 @@ function loadCalculatorHtml() {
 function handlerCalculator() {
 
     return {
-        calculatorOnMouseClick: function() {
+        calculatorOnMouseClick: function () {
             // Select all the from document using queryselectAll
             var keys = document.querySelectorAll('#i_ty_st_calculator span');
             // Define operators
@@ -89,18 +89,28 @@ function handlerCalculator() {
             // loop through all keys
             for (var i = 0; i < keys.length; i++) {
                 //add onclick event to the keys
-                keys[i].onclick = function(e) {
+                keys[i].onclick = function (e) {
                     $('.ty-st-cal-screen').css('fontSize', '30px')
-                        // Get the input and button values
+                    // Get the input and button values
                     var input = document.querySelector('.ty-st-cal-screen');
                     var inputVal = input.innerHTML;
                     var btnVal = this.innerHTML;
 
-                    if (input.innerText.length > 9) {
-                        input.innerText = input.innerText.substr(0, input.innerText.length - 1)
+                    // if (input.innerText.length > 9) {
+                    //     input.innerText = input.innerText.substr(0, input.innerText.length - 1)
+                    // }
+                    if (input.innerText.length < 11) {
+                        $('.ty-st-cal-screen').css('fontSize', '30px')
+                    } else if (input.innerText.length < 14) {
+                        $('.ty-st-cal-screen').css('fontSize', '22px')
+                    } else if (input.innerText.length < 18) {
+                        $('.ty-st-cal-screen').css('fontSize', '18px')
+                    } else {
+                        $('.ty-st-cal-screen').css('fontSize', '18px')
+                        input.innerText = input.innerText.slice(0, 17)
                     }
 
-                    if (input.innerText.indexOf('최대') !== -1 || input.innerText == Infinity || input.innerText.indexOf('복사') !== -1)(
+                    if (input.innerText.indexOf('최대') !== -1 || input.innerText == Infinity || input.innerText.indexOf('복사') !== -1) (
                         input.innerText = ''
                     )
 
@@ -136,12 +146,11 @@ function handlerCalculator() {
                         // use javascript's eval function to get the result
 
                         if (equation) {
-
-                            if (eval(equation).toFixed(6).toString().length < 21) {
+                            if (eval(equation).toFixed(6).toString().length < 31) {
                                 input.innerHTML = parseFloat((eval(equation)).toFixed(6));
                                 decimalAdded = false;
                             } else {
-                                input.innerHTML = "최대 10자리까지 표시됩니다."
+                                input.innerHTML = "최대 18자리까지 표시됩니다."
                                 $('.ty-st-cal-screen').css('fontSize', '16px')
                             }
                         }
@@ -188,12 +197,12 @@ function handlerCalculator() {
             }
 
         },
-        calculatorOnFocusScreen: function() {
+        calculatorOnFocusScreen: function () {
             // $('#i_ty_st_calculator').draggable()
             $('#i_ty_st_calculator').draggable('disable')
             $('#i_ty_st_calculator').focus()
         },
-        calculatorOnKeyDown: function(event) {
+        calculatorOnKeyDown: function (event) {
 
             // Define operators
             var operators = ['+', '-', 'x', '÷', '^', '%'];
@@ -210,12 +219,22 @@ function handlerCalculator() {
 
             $('.ty-st-cal-screen').css('fontSize', '30px')
 
-            if (equation.indexOf('최대') !== -1 || input.innerText == Infinity || equation.indexOf('복사') !== -1)(
+            if (equation.indexOf('최대') !== -1 || input.innerText == Infinity || equation.indexOf('복사') !== -1) (
                 input.innerText = ''
             )
 
-            if (input.innerText.length > 9) {
-                input.innerText = input.innerText.substr(0, input.innerText.length - 1)
+            // if (input.innerText.length > 9) {
+            //     input.innerText = input.innerText.substr(0, input.innerText.length - 1)
+            // }
+            if (input.innerText.length < 11) {
+                $('.ty-st-cal-screen').css('fontSize', '30px')
+            } else if (input.innerText.length < 14) {
+                $('.ty-st-cal-screen').css('fontSize', '22px')
+            } else if (input.innerText.length < 18) {
+                $('.ty-st-cal-screen').css('fontSize', '18px')
+            } else {
+                $('.ty-st-cal-screen').css('fontSize', '18px')
+                input.innerText = input.innerText.slice(0, 17)
             }
 
             // Target each keypress and update the input screen
@@ -280,11 +299,11 @@ function handlerCalculator() {
                 console.log(eval(equation).toString().length - 1)
                 console.log(eval(equation))
                 if (equation) {
-                    if (eval(equation).toFixed(9).toString().length < 21) {
+                    if (eval(equation).toFixed(9).toString().length < 31) {
                         input.innerHTML = parseFloat((eval(equation)).toFixed(9));
                         decimalAdded = false;
                     } else {
-                        input.innerHTML = "최대 10자리까지 표시됩니다."
+                        input.innerHTML = "최대 18자리까지 표시됩니다."
                         $('.ty-st-cal-screen').css('fontSize', '16px')
                     }
                 }
@@ -297,11 +316,11 @@ function handlerCalculator() {
             }
 
         },
-        draggableOpen: function() {
+        draggableOpen: function () {
             // $('#i_ty_st_calculator').draggable()
             $('#i_ty_st_calculator').draggable('enable')
         },
-        closeCalculatorHtml: function() {
+        closeCalculatorHtml: function () {
             $('#i_ty_st_calculator').removeClass('st-calc-show')
             $('#i_open_btn').addClass('st-calc-show')
         },

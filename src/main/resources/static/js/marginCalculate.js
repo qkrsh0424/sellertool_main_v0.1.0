@@ -34,6 +34,8 @@ $("#domesticMarginSubmit").submit(
                         $("#marginRateVal").html(JSON.parse(Parse_data).marginRate);
                         $("#VAT_10").html(JSON.parse(Parse_data).VAT_10);
                         $("#marginAfterVAT_10").html(JSON.parse(Parse_data).margin - JSON.parse(Parse_data).VAT_10);
+                        $("#salesTotalMargin").html(JSON.parse(Parse_data).salesTotMargin)
+                        $("#salesTotalMarginRate").html(JSON.parse(Parse_data).salesTotMarginRate)
                     }
     
                 });

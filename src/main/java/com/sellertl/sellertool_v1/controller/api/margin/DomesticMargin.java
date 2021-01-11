@@ -39,8 +39,22 @@ public class DomesticMargin {
         return Math.round(getMargin()/11);
     }
 
+    public Long getSalesTotMargin(){
+        Long sellUnitPrice = Long.parseLong(String.valueOf(this.sellPrice + this.sellTransUnitCharge));
+        Long purchaseUnitCost = Long.parseLong(String.valueOf(purchaseCost + purchaseTransCharge)); // &매입 개당 원가
+        Long result = sellUnitPrice - purchaseUnitCost;
+        return result;
+    }
+
+    public double getSalesTotMarginRate(){
+        Long sellUnitPrice = Long.parseLong(String.valueOf(this.sellPrice + this.sellTransUnitCharge));
+        Long salesTotMargin = getSalesTotMargin();
+        double result = Math.round((((double) salesTotMargin / sellUnitPrice)*100)*100)/100.0;
+        return result;
+    }
+
     public String DomesticMarginReturn(){
-        return "{\"margin\":"+getMargin()+",\"marginRate\":" + getMarginRate()+",\"VAT_10\":" + getVAT_10()+"}";
+        return "{\"margin\":"+getMargin()+",\"marginRate\":" + getMarginRate()+",\"VAT_10\":" + getVAT_10()+",\"salesTotMargin\":"+getSalesTotMargin()+",\"salesTotMarginRate\":"+getSalesTotMarginRate()+"}";
     }
 
     
