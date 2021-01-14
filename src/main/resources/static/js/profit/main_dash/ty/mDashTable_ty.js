@@ -24,8 +24,11 @@ function loadTableHtml() {
                             <span>${r.sellCount}</span>
                         </td>
                         <td>${numberWithCommas(totSales)}</td>
+                        <td>${numberWithCommas(totValue.getTotSalesMargin())}</td>
                         <td>${numberWithCommas(totProfit)}</td>
                         <td>${numberWithCommas(r.sellTotAdsCost)}</td>
+                        <td>${totSales !=0 ? ((totProfit/totSales)*100).toFixed(2) : '매출 데이터 오류'}</td>
+                        <td>${r.sellTotAdsCost !=0 ? ((totProfit/r.sellTotAdsCost)*100).toFixed(2) : '0'}</td>
                     </tr>
                 `
             })
@@ -44,8 +47,11 @@ function loadTableHtml() {
                             <span>${totalValueSum.sellCountSum}</span>
                         </th>
                         <th>${numberWithCommas(totalValueSum.totSalesSum)}</th>
+                        <th>${numberWithCommas(totalValueSum.totSalesMarginSum)}</th>
                         <th>${numberWithCommas(totalValueSum.totProfitSum)}</th>
                         <th>${numberWithCommas(totalValueSum.totAdsCostSum)}</th>
+                        <th>${totalValueSum.totSalesSum != 0 ? ((totalValueSum.totProfitSum / totalValueSum.totSalesSum) * 100).toFixed(2):'매출 데이터 오류'}</th>
+                        <th>${totalValueSum.totAdsCostSum != 0 ? ((totalValueSum.totProfitSum / totalValueSum.totAdsCostSum) * 100).toFixed(2):'0'}</th>
                     </tr>
             `
 
@@ -53,15 +59,18 @@ function loadTableHtml() {
                 <table class="table overflow-table text-center table-hover ty-st-mDash-table">
                     <thead class="ty-st-mDash-thead">
                     <tr>
-                        <th scope="col" width="50">#</th>
-                        <th scope="col" width="180">판매 날짜&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-light" onclick="tableDataHandler().turnOrderByClick()"><i class="fas fa-sort"></i></button></th>
+                        <th scope="col" width="70">#</th>
+                        <th scope="col" width="200">판매 날짜&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-light" onclick="tableDataHandler().turnOrderByClick()"><i class="fas fa-sort"></i></button></th>
                         <th scope="col" width="200">상품명</th>
                         <th scope="col" width="100">마켓 종류</th>
                         <th scope="col" width="100">상품 태그</th>
                         <th scope="col" width="80">판매 개수 <div class="st-sd-sell-unit">단위 : [개]</div></th>
                         <th scope="col" width="150">수익(매출) 합계<div class="st-sd-sell-unit">단위 : [원]</div></th>
+                        <th scope="col" width="150">합계 매출총이익<div class="st-sd-sell-unit">단위 : [원]</div></th>
                         <th scope="col" width="150">순수익 합계<div class="st-sd-sell-unit">단위 : [원]</div></th>
                         <th scope="col" width="150">광고비 합계<div class="st-sd-sell-unit">단위 : [원]</div></th>
+                        <th scope="col" width="150">순수익율<div class="st-sd-sell-unit">단위 : [%]</div></th>
+                        <th scope="col" width="150">ROI<div class="st-sd-sell-unit">단위 : [%]</div></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -97,8 +106,11 @@ function loadTableHtml() {
                             <span>${r.sellCountSum}</span>
                         </td>
                         <td>${numberWithCommas(r.totSalesSum)}</td>
+                        <td>${numberWithCommas(r.totSalesMarginSum)}</td>
                         <td>${numberWithCommas(r.totProfitSum)}</td>
                         <td>${numberWithCommas(r.totAdsCostSum)}</td>
+                        <td>${r.totSalesSum !=0 ? ((r.totProfitSum/r.totSalesSum)*100).toFixed(2) : '매출 데이터 오류'}</td>
+                        <td>${r.totAdsCostSum !=0 ? ((r.totProfitSum/r.totAdsCostSum)*100).toFixed(2) : '0'}</td>
                     </tr>
                 `
             })
@@ -115,22 +127,28 @@ function loadTableHtml() {
                             <span>${totalValueSum.sellCountSum}</span>
                         </th>
                         <th>${numberWithCommas(totalValueSum.totSalesSum)}</th>
+                        <th>${numberWithCommas(totalValueSum.totSalesMarginSum)}</th>
                         <th>${numberWithCommas(totalValueSum.totProfitSum)}</th>
                         <th>${numberWithCommas(totalValueSum.totAdsCostSum)}</th>
+                        <th>${totalValueSum.totSalesSum != 0 ? ((totalValueSum.totProfitSum / totalValueSum.totSalesSum) * 100).toFixed(2):'매출 데이터 오류'}</th>
+                        <th>${totalValueSum.totAdsCostSum != 0 ? ((totalValueSum.totProfitSum / totalValueSum.totAdsCostSum) * 100).toFixed(2):'0'}</th>
                     </tr>
                 `
             let html = `
                 <table class="table overflow-table text-center table-hover ty-st-mDash-table">
                     <thead class="ty-st-mDash-thead">
                     <tr>
-                        <th scope="col" width="50">#</th>
-                        <th scope="col" width="180">판매 날짜&nbsp;&nbsp;&nbsp;</th>
+                        <th scope="col" width="70">#</th>
+                        <th scope="col" width="200">판매 날짜&nbsp;&nbsp;&nbsp;</th>
                         <th scope="col" width="200">상품명</th>
                         <th scope="col" width="120">마켓 종류</th>
                         <th scope="col" width="120">판매 개수 <div class="st-sd-sell-unit">단위 : [개]</div></th>
                         <th scope="col" width="150">수익(매출) 합계<div class="st-sd-sell-unit">단위 : [원]</div></th>
+                        <th scope="col" width="150">합계 매출총이익<div class="st-sd-sell-unit">단위 : [원]</div></th>
                         <th scope="col" width="150">순수익 합계<div class="st-sd-sell-unit">단위 : [원]</div></th>
                         <th scope="col" width="150">광고비 합계<div class="st-sd-sell-unit">단위 : [원]</div></th>
+                        <th scope="col" width="150">순수익율<div class="st-sd-sell-unit">단위 : [%]</div></th>
+                        <th scope="col" width="150">ROI<div class="st-sd-sell-unit">단위 : [%]</div></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -186,6 +204,7 @@ function tableDataHandler() {
             let totSales = unitSales * n + tct; // 합계 매출 sam = 개당 실질 판매가 * 개수 + 총 소비자 운임비용
             let totMarginCost = unitMarginCost * n + tads + texp - tear + tput + parseInt((tct * (cc / 100))) + tst; // 합계 마진 원가 | 합계 매출 원가 | 합계 매입 원가 cpm
             let totProfit = totSales - totMarginCost; // 합계 수익 npm
+            let totSalesMargin = totSales - n*( upu ) - ( n*uput+tput )
             let adsROAS = 0;
             let adsROI = 0;
             let sellROI = 0;
@@ -206,7 +225,8 @@ function tableDataHandler() {
                 getAdsROAS: function() { return adsROAS; },
                 getAdsROI: function() { return adsROI; },
                 getSellROI: function() { return sellROI; },
-                getTotMarginCost: function() { return totMarginCost; }
+                getTotMarginCost: function() { return totMarginCost; },
+                getTotSalesMargin: function(){ return totSalesMargin }
             }
         },
         handleDataByItemName: function() {
@@ -233,6 +253,7 @@ function tableDataHandler() {
                     'totAdsCostSum': 0,
                     'totMarginCostSum': 0,
                     'sellSelldate': '',
+                    'totSalesMarginSum':0,
                     'startDate': calandarHandler().formatDateFitInput(DATE_SETTING.startDate),
                     'endDate': calandarHandler().formatDateFitInput(DATE_SETTING.endDate)
                 }
@@ -251,6 +272,7 @@ function tableDataHandler() {
                         json.totAdsCostSum += d.sellTotAdsCost;
                         json.totMarginCostSum += totMarginCost;
                         json.sellSelldate = d.sellSelldate;
+                        json.totSalesMarginSum += totValue.getTotSalesMargin();
                     }
                 });
                 // ORIGIN
@@ -266,6 +288,7 @@ function tableDataHandler() {
                 getTotProfitSumArr: function() { return itemDataArr.map(r => r.totProfitSum); },
                 getSellCountDataArr: function() { return itemDataArr.map(r => r.sellCountSum); },
                 getTotAdsSumArr: function() { return itemDataArr.map(r => r.totAdsCostSum); },
+                getTotSalesMarginSum: function(){ return itemDataArr.map(r => r.totSalesMarginSum); }
             }
         },
         handleDataTotalSumValue: function() {
@@ -278,6 +301,7 @@ function tableDataHandler() {
                 'totAdsCostSum': 0,
                 'totMarginCostSum': 0,
                 'sellSelldate': '',
+                'totSalesMarginSum':0,
                 'startDate': calandarHandler().formatDateFitInput(DATE_SETTING.startDate),
                 'endDate': calandarHandler().formatDateFitInput(DATE_SETTING.endDate)
             }
@@ -292,6 +316,7 @@ function tableDataHandler() {
                 json.totAdsCostSum += d.sellTotAdsCost;
                 json.totMarginCostSum += totMarginCost;
                 json.sellSelldate = d.sellSelldate;
+                json.totSalesMarginSum += totValue.getTotSalesMargin();
 
             });
             // ORIGIN
@@ -304,6 +329,7 @@ function tableDataHandler() {
                 getTotProfitSum: function() { return totalValueByDate.totProfitSum; },
                 getTotSellCount: function() { return totalValueByDate.sellCountSum; },
                 getTotAdsSum: function() { return totalValueByDate.totAdsCostSum; },
+                getTotSalesMarginSum: function(){ return totalValueByDate.totSalesMarginSum; }
             }
         },
         turnOrderByClick: async function() {
