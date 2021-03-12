@@ -53,6 +53,7 @@
     background-color: #00ffff4f;
     color: white;
     text-align: center;
+    padding:8px;
 }
 @media screen and (max-width:989px){
     .pcy-mainpage-container{

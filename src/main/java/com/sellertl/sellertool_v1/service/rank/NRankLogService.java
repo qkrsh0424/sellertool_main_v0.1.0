@@ -27,6 +27,7 @@ public class NRankLogService {
     public String setNRankLog(HttpServletRequest request, String keyword, String shopName){
         UserLoginSessionDTO user = userService.getUserInfoDTO(request);
         NRankLogPureEntity entity = new NRankLogPureEntity();
+        // System.out.println(keyword);
         String userType = "";
         String userId = "";
         if(user==null){

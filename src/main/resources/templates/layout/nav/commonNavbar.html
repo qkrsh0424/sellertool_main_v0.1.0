@@ -1,6 +1,7 @@
 <th:block th:fragment="commonNavbar">
   <nav class="navbar navbar-expand-lg pcy-nav">
-    <a class="navbar-brand" href="/"><img src="/images/icon/favicon.ico/android-icon-192x192.png" width="20" height="20" alt="" loading="lazy"> SellerTool</a>
+    <a class="navbar-brand" href="/"><img src="/images/icon/favicon.ico/android-icon-192x192.png" width="20" height="20"
+        alt="" loading="lazy"> SellerTool</a>
     <button class="pcy-nav-toggle-btn navbar-toggler" type="button" data-toggle="collapse"
       data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
       aria-label="Toggle navigation">
@@ -12,7 +13,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
-        
+
         <a class="nav-link" href="/margin/nonmem/dashboard">누적 수익 계산기</a>
         <a class="nav-link" href="/margin/dashboard">마진율 계산기</a>
         <a class="nav-link" href="/rank/naver">네이버 랭킹</a>
@@ -63,6 +64,12 @@
           <a th:if="${@environment.getProperty('app.environment')=='development'}" class="nav-link"
             th:href="${@environment.getProperty('app.environment.development.auth.url')+'/signup'}">회원가입</a>
         </th:block>
+      </div>
+      <div style="display: inline-block;">
+        <span style="margin-left: 10px;"><a href="https://blog.naver.com/pcysammai" target="_blank">
+          <img src="/images/icon/common/ft_icon01.png" alt="네이버 블로그 아이콘" width='34'></a></span>
+        <span style="margin-left: 10px;"><a href="https://www.youtube.com/channel/UCG7aGpryd6DbGBGDzfFqrDg"
+            target="_blank"><img src="/images/icon/common/ft_icon04.png" alt="유튜브 아이콘" width='34'></a></span>
       </div>
     </div>
   </nav>
