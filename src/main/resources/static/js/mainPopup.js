@@ -17,10 +17,10 @@ function mainPopupLoad() {
 <!--                <div class="modal-content" style="background:#164773; padding: 20px;">-->
                     <div style="width:100%; height:30px; background: #164773"></div>
                     <div style="padding: 20px">
-                        <h3 style="color:#444; text-align:center; font-weight:700; padding: 20px 0; ">새롭게 바뀌는 셀러툴 궁금하지 않으세요?</h3>
-                        <p style="color:#606060; text-align:center; font-weight:700; font-size: 15px">모든 신규 서비스는 유튜브를 통해 가장 먼저 공개됩니다.</p>
-                        <a href="https://www.youtube.com/watch?v=bJ3DMNROXSs&t=24s" target="_blank"><img src="/images/banner/1.jpg" width="100%"/></a>
-                        <p style="color:#606060; text-align:center; font-weight:700; font-size: 15px; margin-top: 10px">위 이미지를 클릭하시면 유튜브 영상으로 이동합니다.</p>
+                        <h3 style="color:#444; text-align:center; font-weight:700; padding: 20px 0; ">새롭게 바뀌는 셀러툴의 베타 테스터를 모집합니다!</h3>
+                        <p style="color:#606060; text-align:center; font-weight:700; font-size: 15px">베타 테스터에 참여 의사가 있으신분은 아래의 이미지를 클릭해주세요.</p>
+                        <a href="https://naver.me/xsYebuhs" target="_blank"><img src="/images/banner/2.jpg" width="100%"/></a>
+<!--                        <p style="color:#606060; text-align:center; font-weight:700; font-size: 15px; margin-top: 10px">위 이미지를 클릭하시면 유튜브 페이지로 이동합니다.</p>-->
                     </div>
                 </div>
             </div>
