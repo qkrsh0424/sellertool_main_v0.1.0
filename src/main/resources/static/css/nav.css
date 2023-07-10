@@ -60,3 +60,15 @@
     color: #fff;
     background-color: #f2811d;
 }
+
+.newVersion-container{
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 20px;
+    background: #fff;
+}
+
+.newVersion-link{
+    font-weight: 700;
+    color: #344b98;
+}

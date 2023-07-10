@@ -29,6 +29,6 @@ function mainPopupLoad() {
     $("#mainPagePopup").html(html);
 
     $(document).ready(function () {
-        $("#ModalEvent").modal("show"); // show or hide
+        $("#ModalEvent").modal("hide"); // show or hide
     })
 }
